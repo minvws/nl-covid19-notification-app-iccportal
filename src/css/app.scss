@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~src/css/components";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
+
+body {
+  @apply text-black bg-gray-200;
+}
+
+// reset
+
+h1, h2 {
+  @apply font-bold;
+}
+h3, h4, h5, h6{
+  @apply font-medium;
+}
+
+.container {
+  @apply mx-auto px-4;
+}
+@screen xl {
+  .container {
+    @apply px-0;
+  }
+}
+h1 {
+  @apply text-5xl;
+}
+
+h2 {
+  @apply text-4xl;
+}
+
+h3 {
+  @apply text-3xl;
+}
+
+h4 {
+  @apply text-2xl;
+}
+
+h5 {
+  @apply text-xl;
+}
+
+h6 {
+  @apply text-lg;
+}
+
+@screen md {
+  h1 {
+    @apply text-6xl;
+  }
+
+  h2 {
+    @apply text-5xl;
+  }
+
+  h3 {
+    @apply text-4xl;
+  }
+
+  h4 {
+    @apply text-3xl;
+  }
+
+  h5 {
+    @apply text-2xl;
+  }
+
+  h6 {
+    @apply text-xl;
+  }
+}
+
+.btn {
+  @apply px-3 py-2 bg-primary font-medium rounded text-white cursor-pointer block;
+}

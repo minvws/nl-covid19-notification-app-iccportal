@@ -3,7 +3,7 @@ Front-end portal for GGD workers to validate InfectionConfirmationId's from {app
 
 
 
-# TestPortal
+# GGDPortal
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0.
 
