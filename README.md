@@ -27,6 +27,10 @@ This increases the chance that we might be able to use your contribution (or it 
 ## Getting started
 
 Copy the `.env.example` in the root of the repository to `.env` to temporary secure the frontend portal. 
+```bash
+cp .env.example .env && vi .env
+```
+
 
 **!! This is a temporary solution, to prevent unauthorized access before the custom authentication middleware is in place. !!**
 
