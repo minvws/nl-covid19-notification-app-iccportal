@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TitleService} from "../services/title.service";
 
 @Component({
   selector: 'app-validate-icc',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ValidateIccComponent implements OnInit {
 
-  constructor() { }
+  public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
+  public InfectionConfirmationIdIsValid:boolean = false
+  public IndexIsSubmitted:boolean = false
+
+  constructor(public titleService:TitleService) { }
+
 
   ngOnInit(): void {
   }

@@ -38,17 +38,17 @@ registerLocaleData(localeNL);
         ValidateStep4Component,
         ValidateStep5Component
     ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'validate', component: ValidateIccComponent, pathMatch: 'full' },
-      { path: 'icc/report', component: IccReportComponent, pathMatch: 'full' },
-      { path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full' }
-    ])
-  ],
+    imports: [
+        BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: 'validate', component: ValidateIccComponent, pathMatch: 'full'},
+            {path: 'icc/report', component: IccReportComponent, pathMatch: 'full'},
+            {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full'}
+        ])
+    ],
   providers: [{
         provide: LOCALE_ID, useValue: "nl",
   }],

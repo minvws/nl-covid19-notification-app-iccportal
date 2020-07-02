@@ -13,14 +13,12 @@
     <div class="mt-6" *ngIf="showsSymptons">
         <p class="font-medium mb-4">Sinds wanneer?</p>
 
-        <div class="friendly-date-block px-4 py-3 bg-white rounded inline-block" style="min-width: 240px;">
+        <div class="relative friendly-date-block px-4 py-3 bg-white rounded inline-block" style="min-width: 240px;">
             {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
         </div>
+        <input #dateInput type="date" [(ngModel)]="symptonsDate"> <p class="red-text-400">! will be changed shortly!</p>
         <br>
         <br>
-
-        <input type="date" [(ngModel)]="symptonsDate">
-
         <!--        <p>Is de index in de periode wanneer hij/zij symptomen had in één of meerdere van de onderstaande landen geweest?</p>-->
     </div>
     <button class="btn btn-primary mt-10" style="min-width: 340px"
