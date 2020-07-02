@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule, LOCALE_ID} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
@@ -23,6 +23,8 @@ import {ValidateIccConfirmComponent} from "./validate-icc/validate-icc-confirm/v
 import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/validate-icc-start.component";
 import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
 import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
+import {AuthGuard, BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./_helpers";
+import {LoginComponent} from "./login";
 
 registerLocaleData(localeNL);
 
@@ -31,6 +33,7 @@ registerLocaleData(localeNL);
     declarations: [
         AppComponent,
         HomeComponent,
+        LoginComponent,
         ValidateIccComponent,
         IccReportComponent,
         IccGenerateComponent,
@@ -47,14 +50,17 @@ registerLocaleData(localeNL);
         ValidateIccFinalComponent
     ],
     imports: [
+        FormsModule, ReactiveFormsModule,
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full'},
+            {path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+            {path: 'login', component: LoginComponent},
             {
                 path: 'validate',
                 component: ValidateIccComponent,
+                canActivate: [AuthGuard],
                 children: [
                     {
                         path: 'start',
@@ -68,20 +74,25 @@ registerLocaleData(localeNL);
                         path: 'confirm',
                         component: ValidateIccConfirmComponent
                     },
-                    {
-                        path: 'final',
-                        component: ValidateIccFinalComponent
-                    },
+
                 ]
             },
-
-            {path: 'icc/report', component: IccReportComponent, pathMatch: 'full'},
-            {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full'}
+            {
+                path: 'validate_final',
+                component: ValidateIccFinalComponent
+            },
+            {path: 'icc/report', component: IccReportComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+            {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full', canActivate: [AuthGuard]}
         ])
     ],
-    providers: [{
-        provide: LOCALE_ID, useValue: "nl",
-    }],
+    providers: [
+        {provide: LOCALE_ID, useValue: "nl"},
+        {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+
+        // provider used to create fake backend
+        fakeBackendProvider
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
