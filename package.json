@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "build:ssr": "ng run GGDPortal:server:dev",
-    "test": "ng test",
-    "lint": "ng lint",
+    "config": "ts-node set-env.ts",
+    "start": "npm run config && ng serve",
+    "build": "npm run config && ng build",
+    "build:ssr": "npm run config && ng run GGDPortal:server:dev",
+    "test": "npm run config && ng test",
+    "lint": "npm run config && ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -26,6 +27,8 @@
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.3.1",
     "core-js": "^3.3.3",
+    "colors": "^1.1.2",
+    "dotenv": "^5.0.0",
     "file-saver": "^2.0.2",
     "ng-pick-datetime": "^7.0.0",
     "oidc-client": "^1.9.1",
@@ -60,12 +63,12 @@
     "serialize-javascript": "^4.0.0",
     "tailwindcss": "^1.4.6",
     "typescript": "3.8.3",
-    "websocket-extensions": ">=0.1.4"
+    "websocket-extensions": ">=0.1.4",
+    "ts-node": "~8.4.1"
   },
   "optionalDependencies": {
     "node-sass": "^4.12.0",
     "protractor": "~5.4.2",
-    "ts-node": "~8.4.1",
     "tslint": "~5.20.0"
   }
 }

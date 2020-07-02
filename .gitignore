@@ -1,5 +1,8 @@
 .DS_STORE
 
+.env
+src/environments/environment.prod.ts
+
 /dist/
 /bazel-out
 /integration/bazel/bazel-*
