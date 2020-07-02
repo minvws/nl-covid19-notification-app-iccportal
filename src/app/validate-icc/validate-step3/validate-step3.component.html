@@ -18,12 +18,12 @@
         </div>
         <br>
         <br>
-        <input #dateInput type="date" [(ngModel)]="symptonsDate"> <br> <p class="text-red-600">! will be changed shortly!</p>
+        <input #dateInput type="date" [(ngModel)]="symptonsDate"> <br> <p class="text-red-600">change date to day in past to check datebox! will be changed shortly!</p>
         <br>
         <br>
         <!--        <p>Is de index in de periode wanneer hij/zij symptomen had in één of meerdere van de onderstaande landen geweest?</p>-->
     </div>
-    <button class="btn btn-primary mt-10" style="min-width: 340px"
+    <button class="btn btn-primary mt-10" style="min-width: 340px" routerLink="/validate/confirm"
             [disabled]="!(showsSymptons != null && ((showsSymptons && symptonsDate !== null) || showsSymptons == false))">
         Volgende
     </button>
