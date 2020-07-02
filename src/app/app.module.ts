@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, LOCALE_ID} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterModule} from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import {AppComponent} from './app.component';
+import {HomeComponent} from './home/home.component';
 import {IccReportComponent} from './icc/report.component';
 import {IccGenerateComponent} from './icc/generate.component';
 import {ValidateIccComponent} from "./validate-icc/validate-icc.component";
@@ -16,9 +16,13 @@ import {ExpansionPanelComponent} from "./validate-icc/expansion-panel/expansion-
 import {ValidateStep3Component} from "./validate-icc/validate-step3/validate-step3.component";
 import {ValidateStep4Component} from "./validate-icc/validate-step4/validate-step4.component";
 
-import { registerLocaleData } from '@angular/common';
+import {registerLocaleData} from '@angular/common';
 import localeNL from '@angular/common/locales/nl';
 import {ValidateStep5Component} from "./validate-icc/validate-step5/validate-step5.component";
+import {ValidateIccConfirmComponent} from "./validate-icc/validate-icc-confirm/validate-icc-confirm.component";
+import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/validate-icc-start.component";
+import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
+import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
 
 registerLocaleData(localeNL);
 
@@ -36,7 +40,11 @@ registerLocaleData(localeNL);
         ExpansionPanelComponent,
         ValidateStep3Component,
         ValidateStep4Component,
-        ValidateStep5Component
+        ValidateStep5Component,
+        ValidateIccConfirmComponent,
+        ValidateIccStartComponent,
+        ValidateIccSymptonsComponent,
+        ValidateIccFinalComponent
     ],
     imports: [
         BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -44,14 +52,37 @@ registerLocaleData(localeNL);
         FormsModule,
         RouterModule.forRoot([
             {path: '', component: HomeComponent, pathMatch: 'full'},
-            {path: 'validate', component: ValidateIccComponent, pathMatch: 'full'},
+            {
+                path: 'validate',
+                component: ValidateIccComponent,
+                children: [
+                    {
+                        path: 'start',
+                        component: ValidateIccStartComponent
+                    },
+                    {
+                        path: 'symptons',
+                        component: ValidateIccSymptonsComponent
+                    },
+                    {
+                        path: 'confirm',
+                        component: ValidateIccConfirmComponent
+                    },
+                    {
+                        path: 'final',
+                        component: ValidateIccFinalComponent
+                    },
+                ]
+            },
+
             {path: 'icc/report', component: IccReportComponent, pathMatch: 'full'},
             {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full'}
         ])
     ],
-  providers: [{
+    providers: [{
         provide: LOCALE_ID, useValue: "nl",
-  }],
-  bootstrap: [AppComponent]
+    }],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

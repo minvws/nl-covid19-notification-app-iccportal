@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
     selector: 'app-validate-step2',
@@ -10,7 +11,7 @@ export class ValidateStep2Component implements OnInit {
     public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
     InvalidState: Array<number> = [];
 
-    constructor() {
+    constructor(private router:Router) {
     }
 
 
@@ -19,10 +20,11 @@ export class ValidateStep2Component implements OnInit {
     }
 
     public submitIccId() {
-        // UI Test purposes
-        for (let i = 0; i < 7; i++) {
-            this.InvalidState.push(i)
-        }
+        // // UI Test purposes
+        // for (let i = 0; i < 7; i++) {
+        //     this.InvalidState.push(i)
+        // }
+        this.router.navigate(["validate","symptons"]);
     }
 
     removeInvalidState(number: number) {
