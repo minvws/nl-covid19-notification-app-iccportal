@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment.prod";
 
 
 
-const users: User[] = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const users: User[] = [{ id: 1, username: environment.auth.username, password: environment.auth.password, firstName: 'Test', lastName: 'User' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -67,7 +67,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function isLoggedIn() {
-            return headers.get('Authorization') === `Basic ${window.btoa(environment.auth)}`;
+            console.log("auth")
+            console.log(environment.auth)
+            return headers.get('Authorization') === `Basic ${window.btoa(environment.auth.username + ":" + environment.auth.password)}`;
         }
     }
 }
