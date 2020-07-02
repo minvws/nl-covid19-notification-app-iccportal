@@ -9,7 +9,10 @@ const envConfigFile = `export const environment = {
       production: false,
       appName: "{appName}",
       apiUrl: 'http://localhost:5006',
-      auth: '${process.env.user}:${process.env.password}',
+      auth: {
+          username:'${process.env.user}',
+          password:'${process.env.password}'
+      }
 };
 `;
 fs.writeFile(targetPath, envConfigFile, function (err) {
