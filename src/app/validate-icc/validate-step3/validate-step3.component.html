@@ -1,0 +1,31 @@
+<app-step [stepNumber]="3" stepTitle="Vertoont de index COVID-19 symptomen?">
+
+    <div class="btn-group-checkbox">
+        <div class="btn border-2 border-solid" (click)="showsSymptons = false"
+             [class.border-primary]="showsSymptons === false && showsSymptons !== null">Nee
+        </div>
+        <div class="btn border-2 border-solid" (click)="showsSymptons = true"
+             style="margin-left: -.25rem;border-radius: 0rem 0.25rem 0.25rem 0;"
+             [class.border-primary]="showsSymptons">Ja
+        </div>
+    </div>
+
+    <div class="mt-6" *ngIf="showsSymptons">
+        <p class="font-medium mb-4">Sinds wanneer?</p>
+
+        <div class="friendly-date-block px-4 py-3 bg-white rounded inline-block" style="min-width: 240px;">
+            {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
+        </div>
+        <br>
+        <br>
+
+        <input type="date" [(ngModel)]="symptonsDate">
+
+        <!--        <p>Is de index in de periode wanneer hij/zij symptomen had in één of meerdere van de onderstaande landen geweest?</p>-->
+    </div>
+    <button class="btn btn-primary mt-10" style="min-width: 340px"
+            [disabled]="!(showsSymptons != null && ((showsSymptons && symptonsDate !== null) || showsSymptons == false))">
+        Volgende
+    </button>
+
+</app-step>
