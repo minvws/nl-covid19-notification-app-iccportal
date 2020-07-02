@@ -1,5 +1,5 @@
 <app-step stepNumber="2" stepTitle="Vul het tijdelijke wachtwoord van de index in">
-<div class="input-box grid grid-cols-8 w-2/3 mb-10">
+<div class="input-box grid grid-cols-8 mb-10" style="width: 480px; ">
     <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)" (focus)="removeInvalidState(0)" type="text" [(ngModel)]="InfectionConfirmationId[0]" [autofocus]="true">
     <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)" (focus)="removeInvalidState(1)" type="text" [(ngModel)]="InfectionConfirmationId[1]">
     <div class="text-center text-3xl py-4">-</div>
