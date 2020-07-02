@@ -1,1 +1,15 @@
-<app-step stepNumber="2" stepTitle="Vul het tijdelijke wachtwoord van de index in"></app-step>
+<app-step stepNumber="2" stepTitle="Vul het tijdelijke wachtwoord van de index in">
+<div class="input-box grid grid-cols-8 w-2/3 mb-10">
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)" (focus)="removeInvalidState(0)" type="text" [(ngModel)]="InfectionConfirmationId[0]" [autofocus]="true">
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)" (focus)="removeInvalidState(1)" type="text" [(ngModel)]="InfectionConfirmationId[1]">
+    <div class="text-center text-3xl py-4">-</div>
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)" (focus)="removeInvalidState(2)" type="text" [(ngModel)]="InfectionConfirmationId[2]">
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)" (focus)="removeInvalidState(3)" type="text" [(ngModel)]="InfectionConfirmationId[3]">
+    <div class="text-center text-3xl py-4">-</div>
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)" (focus)="removeInvalidState(4)" type="text" [(ngModel)]="InfectionConfirmationId[4]">
+    <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)" (focus)="removeInvalidState(5)" type="text" [(ngModel)]="InfectionConfirmationId[5]">
+</div>
+<button class="btn btn-primary" (click)="submitIccId()" [disabled]="InfectionConfirmationId.join('').length !== 6" style="width: 330px;">
+    Bevestigen
+</button>
+</app-step>
