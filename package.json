@@ -1,11 +1,11 @@
 {
-  "name": "testportal",
+  "name": "ggdportal",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:ssr": "ng run TestPortal:server:dev",
+    "build:ssr": "ng run GGDPortal:server:dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -33,6 +33,7 @@
     "zone.js": "0.10.3"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^9.2.0",
     "@angular-devkit/build-angular": "^0.901.9",
     "@angular/cli": "^9.1.9",
     "@angular/compiler-cli": "^9.1.11",
@@ -52,7 +53,11 @@
     "karma-jasmine-html-reporter": "^1.4.2",
     "kind-of": ">=6.0.3",
     "minimist": ">=1.2.3",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-scss": "^2.1.1",
     "serialize-javascript": "^4.0.0",
+    "tailwindcss": "^1.4.6",
     "typescript": "3.8.3",
     "websocket-extensions": ">=0.1.4"
   },
