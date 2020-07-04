@@ -10,8 +10,10 @@ import {DatePipe, formatDate} from "@angular/common";
 export class ValidateStep3Component implements OnInit {
 
     showsSymptons: boolean = null
-    symptonsDate: string = null
+    symptonsDate: Date = null
     datePipe: DatePipe;
+    openDayPicker: boolean = false
+    dateArray: Array<number> = [...Array(15)]
 
     constructor(@Inject(LOCALE_ID) private locale: string) {
         this.datePipe = new DatePipe(locale)
@@ -20,19 +22,21 @@ export class ValidateStep3Component implements OnInit {
     ngOnInit(): void {
     }
 
-    isValidDate() {
-        return this.symptonsDate && Date.parse(this.symptonsDate) < Date.now()
-    }
 
     getFriendlySymptonsDate() {
-        if (this.isValidDate()) {
-            return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
-        }
-        return "Geen geldige datum geselecteerd"
+        return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
     }
 
-    getDaysAgo() {
-        const daysAgo = Math.floor(((Date.now() - Date.parse(this.symptonsDate)) / 1000 / 60 / 60 / 24))
-        return this.isValidDate() ? ((daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")) : ""
+    getDaysAgo(): string {
+        const daysAgo = (this.symptonsDate) ? Math.floor(((Date.now() - (this.symptonsDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
+        return (daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")
+    }
+
+    getDayAgo(dayCount: number): number {
+        let today = new Date();
+        if (dayCount > 0) {
+            return (today.setDate(today.getDate() - dayCount))
+        }
+        return today.valueOf()
     }
 }

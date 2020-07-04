@@ -13,15 +13,16 @@
     <div class="mt-6" *ngIf="showsSymptons">
         <p class="font-medium mb-4">Sinds wanneer?</p>
 
-        <div class="relative friendly-date-block px-4 py-3 bg-white rounded inline-block" style="min-width: 240px;">
+        <div class="relative friendly-date-block px-4 py-3 bg-white rounded inline-block shadow-md" style="min-width: 240px;" (click)="openDayPicker=true">
             {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
+        </div>
+        <div *ngIf="openDayPicker" class="friendly-dates flex flex-col justify-start rounded bg-white inline-block" style="width: 240px;">
+            <div (click)="symptonsDate = getDayAgo(dateDay)" *ngFor="let ii of dateArray; let dateDay = index" class="date w-full cursor-pointer hover:bg-gray-100 text-left px-4 py-3 rounded inline-block mr-auto" >
+                {{this.datePipe.transform(getDayAgo(dateDay),"EEE d MMM")}}
+            </div>
         </div>
         <br>
         <br>
-        <input #dateInput type="date" [(ngModel)]="symptonsDate"> <br> <p class="text-red-600">change date to day in past to check datebox! will be changed shortly!</p>
-        <br>
-        <br>
-        <!--        <p>Is de index in de periode wanneer hij/zij symptomen had in één of meerdere van de onderstaande landen geweest?</p>-->
     </div>
     <button class="btn btn-primary mt-10" style="min-width: 340px" routerLink="/validate/confirm"
             [disabled]="!(showsSymptons != null && ((showsSymptons && symptonsDate !== null) || showsSymptons == false))">
