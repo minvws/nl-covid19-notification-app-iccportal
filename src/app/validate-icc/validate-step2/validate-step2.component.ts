@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
@@ -6,14 +6,21 @@ import {Router, ActivatedRoute, ParamMap} from '@angular/router';
     templateUrl: './validate-step2.component.html',
     styleUrls: ['./validate-step2.component.scss']
 })
-export class ValidateStep2Component implements OnInit {
+export class ValidateStep2Component implements OnInit, AfterViewInit {
 
-    public InfectionConfirmationId: Array<string> = ['', '', '-','', '','-', '', ''];
+    public InfectionConfirmationId: Array<string> = ['', '', '-', '', '', '-', '', ''];
     InvalidState: Array<number> = [];
+    @ViewChild('first_char')
+    first_char: ElementRef;
 
     constructor(private router: Router) {
     }
-
+    ngAfterViewInit() {
+        const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement
+        firstCharInputElement.focus()
+    }
+    ngOnInit(): void {
+    }
 
     public getFormattedIccId() {
         return this.InfectionConfirmationId.map((part, i) => (i == 1 || i == 3) ? part + "-" : part).join('');
@@ -27,7 +34,7 @@ export class ValidateStep2Component implements OnInit {
         this.router.navigate(["validate", "symptons"]);
     }
 
-    removeInvalidState($event: FocusEvent,  number: number) {
+    removeInvalidState($event: FocusEvent, number: number) {
         const target = $event.target as HTMLInputElement;
         target.select()
         this.InvalidState = this.InvalidState.filter((i) => i !== number)
@@ -35,9 +42,6 @@ export class ValidateStep2Component implements OnInit {
 
     resetInvalidState() {
         if (this.InvalidState.length > 0) this.InvalidState = [];
-    }
-
-    ngOnInit(): void {
     }
 
     focusOnNext(target: Element) {
@@ -69,6 +73,8 @@ export class ValidateStep2Component implements OnInit {
         } else if ($event.code === 'Backspace') {
             target.value = ""
             this.focusOnPrev(target)
+        }else if ($event.code === 'Enter'){
+            this.submitIccId()
         } else {
             if ([...target.value].length > 1) {
                 target.value = target.value[target.value.length - 1]; // prevent fast overfilling
@@ -82,20 +88,4 @@ export class ValidateStep2Component implements OnInit {
         this.InfectionConfirmationId[index] = target.value
     }
 
-    // setTimeout(() => {
-    //     // console.log(index);
-    //     if ($event.code === 'Backspace') {
-    //         target.value = '';
-    //         (<HTMLInputElement>target.parentNode.querySelector(`.form-control:nth-child(${index})`)).focus();
-    //     } else if (index === 2) {
-    //         (<HTMLInputElement>target.parentNode.querySelector(`.form-control:nth-child(${index + 3})`)).focus();
-    //     } else if (index < 6) {
-    //         console.log(index + ' i');
-    //         (<HTMLInputElement>target.parentNode.querySelector(`.form-control:nth-child(${index + 2})`)).focus();
-    //     } else if (target.parentNode['id'] === 'iccWrapper') {
-    //         (<HTMLInputElement>document.querySelector('#icIdWrapper .form-control:first-child')).focus();
-    //     } else if (target.parentNode['id'] === 'icIdWrapper') {
-    //         (<HTMLInputElement>document.querySelector('.btn:last-child')).focus();
-    //     }
-    // }, 20);
 }

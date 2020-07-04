@@ -4,7 +4,7 @@
         <h1 class="text-4xl mt-10 leading-tight">Digitaal Contactonderzoek</h1>
         <p class="text-gray-700 mt-4 mb-8">Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}}
             app</p>
-        <a routerLink="validate/start" class="btn btn-primary">
+        <a (click)="authorize()" class="btn btn-primary">
             Inloggen met HPZone
         </a>
     </div>

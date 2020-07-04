@@ -1,6 +1,6 @@
 <app-step stepNumber="2" stepTitle="Vul het tijdelijke wachtwoord van de index in">
     <div class="input-box grid grid-cols-8 mb-10" style="width: 480px; ">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)" (focus)="removeInvalidState($event,0)"
+        <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)" (focus)="removeInvalidState($event,0)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[0]" [autofocus]="true">
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)" (focus)="removeInvalidState($event,1)"

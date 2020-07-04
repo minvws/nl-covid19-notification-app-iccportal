@@ -17,7 +17,7 @@
             {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
         </div>
         <div *ngIf="openDayPicker" class="friendly-dates flex flex-col justify-start rounded bg-white inline-block" style="width: 240px;">
-            <div (click)="symptonsDate = getDayAgo(dateDay)" *ngFor="let ii of dateArray; let dateDay = index" class="date w-full cursor-pointer hover:bg-gray-100 text-left px-4 py-3 rounded inline-block mr-auto" >
+            <div (click)="selectDate(dateDay)" *ngFor="let ii of dateArray; let dateDay = index" class="date w-full cursor-pointer hover:bg-gray-100 text-left px-4 py-3 rounded inline-block mr-auto" >
                 {{this.datePipe.transform(getDayAgo(dateDay),"EEE d MMM")}}
             </div>
         </div>

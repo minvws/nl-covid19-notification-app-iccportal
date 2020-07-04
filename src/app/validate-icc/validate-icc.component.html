@@ -1,8 +1,17 @@
+<div *ngIf="userInfo" [title]="userInfo.emailAddress" class="user-info flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
+    <p>Ingelogd als {{userInfo.displayName}}</p>
+    <a class="text-gray-500 hover:text-gray-800 ml-2" (click)="logout()">Uitloggen</a>
+</div>
+
 <div class="container">
     <div class="wrapper lg:w-3/4">
         <div class="hero mt-20 mb-10">
             <h2>Digitaal Contactonderzoek</h2>
-            <p class="text-gray-800">Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}} app</p>
+            <div class="text-gray-800 content">
+                <p *ngIf="userInfo">Welkom {{userInfo.displayName}}.</p>
+                <p>Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}} app</p>
+            </div>
+
         </div>
         <router-outlet></router-outlet>
     </div>

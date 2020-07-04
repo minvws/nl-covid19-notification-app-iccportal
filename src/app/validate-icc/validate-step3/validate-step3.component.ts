@@ -9,7 +9,7 @@ import {DatePipe, formatDate} from "@angular/common";
 })
 export class ValidateStep3Component implements OnInit {
 
-    showsSymptons: boolean = null
+    showsSymptons: boolean = true
     symptonsDate: Date = null
     datePipe: DatePipe;
     openDayPicker: boolean = false
@@ -32,11 +32,16 @@ export class ValidateStep3Component implements OnInit {
         return (daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")
     }
 
-    getDayAgo(dayCount: number): number {
+    getDayAgo(dayCount: number): Date {
         let today = new Date();
         if (dayCount > 0) {
-            return (today.setDate(today.getDate() - dayCount))
+            return new Date(today.setDate(today.getDate() - dayCount))
         }
-        return today.valueOf()
+        return today
+    }
+
+    selectDate(dateDay: number) {
+        this.symptonsDate = this.getDayAgo(dateDay)
+        this.openDayPicker = false
     }
 }

@@ -9,6 +9,7 @@ const envConfigFile = `export const environment = {
       production: false,
       appName: "{appName}",
       apiUrl: 'http://localhost:5006',
+      authHost: '${process.env.AUTH_HOST}',
       auth: {
           username:'${process.env.USERNAME}',
           password:'${process.env.PASSWORD}'
