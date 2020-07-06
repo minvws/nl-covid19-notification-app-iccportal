@@ -1,32 +1,38 @@
 <app-step stepNumber="2" stepTitle="Vul het tijdelijke wachtwoord van de index in">
     <div class="input-box grid grid-cols-8 mb-10" style="width: 480px; ">
-        <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)" (focus)="removeInvalidState($event,0)"
+        <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)"
+               (focus)="removeInvalidState($event,0)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[0]" [autofocus]="true">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)" (focus)="removeInvalidState($event,1)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)"
+               (focus)="removeInvalidState($event,1)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[1]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)" (focus)="removeInvalidState($event,2)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)"
+               (focus)="removeInvalidState($event,2)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[2]">
         <div class="text-center text-3xl py-4">-</div>
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)" (focus)="removeInvalidState($event,3)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)"
+               (focus)="removeInvalidState($event,3)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[3]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)" (focus)="removeInvalidState($event,4)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)"
+               (focus)="removeInvalidState($event,4)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[4]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)" (focus)="removeInvalidState($event,5)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)"
+               (focus)="removeInvalidState($event,5)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[5]">
     </div>
 
     <div class="error-message text-red-600 mt-4 mb-10" *ngIf="error_code > -1" style="max-width: 500px;">
-        <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je hebt ingevoerd: F (Frederik) C (Charlie) 9 - 3 A (Anton) 6</p>
-        <p *ngIf="error_code == 1">Nieuwe foutmelding.</p>
+        <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je
+            hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span> </p>
+        <p *ngIf="error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke wachtwoord <b>enkel</b>
+            de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
     </div>
-
-
     <button class="btn btn-primary" (click)="submitIccId()" [disabled]="InfectionConfirmationId.join('').length !== 6"
             style="width: 330px;">
         Bevestigen

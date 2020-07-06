@@ -13,6 +13,38 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     @ViewChild('first_char')
     first_char: ElementRef;
     error_code: number = -1
+    allowedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54']
+    allowedChars: string = 'BCFGJLQRSTUVXYZ23456789'
+
+    spelAlphabet: Object = {
+        "A": "Anna",
+        "B": "Bernard",
+        "C": "Cornelis",
+        "D": "Dirk",
+        "E": "Eduard",
+        "F": "Ferdinand",
+        "G": "Gerard",
+        "H": "Hendrik",
+        "I": "Izak",
+        "J": "Jan",
+        "K": "Karel",
+        "L": "Lodewijk",
+        "M": "Maria",
+        "N": "Nico",
+        "O": "Otto",
+        "P": "Pieter",
+        "Q": "Quotiënt",
+        "R": "Rudolf",
+        "S": "Simon",
+        "T": "Teunis",
+        "U": "Utrecht",
+        "V": "Victor",
+        "W": "Willem",
+        "X": "Xantippe",
+        "Y": "Y-grec",
+        "Z": "Zaandam"
+    }
+
 
     constructor(private router: Router) {
     }
@@ -25,18 +57,41 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     ngOnInit(): void {
     }
 
+    public InfectionConfirmationIdValid() {
+        return (this.InfectionConfirmationId.join("").length === 6 && this.InfectionConfirmationId.join("").match("^[" + this.allowedChars + "]+$"))
+    }
+
+    public InfectionConfirmationIdToTaalString() {
+        let output = ""
+        this.InfectionConfirmationId.forEach((c, index) => {
+            if (index == 3) {
+                output += " – "
+            }
+            if (this.spelAlphabet[c]) {
+                output += "<b>" + c + "</b>" + " (" + this.spelAlphabet[c] + ")"
+            } else {
+                output += "<b>" + c + "</b>";
+            }
+            output += " ";
+        })
+        return output;
+    }
+
     public submitIccId() {
-        // // UI Test purposes – MOCK ERROR CODES
-        for (let i = 0; i < 7; i++) {
-            this.InvalidState.push(i)
-        }
-        if (this.error_code > -1) {
-            this.error_code--
-            if (this.error_code == 0) {
+        // UI Test purposes – MOCK ERROR CODES
+        if (this.InfectionConfirmationIdValid()) {
+            if (this.allowedMockIds.includes(this.InfectionConfirmationId.join(""))) {
                 this.router.navigate(["validate", "symptons"]);
+            } else {
+                this.error_code = 2
             }
         } else {
-            this.error_code = 2
+            this.error_code = 1
+        }
+        if (this.error_code > -1) {
+            for (let i = 0; i < 7; i++) {
+                this.InvalidState.push(i)
+            }
         }
     }
 
