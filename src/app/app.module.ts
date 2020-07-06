@@ -23,8 +23,7 @@ import {ValidateIccConfirmComponent} from "./validate-icc/validate-icc-confirm/v
 import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/validate-icc-start.component";
 import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
 import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
-import {AuthGuard, BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./_helpers";
-import {LoginComponent} from "./login";
+import {AuthGuard, BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./helpers";
 
 registerLocaleData(localeNL);
 
@@ -33,7 +32,6 @@ registerLocaleData(localeNL);
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent,
         ValidateIccComponent,
         IccReportComponent,
         IccGenerateComponent,
@@ -55,8 +53,7 @@ registerLocaleData(localeNL);
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
-            {path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-            {path: 'login', component: LoginComponent},
+            {path: '', component: HomeComponent, pathMatch: 'full'},
             {
                 path: 'validate',
                 component: ValidateIccComponent,

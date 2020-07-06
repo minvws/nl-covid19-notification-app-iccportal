@@ -2,12 +2,10 @@
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import {User} from "../_models";
+import {User} from "../models";
 import {environment} from "../../environments/environment.prod";
 
-
-
-const users: User[] = [{ id: 1, username: environment.auth.username, password: environment.auth.password, firstName: 'Test', lastName: 'User' }];
+const users: User[] = [{ id: 1, username: "test", password: "test", firstName: 'Test', lastName: 'User' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -68,8 +66,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function isLoggedIn() {
             console.log("auth")
-            console.log(environment.auth)
-            return headers.get('Authorization') === `Basic ${window.btoa(environment.auth.username + ":" + environment.auth.password)}`;
+            return true;
+            // return headers.get('Authorization') === `Basic ${window.btoa(environment.auth.username + ":" + environment.auth.password)}`;
         }
     }
 }
