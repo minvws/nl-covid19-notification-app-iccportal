@@ -66,7 +66,7 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "GGDPortal:build:production"
+              "browserTarget": "GGDPortal:build"
             }
           }
         },
