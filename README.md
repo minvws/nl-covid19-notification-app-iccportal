@@ -31,10 +31,6 @@ Copy the `.env.example` in the root of the repository to `.env` to temporary sec
 cp .env.example .env && vi .env
 ```
 
-
-**!! This is a temporary solution, to prevent unauthorized access before the custom authentication middleware is in place. !!**
-
-
 ## Installation
 
 To install all required packages from `package.json`, run the following command:
