@@ -13,7 +13,7 @@
     <div class="mt-6" *ngIf="showsSymptons">
         <p class="font-medium mb-4">Sinds wanneer?</p>
 
-        <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-white rounded inline-block shadow-md" style="min-width: 240px;" (click)="openDayPicker=true">
+        <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-white rounded inline-block shadow-md hover:bg-gray-100" style="min-width: 240px;" (click)="openDayPicker=!openDayPicker">
             {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
         </div>
         <div *ngIf="openDayPicker" class="friendly-dates flex flex-col justify-start rounded bg-white inline-block" style="width: 240px;">
