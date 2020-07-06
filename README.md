@@ -24,13 +24,6 @@ This increases the chance that we might be able to use your contribution (or it 
 1. NPM: https://nodejs.org/en/ or Yarn: https://yarnpkg.com/
 1. Angular CLI: https://angular.io/guide/setup-local
 
-## Getting started
-
-Copy the `.env.example` in the root of the repository to `.env` to temporary secure the frontend portal. 
-```bash
-cp .env.example .env && vi .env
-```
-
 ## Installation
 
 To install all required packages from `package.json`, run the following command:

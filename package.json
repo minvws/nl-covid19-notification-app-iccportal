@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "config": "ts-node set-env.ts",
-    "start": "npm run config && ng serve",
-    "build": "npm run config && ng build",
-    "build:ssr": "npm run config && ng run GGDPortal:server:dev",
-    "test": "npm run config && ng test",
-    "lint": "npm run config && ng lint",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:ssr": "ng run GGDPortal:server:dev",
+    "test": "ng test",
+    "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,

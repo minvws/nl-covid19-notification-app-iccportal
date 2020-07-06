@@ -14,7 +14,7 @@ export class ValidateStep5Component implements OnInit {
     ngOnInit(): void {
         setTimeout(() => {
             this.uploadSuccessfull = true
-        }, 4000)
+        }, 7000)
     }
 
 }

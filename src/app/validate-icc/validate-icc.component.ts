@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TitleService} from "../services/title.service";
-import {environment} from "../../environments/environment.prod";
+import {environment} from "../../environments/environment";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
