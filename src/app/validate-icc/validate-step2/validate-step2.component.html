@@ -6,6 +6,9 @@
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)" (focus)="removeInvalidState($event,1)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[1]">
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)" (focus)="removeInvalidState($event,2)"
+               (keyup)="icIdKeyPress($event)"
+               type="text" [(ngModel)]="InfectionConfirmationId[2]">
         <div class="text-center text-3xl py-4">-</div>
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)" (focus)="removeInvalidState($event,3)"
                (keyup)="icIdKeyPress($event)"
@@ -13,15 +16,18 @@
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)" (focus)="removeInvalidState($event,4)"
                (keyup)="icIdKeyPress($event)"
                type="text" [(ngModel)]="InfectionConfirmationId[4]">
-        <div class="text-center text-3xl py-4">-</div>
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(6)" (focus)="removeInvalidState($event,6)"
+        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)" (focus)="removeInvalidState($event,5)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[6]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(7)" (focus)="removeInvalidState($event,7)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[7]">
+               type="text" [(ngModel)]="InfectionConfirmationId[5]">
     </div>
-    <button class="btn btn-primary" (click)="submitIccId()" [disabled]="InfectionConfirmationId.join('').length !== 8"
+
+    <div class="error-message text-red-600 mt-4 mb-10" *ngIf="error_code > -1" style="max-width: 500px;">
+        <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je hebt ingevoerd: F (Frederik) C (Charlie) 9 - 3 A (Anton) 6</p>
+        <p *ngIf="error_code == 1">Zorg dat alle vakken zijn gevuld.</p>
+    </div>
+
+
+    <button class="btn btn-primary" (click)="submitIccId()" [disabled]="InfectionConfirmationId.join('').length !== 6"
             style="width: 330px;">
         Bevestigen
     </button>
