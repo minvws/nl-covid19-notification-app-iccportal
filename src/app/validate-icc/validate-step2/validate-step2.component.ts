@@ -8,30 +8,36 @@ import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 })
 export class ValidateStep2Component implements OnInit, AfterViewInit {
 
-    public InfectionConfirmationId: Array<string> = ['', '', '-', '', '', '-', '', ''];
+    public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
+    error_code: number = -1
 
     constructor(private router: Router) {
     }
+
     ngAfterViewInit() {
         const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement
         firstCharInputElement.focus()
     }
+
     ngOnInit(): void {
     }
 
-    public getFormattedIccId() {
-        return this.InfectionConfirmationId.map((part, i) => (i == 1 || i == 3) ? part + "-" : part).join('');
-    }
-
     public submitIccId() {
-        // // UI Test purposes
-        // for (let i = 0; i < 7; i++) {
-        //     this.InvalidState.push(i)
-        // }
-        this.router.navigate(["validate", "symptons"]);
+        // // UI Test purposes – MOCK ERROR CODES
+        for (let i = 0; i < 7; i++) {
+            this.InvalidState.push(i)
+        }
+        if (this.error_code > -1) {
+            this.error_code--
+            if (this.error_code == 0) {
+                this.router.navigate(["validate", "symptons"]);
+            }
+        } else {
+            this.error_code = 2
+        }
     }
 
     removeInvalidState($event: FocusEvent, number: number) {
@@ -64,7 +70,8 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
 
     icIdKeyPress($event: KeyboardEvent) {
         const target = $event.target as HTMLInputElement;
-        const index = Array.prototype.indexOf.call(target.parentElement.children, target);
+        let index = Array.prototype.indexOf.call(target.parentElement.children, target);
+        index = (index > 3) ? index - 1 : index;
 
         if ($event.code === 'ArrowRight') {
             this.focusOnNext(target)
@@ -73,7 +80,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
         } else if ($event.code === 'Backspace') {
             target.value = ""
             this.focusOnPrev(target)
-        }else if ($event.code === 'Enter'){
+        } else if ($event.code === 'Enter') {
             this.submitIccId()
         } else {
             if ([...target.value].length > 1) {
