@@ -13,7 +13,7 @@ export class ValidateStep3Component implements OnInit {
     symptonsDate: Date = null
     datePipe: DatePipe;
     openDayPicker: boolean = false
-    dateArray: Array<number> = [...Array(15)]
+    dateArray: Array<number> = [...Array(22)]
 
     constructor(@Inject(LOCALE_ID) private locale: string) {
         this.datePipe = new DatePipe(locale)
@@ -27,13 +27,18 @@ export class ValidateStep3Component implements OnInit {
         return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
     }
 
-    getDaysAgo(): string {
-        const daysAgo = (this.symptonsDate) ? Math.floor(((Date.now() - (this.symptonsDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
+    getDaysAgo(inputDate: Date): string {
+        inputDate = ((inputDate) ? inputDate : this.symptonsDate)
+        const daysAgo = (inputDate) ? Math.floor(((Date.now() - (inputDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
         return (daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")
     }
 
     getDayAgo(dayCount: number): Date {
         let today = new Date();
+        today.setHours(0)
+        today.setMinutes(0)
+        today.setSeconds(0)
+        today.setMilliseconds(0)
         if (dayCount > 0) {
             return new Date(today.setDate(today.getDate() - dayCount))
         }

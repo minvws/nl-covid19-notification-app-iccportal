@@ -1,7 +1,7 @@
 <app-step stepTitle="Controleer of het uploaden is gelukt" stepNumber="5">
     <div class="bg-white p-4 flex items-center mb-3 mt-6 rounded" style="max-width: 380px">
-        <div class="icon loading w-6 h-6">
-
+        <div class="w-6 h-6 text-2xl mr-4 leading-none">
+            <span class="icon" [class.icon-loading]="!uploadSuccessfull" [class.icon-check-green]="uploadSuccessfull"></span>
         </div>
         <span *ngIf="!uploadSuccessfull" class="leading-none">Nog geen codes geupload door index</span>
         <span *ngIf="uploadSuccessfull" class="leading-none">Codes geupload door index</span>

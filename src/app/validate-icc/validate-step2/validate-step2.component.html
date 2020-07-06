@@ -27,11 +27,15 @@
                type="text" [(ngModel)]="InfectionConfirmationId[5]">
     </div>
 
-    <div class="error-message text-red-600 mt-4 mb-10" *ngIf="error_code > -1" style="max-width: 500px;">
-        <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je
-            hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span> </p>
-        <p *ngIf="error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke wachtwoord <b>enkel</b>
-            de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
+    <div class="error-message text-red-600 mt-4 mb-10 flex flex-row flex-nowrap items-start" *ngIf="error_code > -1"
+         style="max-width: 500px;">
+        <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
+        <div>
+            <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je
+                hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
+            <p *ngIf="error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke wachtwoord <b>enkel</b>
+                de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
+        </div>
     </div>
     <button class="btn btn-primary" (click)="submitIccId()" [disabled]="InfectionConfirmationId.join('').length !== 6"
             style="width: 330px;">

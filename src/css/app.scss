@@ -91,16 +91,28 @@ h6 {
     @apply text-gray-700 bg-gray-500;
   }
 }
-.btn-group-checkbox{
-  .btn{
+
+.btn-group-checkbox {
+  .btn {
     @apply py-3 px-12 !important;
   }
 }
 
+
+@keyframes loading_circle {
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+
 span.icon {
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: 1em;
+  height: 1em;
 
   &:after {
     content: '';
@@ -119,6 +131,19 @@ span.icon {
   &.icon-collapse:after {
     background-image: url("src/assets/icon-arrow-up.svg");
     transform: rotate(180deg);
+  }
+  &.icon-exclamation-mark:after {
+    background-image: url("src/assets/icon-exclamation-mark.svg");
+  }
+  &.icon-check-green:after{
+    background-image: url("src/assets/icon-check-green.svg");
+  }
+  &.icon-close:after{
+    background-image: url("src/assets/icon-close.svg");
+  }
+  &.icon-loading:after{
+    animation: loading_circle 1s infinite linear;
+    background-image: url("src/assets/icon-loading.svg");
   }
 }
 
@@ -157,8 +182,14 @@ span.icon {
 }
 
 
-.friendly-date-block{
-  &:first-letter{
+.friendly-date-block, .friendly-dates {
+  &:first-letter {
     text-transform: uppercase;
   }
+}
+
+.friendly-dates {
+  position: absolute;
+  max-height: 350px;
+  overflow-y: scroll;
 }
