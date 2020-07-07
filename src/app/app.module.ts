@@ -24,6 +24,7 @@ import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/valid
 import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
 import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
 import {AuthGuard, BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./helpers";
+import {ImageCarousselComponent} from "./components/image-caroussel/image-caroussel.component";
 
 registerLocaleData(localeNL);
 
@@ -45,7 +46,8 @@ registerLocaleData(localeNL);
         ValidateIccConfirmComponent,
         ValidateIccStartComponent,
         ValidateIccSymptonsComponent,
-        ValidateIccFinalComponent
+        ValidateIccFinalComponent,
+        ImageCarousselComponent
     ],
     imports: [
         FormsModule, ReactiveFormsModule,
