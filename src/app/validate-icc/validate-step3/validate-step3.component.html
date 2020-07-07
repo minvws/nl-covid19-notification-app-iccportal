@@ -31,9 +31,9 @@
         <br>
         <br>
     </div>
-    <button class="btn btn-primary mt-10" style="min-width: 340px" routerLink="/validate/confirm"
+    <button class="btn btn-primary mt-10" style="min-width: 340px" (click)="confirmLabConfirmationId()"
             [disabled]="!(showsSymptons != null && ((showsSymptons && symptonsDate !== null) || showsSymptons == false))">
-        Volgende
+        Bevestig symptonendatum
     </button>
 
 </app-step>

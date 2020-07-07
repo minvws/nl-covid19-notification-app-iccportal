@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   appName: "{appName}",
-  apiUrl: 'http://localhost:5006',
+  apiUrl: 'https://localhost:5005',
   authHost: 'localhost:5001'
 };
 

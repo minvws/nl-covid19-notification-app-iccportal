@@ -1,6 +1,6 @@
-<div *ngIf="userInfo" [title]="userInfo.emailAddress" class="user-info flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
-    <p>Ingelogd als {{userInfo.displayName}}</p>
-    <a class="text-gray-500 hover:text-gray-800 ml-2" (click)="logout()">Uitloggen</a>
+<div *ngIf="authenticationService.currentUserValue" [title]="authenticationService.currentUserValue.email" class="user-info flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
+    <p>Ingelogd als {{authenticationService.currentUserValue.displayName}}</p>
+    <a class="cursor-pointer text-gray-500 hover:text-gray-800 ml-2" (click)="authenticationService.logout()">Uitloggen</a>
 </div>
 
 <div class="container">
@@ -8,7 +8,7 @@
         <div class="hero mt-20 mb-10">
             <h2>Digitaal Contactonderzoek</h2>
             <div class="text-gray-800 content">
-                <p *ngIf="userInfo">Welkom {{userInfo.displayName}}.</p>
+                <p *ngIf="authenticationService.currentUserValue">Welkom {{authenticationService.currentUserValue.displayName}}.</p>
                 <p>Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}} app</p>
             </div>
 
