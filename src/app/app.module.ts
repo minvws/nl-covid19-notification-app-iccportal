@@ -10,9 +10,9 @@ import {IccReportComponent} from './icc/report.component';
 import {IccGenerateComponent} from './icc/generate.component';
 import {ValidateIccComponent} from "./validate-icc/validate-icc.component";
 import {ValidateStep1Component} from "./validate-icc/validate-step1/validate-step1.component";
-import {StepComponent} from "./validate-icc/step/step.component";
+import {StepComponent} from "./components/step/step.component";
 import {ValidateStep2Component} from "./validate-icc/validate-step2/validate-step2.component";
-import {ExpansionPanelComponent} from "./validate-icc/expansion-panel/expansion-panel.component";
+import {ExpansionPanelComponent} from "./components/expansion-panel/expansion-panel.component";
 import {ValidateStep3Component} from "./validate-icc/validate-step3/validate-step3.component";
 import {ValidateStep4Component} from "./validate-icc/validate-step4/validate-step4.component";
 

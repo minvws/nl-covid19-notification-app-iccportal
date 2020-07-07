@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./expansion-panel.component.scss']
 })
 export class ExpansionPanelComponent implements OnInit {
-  @Input() title: string;
+  @Input() panelTitle: string;
   @Input() expanded: Boolean = false;
   constructor() { }
 

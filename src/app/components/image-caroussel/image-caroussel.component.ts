@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-image-caroussel',
@@ -10,6 +10,12 @@ export class ImageCarousselComponent implements OnInit {
     @Input() additionalStyle: string;
 
     popupActive: boolean = false
+    @HostListener('document:keyup', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        if(event.key === 'Escape'){
+            this.popupActive  = false;
+        }
+    }
 
     constructor() {
     }
