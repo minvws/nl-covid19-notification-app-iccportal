@@ -2,6 +2,9 @@ import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {DatePipe, formatDate} from "@angular/common";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ReportService} from "../../services/report.service";
+import {catchError} from "rxjs/operators";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -62,13 +65,31 @@ export class ValidateStep3Component implements OnInit {
         this.openDayPicker = false
     }
 
-    confirmLabConfirmationId() {
+    returnErrorToStart() {
+        this.router.navigate(["/validate/start"], {
+            queryParams: {
+                labId: this.InfectionConfirmationId,
+                errorCode: 2,
+            }
+        })
+        this.error_code = 2;
+    }
 
-        this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString()).subscribe((result) => {
-            if (result.valid) {
+    errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+        this.returnErrorToStart()
+        throw error;
+    }
+
+    confirmLabConfirmationId() {
+        this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
+            .pipe(catchError((e) => {
+                this.returnErrorToStart()
+                throw e;
+            })).subscribe((result) => {
+            if (result.valid === true) {
                 this.router.navigate(["/validate/confirm"])
             } else {
-                this.error_code = 1;
+                this.returnErrorToStart();
             }
         });
 
