@@ -88,7 +88,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
                 this.router.navigate(["validate", "symptons"],
                     {
                         queryParams: {
-                            labId: this.InfectionConfirmationId
+                            p: btoa(JSON.stringify(this.InfectionConfirmationId))
                         }
                     });
             } else {
