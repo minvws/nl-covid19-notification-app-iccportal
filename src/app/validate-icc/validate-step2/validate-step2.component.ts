@@ -46,7 +46,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private route: ActivatedRoute) {
     }
 
     ngAfterViewInit() {
@@ -55,6 +55,10 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        // console.log(this.route.snapshot.queryParams)
+        if (this.route.snapshot.queryParams["labId"]) this.InfectionConfirmationId = this.route.snapshot.queryParams["labId"];
+        if (this.route.snapshot.queryParams["errorCode"]) this.error_code = this.route.snapshot.queryParams["errorCode"]
+
     }
 
     public InfectionConfirmationIdValid() {
