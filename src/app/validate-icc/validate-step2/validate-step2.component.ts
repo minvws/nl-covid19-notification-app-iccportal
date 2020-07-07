@@ -80,8 +80,13 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     public submitIccId() {
         // UI Test purposes – MOCK ERROR CODES
         if (this.InfectionConfirmationIdValid()) {
-            if (this.allowedMockIds.includes(this.InfectionConfirmationId.join(""))) {
-                this.router.navigate(["validate", "symptons"]);
+            if (true || this.allowedMockIds.includes(this.InfectionConfirmationId.join(""))) {
+                this.router.navigate(["validate", "symptons"],
+                    {
+                        queryParams: {
+                            labId: this.InfectionConfirmationId
+                        }
+                    });
             } else {
                 this.error_code = 2
             }

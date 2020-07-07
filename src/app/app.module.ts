@@ -23,8 +23,9 @@ import {ValidateIccConfirmComponent} from "./validate-icc/validate-icc-confirm/v
 import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/validate-icc-start.component";
 import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
 import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
-import {AuthGuard, BasicAuthInterceptor, ErrorInterceptor, fakeBackendProvider} from "./helpers";
+import {AuthGuard, ErrorInterceptor} from "./helpers";
 import {ImageCarousselComponent} from "./components/image-caroussel/image-caroussel.component";
+import {AuthComponent} from "./auth/auth.component";
 
 registerLocaleData(localeNL);
 
@@ -55,6 +56,7 @@ registerLocaleData(localeNL);
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
+            {path: 'auth', component: AuthComponent},
             {path: '', component: HomeComponent, pathMatch: 'full'},
             {
                 path: 'validate',
@@ -73,7 +75,6 @@ registerLocaleData(localeNL);
                         path: 'confirm',
                         component: ValidateIccConfirmComponent
                     },
-
                 ]
             },
             {
@@ -86,11 +87,7 @@ registerLocaleData(localeNL);
     ],
     providers: [
         {provide: LOCALE_ID, useValue: "nl"},
-        {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-
-        // provider used to create fake backend
-        fakeBackendProvider
+        {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],
     bootstrap: [AppComponent]
 })

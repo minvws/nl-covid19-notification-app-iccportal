@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {AuthenticationService} from "./authentication.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,25 +12,24 @@ export class ReportService {
 
   private authHeader = '';
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient, private readonly authenticationService: AuthenticationService) { }
 
-  redeemIcc(authHeader: string, labConfirmationIds: Array<string>, dateOfSymptomsOnset: string): Observable<any> {
-    this.authHeader = authHeader;
-    const serviceUrl = environment.apiUrl + '/RedeemIcc';
+  confirmLabId(labConfirmationIds: Array<string>, dateOfSymptomsOnset: string): Observable<any> {
+    const serviceUrl = environment.apiUrl + '/CaregiversPortalApi/v1/labconfirm';
     const data = {
-      'LabConfirmationID': labConfirmationIds.join('')
+      'LabConfirmationID': labConfirmationIds.join(""),
+      'DateOfSymptomsOnset': dateOfSymptomsOnset
     };
-    // "DateOfSymptomsOnset": dateOfSymptomsOnset
     const headers = {
       headers: {
-        'Authorization': this.authHeader
+        'Authorization': "Bearer " + this.authenticationService.currentUserValue.authData
       }
     };
 
-    return this.http.post(serviceUrl, data, headers).pipe(catchError(this.errorHandler));
+    return this.http.post(serviceUrl, data, headers).pipe(catchError(ReportService.errorHandler));
   }
 
-  private errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+  private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
     // TODO error handling
     throw error;
   }

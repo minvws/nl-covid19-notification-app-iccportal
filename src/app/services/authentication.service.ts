@@ -1,11 +1,13 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+﻿import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {User} from "../models";
 import {environment} from "../../environments/environment";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {ActivatedRoute} from "@angular/router";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
@@ -19,20 +21,25 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
-            .pipe(map(user => {
-                // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-                user.authdata = window.btoa(username + ':' + password);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
+    login(jwtToken: string) {
+
+        var helper = new JwtHelperService();
+        var payload = helper.decodeToken(jwtToken);
+        const user: User = {
+            displayName: payload.name,
+            email: payload.email,
+            id: payload.id,
+            authData: jwtToken
+        };
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
     }
 
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+
+        window.location.href = "https://" + environment.authHost + "/Auth/Logout";
     }
 }

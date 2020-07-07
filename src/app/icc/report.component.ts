@@ -39,9 +39,9 @@ export class IccReportComponent {
     this.labConfirmationId.forEach((idd, k) => {
       this.labConfirmationId[k] = idd.toUpperCase();
     });
-    this.reportService.redeemIcc(this.icc, this.labConfirmationId, this.dateOfSymptomsOnset).subscribe((result) => {
-      alert(JSON.stringify(result));
-    });
+    // this.reportService.redeemIcc(this.icc, this.labConfirmationId, this.dateOfSymptomsOnset).subscribe((result) => {
+    //   alert(JSON.stringify(result));
+    // });
 
   }
 }

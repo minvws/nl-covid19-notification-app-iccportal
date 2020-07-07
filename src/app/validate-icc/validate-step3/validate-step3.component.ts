@@ -1,5 +1,7 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {DatePipe, formatDate} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
+import {ReportService} from "../../services/report.service";
 
 
 @Component({
@@ -14,14 +16,24 @@ export class ValidateStep3Component implements OnInit {
     datePipe: DatePipe;
     openDayPicker: boolean = false
     dateArray: Array<number> = [...Array(22)]
+    InfectionConfirmationId: Array<string>
+    error_code: number = -1;
 
-    constructor(@Inject(LOCALE_ID) private locale: string) {
+    constructor(@Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute, private router: Router, private reportService: ReportService) {
         this.datePipe = new DatePipe(locale)
+
     }
 
     ngOnInit(): void {
+        this.InfectionConfirmationId = this.route.snapshot.queryParams['labId']
+        // console.log(this.route.snapshot)
+        // console.log()
+        // this.route.params.subscribe(params => {
+        //     console.log(params)
+        //
+        //     // In a real app: dispatch action to load the details here.
+        // });
     }
-
 
     getFriendlySymptonsDate() {
         return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
@@ -48,5 +60,18 @@ export class ValidateStep3Component implements OnInit {
     selectDate(dateDay: number) {
         this.symptonsDate = this.getDayAgo(dateDay)
         this.openDayPicker = false
+    }
+
+    confirmLabConfirmationId() {
+
+        this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString()).subscribe((result) => {
+            if (result.valid) {
+                this.router.navigate(["/validate/confirm"])
+            } else {
+                this.error_code = 1;
+            }
+        });
+
+
     }
 }
