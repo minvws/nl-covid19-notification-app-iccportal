@@ -9,6 +9,8 @@ export class StepComponent implements OnInit {
   @Input() stepNumber: number;
   @Input() stepTitle: string;
 
+
+
   constructor() { }
 
   ngOnInit(): void {

@@ -127,6 +127,12 @@ span.icon {
   &.icon-expand:after {
     background-image: url("src/assets/icon-arrow-up.svg");
   }
+  &.icon-arrow-right:after{
+    transform: rotate(90deg);
+    margin-left: 0.2em;
+    background-image: url("src/assets/icon-arrow-up.svg");
+  }
+
 
   &.icon-collapse:after {
     background-image: url("src/assets/icon-arrow-up.svg");
@@ -144,6 +150,9 @@ span.icon {
   &.icon-loading:after{
     animation: loading_circle 1s infinite linear;
     background-image: url("src/assets/icon-loading.svg");
+  }
+  &.icon-white{
+    filter: invert(100%) sepia(66%) saturate(58%) hue-rotate(95deg) brightness(117%) contrast(100%);
   }
 }
 
@@ -192,4 +201,8 @@ span.icon {
   position: absolute;
   max-height: 350px;
   overflow-y: scroll;
+}
+
+.leading-nothing{
+  line-height: 0;
 }
