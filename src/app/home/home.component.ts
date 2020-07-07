@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
     templateUrl: './home.component.html',
 })
 export class HomeComponent {
-    public constructor(private router: Router, private titleService: TitleService) {
+    public constructor(private router: Router, public titleService: TitleService) {
         titleService.setTitle("Home")
     }
 

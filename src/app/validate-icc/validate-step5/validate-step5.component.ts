@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./validate-step5.component.scss']
 })
 export class ValidateStep5Component implements OnInit {
-    private uploadSuccessfull: boolean = false;
+    uploadSuccessfull: boolean = false;
 
     constructor() {
     }
