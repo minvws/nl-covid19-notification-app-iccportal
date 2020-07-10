@@ -26,7 +26,7 @@ export class ValidateStep5Component implements OnInit {
                 } else {
                     clearInterval(interval)
                 }
-            }, 1000);
+            }, 7000);
         }
     }
 
