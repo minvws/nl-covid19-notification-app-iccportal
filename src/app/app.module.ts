@@ -6,8 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {IccReportComponent} from './icc/report.component';
-import {IccGenerateComponent} from './icc/generate.component';
 import {ValidateIccComponent} from "./validate-icc/validate-icc.component";
 import {ValidateStep1Component} from "./validate-icc/validate-step1/validate-step1.component";
 import {StepComponent} from "./components/step/step.component";
@@ -35,8 +33,6 @@ registerLocaleData(localeNL);
         AppComponent,
         HomeComponent,
         ValidateIccComponent,
-        IccReportComponent,
-        IccGenerateComponent,
         ValidateStep1Component,
         StepComponent,
         ValidateStep2Component,
@@ -56,8 +52,8 @@ registerLocaleData(localeNL);
         HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
+            {path: '', component: HomeComponent},
             {path: 'auth', component: AuthComponent},
-            {path: '', component: HomeComponent, pathMatch: 'full'},
             {
                 path: 'validate',
                 component: ValidateIccComponent,
@@ -80,9 +76,7 @@ registerLocaleData(localeNL);
             {
                 path: 'validate_final',
                 component: ValidateIccFinalComponent
-            },
-            {path: 'icc/report', component: IccReportComponent, pathMatch: 'full', canActivate: [AuthGuard]},
-            {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full', canActivate: [AuthGuard]}
+            }
         ])
     ],
     providers: [
@@ -93,3 +87,4 @@ registerLocaleData(localeNL);
 })
 export class AppModule {
 }
+// {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full', canActivate: [AuthGuard]}
