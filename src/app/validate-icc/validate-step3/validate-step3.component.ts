@@ -85,7 +85,7 @@ export class ValidateStep3Component implements OnInit {
             if (result.valid === true) {
                 this.router.navigate(["/validate/confirm"], {
                     queryParams: {
-                        p: this.reportService.getPayload()
+                        p: result.pollToken
                     }
                 })
             } else {

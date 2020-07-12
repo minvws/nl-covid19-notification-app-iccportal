@@ -13,9 +13,11 @@ export class UploadCheckService {
     constructor(private readonly http: HttpClient, private readonly authenticationService: AuthenticationService) {
     }
 
-    checkUpload(payload: string): Observable<any> {
-        const serviceUrl = environment.apiUrl + '/CaregiversPortalApi/v1/labuploaded';
-        const data = JSON.parse(atob(payload));
+    checkUpload(polltoken: string): Observable<any> {
+        const serviceUrl = environment.apiUrl + '/CaregiversPortalApi/v1/labverify';
+        const data = {
+            PollToken: polltoken
+        };
         const headers = {
             headers: {
                 'Authorization': "Bearer " + this.authenticationService.currentUserValue.authData
