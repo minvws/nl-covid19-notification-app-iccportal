@@ -21,7 +21,7 @@ export class ValidateStep5Component implements OnInit {
             this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
             this.checkUpload()
             const interval = setInterval(() => {
-                if (!this.uploadSuccessfull) {
+                if (!this.uploadSuccessfull && this.pollToken && this.pollToken != "") {
                     this.checkUpload()
                 } else {
                     clearInterval(interval)
@@ -31,15 +31,13 @@ export class ValidateStep5Component implements OnInit {
     }
 
     checkUpload() {
-        if (this.pollToken && this.pollToken != "") {
-            this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
-                if (result.valid) {
-                    this.uploadSuccessfull = true
-                }
-                this.pollToken = result.pollToken;
+        this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
+            if (result.valid) {
+                this.uploadSuccessfull = true
+            }
+            this.pollToken = result.pollToken;
 
-            })
-        }
+        })
     }
 
 }
