@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appName: "{appName}",
+  appName: "CoronaMelder",
   apiUrl: 'https://localhost:5005',
   authHost: 'localhost:5001'
 };
