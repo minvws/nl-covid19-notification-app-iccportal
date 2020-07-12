@@ -15,7 +15,7 @@ export class ValidateIccComponent implements OnInit {
     public InfectionConfirmationIdIsValid: boolean = false
     public IndexIsSubmitted: boolean = false
 
-    constructor(public titleService: TitleService, private authenticationService: AuthenticationService) {
+    constructor(public titleService: TitleService, public authenticationService: AuthenticationService) {
     }
 
     ngOnInit(): void {

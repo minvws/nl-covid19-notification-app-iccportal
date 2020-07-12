@@ -7,5 +7,6 @@
         <a (click)="authorize()" class="btn btn-primary">
             Inloggen
         </a>
+        <div class="bg-red-300 px-5 py-4 rounded mt-8 text-center" *ngIf="error_code > 0">Er is een fout opgetreden bij het inloggen, probeer het opnieuw.</div>
     </div>
 </div>
