@@ -1,4 +1,4 @@
-<div *ngIf="authenticationService.currentUserValue" [title]="authenticationService.currentUserValue.email" class="user-info flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
+<div [class.opacity-25]="scrollDown" *ngIf="authenticationService.currentUserValue" [title]="authenticationService.currentUserValue.email" class="user-info transition ease-in-out duration-200 flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
     <p>Ingelogd als {{authenticationService.currentUserValue.displayName}}</p>
     <a class="cursor-pointer text-gray-500 hover:text-gray-800 ml-2" (click)="authenticationService.logout()">Uitloggen</a>
 </div>

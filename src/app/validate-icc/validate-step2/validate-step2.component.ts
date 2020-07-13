@@ -1,5 +1,10 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
+import {DatePipe} from "@angular/common";
+import {ReportService} from "../../services/report.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {catchError} from "rxjs/operators";
 
 @Component({
     selector: 'app-validate-step2',
@@ -15,6 +20,13 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     error_code: number = -1
     allowedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54']
     allowedChars: string = 'BCFGJLQRSTUVXYZ23456789'
+
+    //datepart
+    symptonsDate: Date = null
+    datePipe: DatePipe;
+    openDayPicker: boolean = false
+    dateArray: Array<number> = [...Array(22)]
+
 
     spelAlphabet: Object = {
         "A": "Anna",
@@ -46,7 +58,9 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
 
-    constructor(private router: Router, private route: ActivatedRoute) {
+    constructor(@Inject(LOCALE_ID) private locale: string, private route: ActivatedRoute, private router: Router, private reportService: ReportService) {
+        this.datePipe = new DatePipe(locale)
+
     }
 
     ngAfterViewInit() {
@@ -55,10 +69,6 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        // console.log(this.route.snapshot.queryParams)
-        if (this.route.snapshot.queryParams["labId"]) this.InfectionConfirmationId = this.route.snapshot.queryParams["labId"];
-        if (this.route.snapshot.queryParams["errorCode"]) this.error_code = this.route.snapshot.queryParams["errorCode"]
-
     }
 
     public InfectionConfirmationIdValid() {
@@ -79,29 +89,6 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
             output += " ";
         })
         return output;
-    }
-
-    public submitIccId() {
-        // UI Test purposes – MOCK ERROR CODES
-        if (this.InfectionConfirmationIdValid()) {
-            if (true || this.allowedMockIds.includes(this.InfectionConfirmationId.join(""))) {
-                this.router.navigate(["validate", "symptons"],
-                    {
-                        queryParams: {
-                            p: btoa(JSON.stringify(this.InfectionConfirmationId))
-                        }
-                    });
-            } else {
-                this.error_code = 2
-            }
-        } else {
-            this.error_code = 1
-        }
-        if (this.error_code > -1) {
-            for (let i = 0; i < 7; i++) {
-                this.InvalidState.push(i)
-            }
-        }
     }
 
     removeInvalidState($event: FocusEvent, number: number) {
@@ -145,7 +132,8 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
             target.value = ""
             this.focusOnPrev(target)
         } else if ($event.code === 'Enter') {
-            this.submitIccId()
+            // this.submitIccId()la
+            this.openDayPicker = true;
         } else {
             if ([...target.value].length > 1) {
                 target.value = target.value[target.value.length - 1]; // prevent fast overfilling
@@ -158,5 +146,66 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
         // sync with model
         this.InfectionConfirmationId[index] = target.value
     }
+
+    getFriendlySymptonsDate() {
+        return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
+    }
+
+    getDaysAgo(inputDate: Date): string {
+        inputDate = ((inputDate) ? inputDate : this.symptonsDate)
+        const daysAgo = (inputDate) ? Math.floor(((Date.now() - (inputDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
+        return (daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")
+    }
+
+    getDayAgo(dayCount: number): Date {
+        let today = new Date();
+        today.setHours(0)
+        today.setMinutes(0)
+        today.setSeconds(0)
+        today.setMilliseconds(0)
+        if (dayCount > 0) {
+            return new Date(today.setDate(today.getDate() - dayCount))
+        }
+        return today
+    }
+
+    selectDate(dateDay: number) {
+        this.symptonsDate = this.getDayAgo(dateDay)
+        this.openDayPicker = false
+    }
+
+
+    errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+        this.error_code = 2;
+        throw error;
+    }
+
+    confirmLabConfirmationId() {
+        if (this.InfectionConfirmationIdValid()) {
+            this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
+                .pipe(catchError((e) => {
+                    this.error_code = 2;
+                    throw e;
+                })).subscribe((result) => {
+                if (result.valid === true) {
+                    this.router.navigate(["/validate/confirm"], {
+                        queryParams: {
+                            p: result.pollToken
+                        }
+                    })
+                } else {
+                    this.error_code = 2
+                }
+            });
+        } else {
+            this.error_code = 1
+        }
+        if (this.error_code > -1) {
+            for (let i = 0; i < 7; i++) {
+                this.InvalidState.push(i)
+            }
+        }
+    }
+
 
 }
