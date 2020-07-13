@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class StepComponent implements OnInit {
   @Input() stepNumber: number;
   @Input() stepTitle: string;
+  @Input() stepTitleClass: string = "";
 
 
 

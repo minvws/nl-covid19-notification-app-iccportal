@@ -11,7 +11,6 @@ import {ValidateStep1Component} from "./validate-icc/validate-step1/validate-ste
 import {StepComponent} from "./components/step/step.component";
 import {ValidateStep2Component} from "./validate-icc/validate-step2/validate-step2.component";
 import {ExpansionPanelComponent} from "./components/expansion-panel/expansion-panel.component";
-import {ValidateStep3Component} from "./validate-icc/validate-step3/validate-step3.component";
 import {ValidateStep4Component} from "./validate-icc/validate-step4/validate-step4.component";
 
 import {registerLocaleData} from '@angular/common';
@@ -35,9 +34,8 @@ registerLocaleData(localeNL);
         ValidateIccComponent,
         ValidateStep1Component,
         StepComponent,
-        ValidateStep2Component,
         ExpansionPanelComponent,
-        ValidateStep3Component,
+        ValidateStep2Component,
         ValidateStep4Component,
         ValidateStep5Component,
         ValidateIccConfirmComponent,
