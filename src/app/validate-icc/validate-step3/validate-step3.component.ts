@@ -28,14 +28,10 @@ export class ValidateStep3Component implements OnInit {
     }
 
     ngOnInit(): void {
-        this.InfectionConfirmationId = this.route.snapshot.queryParams['labId']
-        // console.log(this.route.snapshot)
-        // console.log()
-        // this.route.params.subscribe(params => {
-        //     console.log(params)
-        //
-        //     // In a real app: dispatch action to load the details here.
-        // });
+        if (this.route.snapshot.queryParams['p']) {
+            this.InfectionConfirmationId = JSON.parse(atob(this.route.snapshot.queryParams['p']))
+            this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
+        }
     }
 
     getFriendlySymptonsDate() {
@@ -87,7 +83,11 @@ export class ValidateStep3Component implements OnInit {
                 throw e;
             })).subscribe((result) => {
             if (result.valid === true) {
-                this.router.navigate(["/validate/confirm"])
+                this.router.navigate(["/validate/confirm"], {
+                    queryParams: {
+                        p: result.pollToken
+                    }
+                })
             } else {
                 this.returnErrorToStart();
             }
