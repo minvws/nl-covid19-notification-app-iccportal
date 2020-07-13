@@ -132,7 +132,9 @@ span.icon {
     margin-left: 0.2em;
     background-image: url("src/assets/icon-arrow-up.svg");
   }
-
+  &.icon-arrow-left:after{
+    background-image: url("src/assets/icon-arrow-left.svg");
+  }
 
   &.icon-collapse:after {
     background-image: url("src/assets/icon-arrow-up.svg");

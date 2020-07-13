@@ -21,18 +21,21 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(jwtToken: string) {
-
-        var helper = new JwtHelperService();
-        var payload = helper.decodeToken(jwtToken);
-        const user: User = {
-            displayName: payload.name,
-            email: payload.email,
-            id: payload.id,
-            authData: jwtToken
-        };
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
+    login(jwtToken: string): boolean {
+        const helper = new JwtHelperService();
+        if (!helper.isTokenExpired(jwtToken)) {
+            const payload = helper.decodeToken(jwtToken);
+            const user: User = {
+                displayName: payload.name,
+                email: payload.email,
+                id: payload.id,
+                authData: jwtToken
+            };
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return true;
+        }
+        return false;
     }
 
     logout() {
