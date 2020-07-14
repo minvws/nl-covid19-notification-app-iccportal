@@ -16,29 +16,20 @@ export class ValidateStep5Component implements OnInit {
 
 
     ngOnInit(): void {
-
-        // MOCK!!!!
-
-        setTimeout(()=>{
-            this.uploadState = 1;
-        }, 12000)
-
-
-        // MOCK!!!!
-        // if (this.route.snapshot.queryParams['p']) {
-        //     this.pollToken = this.route.snapshot.queryParams['p']
-        //     this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
-        //     this.checkUpload()
-        //     const interval = setInterval(() => {
-        //         if (this.uploadState > -1 && this.pollToken && this.pollToken != "") {
-        //             this.checkUpload()
-        //         } else {
-        //             clearInterval(interval)
-        //         }
-        //     }, 7000);
-        // } else {
-        //     this.uploadState = -1;
-        // }
+        if (this.route.snapshot.queryParams['p']) {
+            this.pollToken = this.route.snapshot.queryParams['p']
+            this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
+            this.checkUpload()
+            const interval = setInterval(() => {
+                if (this.uploadState > -1 && this.pollToken && this.pollToken != "") {
+                    this.checkUpload()
+                } else {
+                    clearInterval(interval)
+                }
+            }, 7000);
+        } else {
+            this.uploadState = -1;
+        }
     }
 
     checkUpload() {

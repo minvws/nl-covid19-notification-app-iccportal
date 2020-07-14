@@ -195,39 +195,21 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
 
     confirmLabConfirmationId() {
         if (this.InfectionConfirmationIdValid()) {
-
-            // MOCK!!!
-
-
-            if(this.deniedMockIds.includes(this.InfectionConfirmationId.join(""))){
-               this.error_code = 2;
-            }else{
-                this.router.navigate(["/validate/confirm"], {
-                    queryParams: {
-                        p: "poll"
-                    }
-                })
-            }
-
-            // MOCK!!!
-
-
-
-            // this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
-            //     .pipe(catchError((e) => {
-            //         this.error_code = 2;
-            //         throw e;
-            //     })).subscribe((result) => {
-            //     if (result.valid === true) {
-            //         this.router.navigate(["/validate/confirm"], {
-            //             queryParams: {
-            //                 p: result.pollToken
-            //             }
-            //         })
-            //     } else {
-            //         this.error_code = 2
-            //     }
-            // });
+            this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
+                .pipe(catchError((e) => {
+                    this.error_code = 2;
+                    throw e;
+                })).subscribe((result) => {
+                if (result.valid === true) {
+                    this.router.navigate(["/validate/confirm"], {
+                        queryParams: {
+                            p: result.pollToken
+                        }
+                    })
+                } else {
+                    this.error_code = 2
+                }
+            });
         } else {
             this.error_code = 1
         }
