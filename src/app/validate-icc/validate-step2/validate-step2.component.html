@@ -40,14 +40,13 @@
 </app-step>
 <!--TODO: Bring datepicker code into new component-->
 <app-step stepNumber="4" stepTitle="Eerste ziektedag van de index?" stepTitleClass="mb-10">
-    <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-white rounded inline-block  hover:bg-gray-100"
-         [class.shadow-md]="!openDayPicker"
-
+    <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-gray-200 rounded inline-block hover:bg-gray-100"
+         [class.shadow-sm]="!openDayPicker"
          style="min-width: 240px;" (click)="openDayPicker=!openDayPicker">
         {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>
     </div>
     <div *ngIf="openDayPicker"
-         class="friendly-dates shadow-md flex flex-col justify-start rounded bg-white inline-block mt-1"
+         class="friendly-dates bg-white shadow-md flex flex-col justify-start rounded inline-block mt-1"
          style="width: 240px;">
         <div (click)="selectDate(dateDay)" *ngFor="let ii of dateArray; let dateDay = index"
              [class]="(this.symptonsDate && this.symptonsDate.valueOf() === this.getDayAgo(dateDay).valueOf()) ? 'bg-primary text-white': ''"

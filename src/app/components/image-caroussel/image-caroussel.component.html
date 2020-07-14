@@ -1,8 +1,8 @@
-<div class="my-5 flex overflow-hidden flex-row items-start relative" [style]="additionalStyle">
-    <div (click)="popupActive = true" class="image mr-10" style="min-width: 250px;"
+<div class="flex overflow-hidden flex-row items-start relative" [style]="additionalStyle">
+    <div (click)="popupActive = true" class="image mr-4" style="min-width: 250px;"
          *ngFor="let image of images; let imageIndex = index">
-        <p class="description mb-2 w-full text-center" [innerHTML]="image.text.replace('\n','<br>')">
-        </p>
+<!--        <p class="description mb-2 w-full text-center" [innerHTML]="image.text.replace('\n','<br>')">-->
+<!--        </p>-->
         <img style="cursor: zoom-in" title="Vergroot screenshot" [src]="image.image" [alt]="image.text">
     </div>
     <div class="absolute w-10 h-10 flex items-center justify-center text-sm bg-black cursor-pointer hover:gray-800 rounded-full d-inline"

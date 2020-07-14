@@ -18,7 +18,7 @@ import localeNL from '@angular/common/locales/nl';
 import {ValidateStep5Component} from "./validate-icc/validate-step5/validate-step5.component";
 import {ValidateIccConfirmComponent} from "./validate-icc/validate-icc-confirm/validate-icc-confirm.component";
 import {ValidateIccStartComponent} from "./validate-icc/validate-icc-start/validate-icc-start.component";
-import {ValidateIccSymptonsComponent} from "./validate-icc/validate-icc-symptons/validate-icc-symptons.component";
+
 import {ValidateIccFinalComponent} from "./validate-icc/validate-icc-final/validate-icc-final.component";
 import {AuthGuard, ErrorInterceptor} from "./helpers";
 import {ImageCarousselComponent} from "./components/image-caroussel/image-caroussel.component";
@@ -40,7 +40,6 @@ registerLocaleData(localeNL);
         ValidateStep5Component,
         ValidateIccConfirmComponent,
         ValidateIccStartComponent,
-        ValidateIccSymptonsComponent,
         ValidateIccFinalComponent,
         ImageCarousselComponent
     ],
@@ -60,10 +59,6 @@ registerLocaleData(localeNL);
                     {
                         path: 'start',
                         component: ValidateIccStartComponent
-                    },
-                    {
-                        path: 'symptons',
-                        component: ValidateIccSymptonsComponent
                     },
                     {
                         path: 'confirm',

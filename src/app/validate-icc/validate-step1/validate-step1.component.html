@@ -14,8 +14,13 @@
         <b>Leg uit:</b> Open de CoronaMelder app. Ga <b>helemaal naar beneden</b> en druk op het onderste item in de
         lijst <b>‘Mijn GGD-sleutel’</b>.
     </p>
+    <div class="bg-gray-200 rounded mb-6 py-8 pl-8">
+        <app-image-caroussel additionalStyle="left: 0rem;" [images]="images"></app-image-caroussel>
+    </div>
+
+
+    <p class="capital-note">Eventuele vragen van de index</p>
     <app-expansion-panel panelTitle="Waar staat die GGD-sleutel?">
-        <app-image-caroussel additionalStyle="left: 1rem;" [images]="images"></app-image-caroussel>
     </app-expansion-panel>
     <app-expansion-panel panelTitle="Waar is die GGD-sleutel voor?"></app-expansion-panel>
     <app-expansion-panel panelTitle="Hoe open ik een app als ik in gesprek ben?"></app-expansion-panel>
