@@ -151,8 +151,8 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
         return this.datePipe.transform(this.symptonsDate, "EE. d MMM - ")
     }
 
-    getDaysAgo(inputDate: Date): string {
-        inputDate = ((inputDate) ? inputDate : this.symptonsDate)
+    getDaysAgo(inputDate: Date = null): string {
+        inputDate = ((inputDate != null) ? inputDate : this.symptonsDate)
         const daysAgo = (inputDate) ? Math.floor(((Date.now() - (inputDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
         return (daysAgo < 1) ? "vandaag" : (daysAgo + " " + ((daysAgo > 1) ? "dagen" : "dag") + " gel.")
     }
