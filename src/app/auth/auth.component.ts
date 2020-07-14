@@ -23,9 +23,7 @@ export class AuthComponent implements OnInit {
                     this.router.navigate(["validate/start"]);
                 } else {
                     this.error_code = 1;
-                    // setTimeout(function () {
                     this.router.navigate([""], {queryParams: {e: "access_token_invalid"}});
-                    // }, 2)
                 }
             }
         });
