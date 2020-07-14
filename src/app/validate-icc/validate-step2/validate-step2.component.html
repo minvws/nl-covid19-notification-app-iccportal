@@ -40,7 +40,7 @@
 </app-step>
 <!--TODO: Bring datepicker code into new component-->
 <app-step stepNumber="4" stepTitle="Eerste ziektedag van de index?" stepTitleClass="mb-10">
-    <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-gray-200 rounded inline-block hover:bg-gray-100"
+    <div class="relative cursor-pointer friendly-date-block px-4 py-3 bg-gray-300 rounded inline-block hover:bg-gray-100"
          [class.shadow-sm]="!openDayPicker"
          style="min-width: 240px;" (click)="openDayPicker=!openDayPicker">
         {{getFriendlySymptonsDate()}} <span class="text-gray-600">{{getDaysAgo()}}</span>

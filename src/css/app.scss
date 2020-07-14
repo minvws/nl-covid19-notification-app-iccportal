@@ -169,7 +169,7 @@ span.icon {
 // TODO: Move to component' file
 .input-box {
   input {
-    @apply text-2xl bg-gray-200 mr-2 rounded text-center;
+    @apply text-2xl bg-gray-300 mr-2 rounded text-center;
     width: 56px;
     height: 80px;
     vertical-align: middle;
@@ -217,6 +217,7 @@ span.icon {
 }
 
 .capital-note {
-  @apply text-sm text-gray-400 mb-2 font-semibold;
+  @apply text-sm text-gray-700 mb-2 font-semibold;
+  //color: #68707C;
   text-transform: uppercase;
 }
