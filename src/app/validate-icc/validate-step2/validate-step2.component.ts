@@ -20,7 +20,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     @ViewChild('step_element')
     step_element: ElementRef;
     error_code: number = -1
-    allowedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54']
+    deniedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54']
     allowedChars: string = 'BCFGJLQRSTUVXYZ23456789'
 
     //datepart
@@ -107,6 +107,10 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
     resetInvalidState() {
+        this.error_code = -1;
+        if (this.InfectionConfirmationId.join("").length > 0 && !this.InfectionConfirmationId.join("").match("^[" + this.allowedChars + "]+$")) {
+            this.error_code = 1;
+        }
         if (this.InvalidState.length > 0) this.InvalidState = [];
     }
 
@@ -191,21 +195,39 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
 
     confirmLabConfirmationId() {
         if (this.InfectionConfirmationIdValid()) {
-            this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
-                .pipe(catchError((e) => {
-                    this.error_code = 2;
-                    throw e;
-                })).subscribe((result) => {
-                if (result.valid === true) {
-                    this.router.navigate(["/validate/confirm"], {
-                        queryParams: {
-                            p: result.pollToken
-                        }
-                    })
-                } else {
-                    this.error_code = 2
-                }
-            });
+
+            // MOCK!!!
+
+
+            if(this.deniedMockIds.includes(this.InfectionConfirmationId.join(""))){
+               this.error_code = 2;
+            }else{
+                this.router.navigate(["/validate/confirm"], {
+                    queryParams: {
+                        p: "poll"
+                    }
+                })
+            }
+
+            // MOCK!!!
+
+
+
+            // this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
+            //     .pipe(catchError((e) => {
+            //         this.error_code = 2;
+            //         throw e;
+            //     })).subscribe((result) => {
+            //     if (result.valid === true) {
+            //         this.router.navigate(["/validate/confirm"], {
+            //             queryParams: {
+            //                 p: result.pollToken
+            //             }
+            //         })
+            //     } else {
+            //         this.error_code = 2
+            //     }
+            // });
         } else {
             this.error_code = 1
         }

@@ -1,5 +1,5 @@
 <div class="flex overflow-hidden flex-row items-start" [style]="additionalStyle">
-    <div (click)="popupActive = true" class="cursor-zoom opacity-0 hover:opacity-50 bg-black w-full h-full absolute top-0 left-0"></div>
+    <div (click)="popupActive = true" class="cursor-zoom opacity-0 transition-ease-in duration-200 hover:opacity-50 bg-black w-full h-full absolute top-0 left-0"></div>
     <div (click)="popupActive = true" class="image mr-4" id="inlineImage"
          *ngFor="let image of images; let imageIndex = index">
         <img draggable="false" title="Vergroot screenshot"

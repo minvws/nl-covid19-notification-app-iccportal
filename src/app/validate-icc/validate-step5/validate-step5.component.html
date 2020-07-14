@@ -5,12 +5,12 @@
                   [class.icon-exclamation-mark]="uploadState == -1"
                   [class.icon-check-green]="uploadState == 1"></span>
         </div>
-        <span *ngIf="uploadState == -1" class="leading-normal">Fout opgetreden bij het controleren van geüploade codes.</span>
+        <span *ngIf="uploadState == -1" class="leading-normal">Op dit moment kunnen we niet controleren of de codes zijn geüpload door de index.</span>
         <span *ngIf="uploadState == 0" class="leading-none">Nog geen codes geupload door index</span>
         <span *ngIf="uploadState == 1" class="leading-none">Codes geupload door index</span>
 
     </div>
-    <p class="text-gray-600 mb-10 text-sm" id="subtext">Lukt het de index niet om nu de codes te uploaden?
+    <p class="text-gray-700 mb-10 text-sm" id="subtext">Lukt het de index niet om nu de codes te uploaden?
         De index kan
         dit nog tot middernacht zelf proberen zodra je hier op verwerken drukt.</p>
     <button class="btn btn-primary" id="submitBtn" routerLink="/validate_final">Verwerken</button>
