@@ -1,4 +1,4 @@
-<div [class.opacity-25]="scrollDown" *ngIf="authenticationService.currentUserValue" [title]="authenticationService.currentUserValue.email" class="user-info transition ease-in-out duration-200 flex items-center fixed right-10 top-10 bg-white rounded px-5 py-3 shadow-md" style="right: 2rem;top: 2rem;">
+<div [class.opacity-25]="scrollDown" *ngIf="authenticationService.currentUserValue" [title]="authenticationService.currentUserValue.email" class="user-info transition ease-in-out duration-200 flex items-center absolute right-0 top-0 mr-5 mt-5 bg-white rounded px-5 py-3 shadow-md">
     <p>Ingelogd als {{authenticationService.currentUserValue.displayName}}</p>
     <a class="cursor-pointer text-gray-500 hover:text-gray-800 ml-2" (click)="authenticationService.logout()">Uitloggen</a>
 </div>
@@ -6,11 +6,11 @@
 <div class="container">
     <div class="wrapper lg:w-3/4">
         <div class="hero mt-20 mb-10">
-            <h2>Digitaal Contactonderzoek</h2>
-            <div class="text-gray-800 content">
-<!--                <p *ngIf="authenticationService.currentUserValue">Welkom {{authenticationService.currentUserValue.displayName}}.</p>-->
-                <p>Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}} app</p>
-            </div>
+<!--            <h2>Digitaal Contactonderzoek</h2>-->
+<!--            <div class="text-gray-800 content">-->
+<!--&lt;!&ndash;                <p *ngIf="authenticationService.currentUserValue">Welkom {{authenticationService.currentUserValue.displayName}}.</p>&ndash;&gt;-->
+<!--                <p>Help de index anderen te waarschuwen met de {{titleService.getAppTitle()}} app</p>-->
+<!--            </div>-->
 
         </div>
         <router-outlet></router-outlet>

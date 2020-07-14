@@ -18,7 +18,7 @@ export class ValidateStep1Component implements OnInit {
             "image": "assets/images/Screen 2.png",
         },
         {
-            "text": "Druk op ‘Mijn GGD-sleutel’",
+            "text": "Druk op ‘GGD-sleutel doorgeven’",
             "image": "assets/images/Screen 3.png",
         },
         {

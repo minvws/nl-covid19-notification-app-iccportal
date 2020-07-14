@@ -1,5 +1,5 @@
 <app-step stepTitle="Wacht tot de index de codes heeft gedeeld" stepNumber="6">
-    <div class="bg-white p-4 flex items-center mb-3 mt-6 rounded" style="min-width: 380px; max-width: 380px;">
+    <div class="bg-gray-200 p-4 flex items-center mb-3 mt-6 rounded upload-state-block" >
         <div class="w-6 h-6 text-2xl mr-4 leading-none">
             <span class="icon" [class.icon-loading]="uploadState == 0"
                   [class.icon-exclamation-mark]="uploadState == -1"
@@ -10,8 +10,8 @@
         <span *ngIf="uploadState == 1" class="leading-none">Codes geupload door index</span>
 
     </div>
-    <p class="text-gray-600 mb-10 text-sm" style="max-width: 340px">Lukt het de index niet om nu de codes te uploaden?
+    <p class="text-gray-600 mb-10 text-sm" id="subtext">Lukt het de index niet om nu de codes te uploaden?
         De index kan
         dit nog tot middernacht zelf proberen zodra je hier op verwerken drukt.</p>
-    <button class="btn btn-primary" style="min-width: 340px" routerLink="/validate_final">Verwerken</button>
+    <button class="btn btn-primary" id="submitBtn" routerLink="/validate_final">Verwerken</button>
 </app-step>

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {DatePipe} from "@angular/common";
 import {ReportService} from "../../services/report.service";
@@ -17,6 +17,8 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
+    @ViewChild('step_element')
+    step_element: ElementRef;
     error_code: number = -1
     allowedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54']
     allowedChars: string = 'BCFGJLQRSTUVXYZ23456789'
@@ -64,8 +66,15 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement
-        firstCharInputElement.focus()
+
+    }
+
+    @HostListener('window:scroll', ['$event'])
+    scrollHandler(event) {
+        if (this.InfectionConfirmationId.join("").length < 1 && window.scrollY > (this.step_element.nativeElement.offsetTop - window.outerHeight + 220)) {
+            const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement
+            firstCharInputElement.focus()
+        }
     }
 
     ngOnInit(): void {

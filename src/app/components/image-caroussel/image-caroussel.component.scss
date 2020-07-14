@@ -1,0 +1,25 @@
+#inlineImage {
+  min-width: 250px;
+}
+.cursor-zoom{
+  cursor: zoom-in;
+}
+#closeBtn {
+  top: 2.5rem;
+  right: 1.75rem;
+}
+
+.controls {
+  top: 50%;
+  left: 0;
+}
+
+.popup .caroussel .image {
+  min-width: 310px;
+  cursor: zoom-out;
+}
+
+.backdrop {
+  z-index: -1;
+  background-color: #000000;
+}
