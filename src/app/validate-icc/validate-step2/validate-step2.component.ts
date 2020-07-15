@@ -81,7 +81,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     }
 
     public InfectionConfirmationIdValid() {
-        return (this.InfectionConfirmationId.join("").length === 6 && this.InfectionConfirmationId.join("").match("^[" + this.allowedChars + "]+$"))
+        return (this.InfectionConfirmationId.join("").length === 6 && this.validateCharacters())
     }
 
     public InfectionConfirmationIdToTaalString() {
@@ -106,9 +106,14 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
         this.InvalidState = this.InvalidState.filter((i) => i !== number)
     }
 
+    validateCharacters(): boolean {
+        const matchArray: RegExpMatchArray = this.InfectionConfirmationId.join("").trim().toUpperCase().match("^[" + this.allowedChars + "]+$");
+        return matchArray && matchArray.length > 0
+    }
+
     resetInvalidState() {
         this.error_code = -1;
-        if (this.InfectionConfirmationId.join("").length > 0 && !this.InfectionConfirmationId.join("").match("^[" + this.allowedChars + "]+$")) {
+        if (this.InfectionConfirmationId.join("").length > 0 && !this.validateCharacters()) {
             this.error_code = 1;
         }
         if (this.InvalidState.length > 0) this.InvalidState = [];
