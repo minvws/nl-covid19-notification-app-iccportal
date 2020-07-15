@@ -10,6 +10,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class ValidateStep5Component implements OnInit {
     public uploadState: number = 0;
     private pollToken: string;
+    private poller: object;
+    private interval: number;
 
     constructor(private route: ActivatedRoute, private router: Router, private uploadCheckService: UploadCheckService) {
     }
@@ -20,11 +22,11 @@ export class ValidateStep5Component implements OnInit {
             this.pollToken = this.route.snapshot.queryParams['p']
             this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
             this.checkUpload()
-            const interval = setInterval(() => {
+            this.interval = setInterval(() => {
                 if (this.uploadState > -1 && this.pollToken && this.pollToken != "") {
                     this.checkUpload()
                 } else {
-                    clearInterval(interval)
+                    clearInterval(this.interval)
                 }
             }, 7000);
         } else {
@@ -36,6 +38,7 @@ export class ValidateStep5Component implements OnInit {
         this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1
+                clearInterval(this.interval)
             }
             this.pollToken = result.pollToken;
 
