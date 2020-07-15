@@ -6,17 +6,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
 
 body {
-  @apply text-black bg-gray-200 text-base;
+  @apply text-black font-body antialiased;
 }
 
 // reset
 
+
+
 h1, h2 {
   @apply font-bold;
+  letter-spacing: 0.5px;
 }
 
 h3, h4, h5, h6 {
   @apply font-medium;
+  letter-spacing: 0.5px;
 }
 
 .container {
@@ -81,6 +85,10 @@ h6 {
 
 // Move to components.scss
 
+button.btn-primary{
+  min-width: 320px;
+}
+
 .btn {
   @apply px-10 py-2 bg-white text-black font-medium text-center rounded cursor-pointer inline-block;
   &.btn-primary {
@@ -100,10 +108,10 @@ h6 {
 
 
 @keyframes loading_circle {
-  0%{
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
@@ -127,33 +135,46 @@ span.icon {
   &.icon-expand:after {
     background-image: url("src/assets/icon-arrow-up.svg");
   }
-  &.icon-arrow-right:after{
+
+  &.icon-arrow-right:after {
     transform: rotate(90deg);
-    margin-left: 0.2em;
+    margin-left: 0.1em;
     background-image: url("src/assets/icon-arrow-up.svg");
   }
-  &.icon-arrow-left:after{
+
+  &.icon-arrow-left:after {
     background-image: url("src/assets/icon-arrow-left.svg");
   }
+  &.icon-arrow-left-sm:after {
+    transform: rotate(-90deg);
+    margin-left: -0.1em;
+    background-image: url("src/assets/icon-arrow-up.svg");
+  }
+
 
   &.icon-collapse:after {
     background-image: url("src/assets/icon-arrow-up.svg");
     transform: rotate(180deg);
   }
+
   &.icon-exclamation-mark:after {
     background-image: url("src/assets/icon-exclamation-mark.svg");
   }
-  &.icon-check-green:after{
+
+  &.icon-check-green:after {
     background-image: url("src/assets/icon-check-green.svg");
   }
-  &.icon-close:after{
+
+  &.icon-close:after {
     background-image: url("src/assets/icon-close.svg");
   }
-  &.icon-loading:after{
+
+  &.icon-loading:after {
     animation: loading_circle 1s infinite linear;
     background-image: url("src/assets/icon-loading.svg");
   }
-  &.icon-white{
+
+  &.icon-white {
     filter: invert(100%) sepia(66%) saturate(58%) hue-rotate(95deg) brightness(117%) contrast(100%);
   }
 }
@@ -161,8 +182,9 @@ span.icon {
 
 // TODO: Move to component' file
 .input-box {
+  width: 480px;
   input {
-    @apply text-2xl bg-white mr-2 rounded text-center;
+    @apply text-2xl bg-gray-300 mr-2 rounded text-center;
     width: 56px;
     height: 80px;
     vertical-align: middle;
@@ -192,7 +214,9 @@ span.icon {
   }
 }
 
-
+.friendly-date-block{
+  min-width: 240px;
+}
 .friendly-date-block, .friendly-dates {
   &:first-letter {
     text-transform: uppercase;
@@ -205,6 +229,13 @@ span.icon {
   overflow-y: scroll;
 }
 
-.leading-nothing{
+.leading-nothing {
   line-height: 0;
+}
+
+.capital-note {
+  @apply text-sm text-gray-700 mb-2 font-semibold;
+  //color: #68707C;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }

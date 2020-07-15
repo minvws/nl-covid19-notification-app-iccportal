@@ -1,11 +1,10 @@
 ﻿import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {User} from "../models";
 import {environment} from "../../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {ActivatedRoute} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -13,26 +12,59 @@ export class AuthenticationService {
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+        const jwtToken = localStorage.getItem('auth');
+        this.currentUserSubject = new BehaviorSubject<User>(AuthenticationService.parsePayloadToUser(jwtToken, AuthenticationService.decodeToken(localStorage.getItem('auth'))));
         this.currentUser = this.currentUserSubject.asObservable();
+    }
+
+    public fetchCurrentUser(): Observable<any> {
+        const serviceUrl = "https://" + environment.authHost + "/user/@me";
+        const headers = {
+            headers: {
+                'Authorization': "Bearer " + ((this.currentUserValue !== null) ? this.currentUserValue.authData : "")
+            }
+        };
+        return this.http.get<any>(serviceUrl, headers).pipe(
+            map(response => {
+                return response.user.id === this.currentUserValue.id
+            }),
+            catchError(error => {
+                this.logout()
+                return of(false)
+            })
+        );
     }
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
 
-    login(jwtToken: string): boolean {
-        const helper = new JwtHelperService();
+    private static decodeToken(jwtToken: string, helper: JwtHelperService = null): object {
+        helper = (helper) ? helper : new JwtHelperService();
         if (!helper.isTokenExpired(jwtToken)) {
-            const payload = helper.decodeToken(jwtToken);
-            const user: User = {
+            return helper.decodeToken(jwtToken);
+        }
+        return null
+    }
+
+    private static parsePayloadToUser(jwtToken: string, payload: any): User {
+        if (payload && payload.id) {
+            return {
                 displayName: payload.name,
                 email: payload.email,
                 id: payload.id,
                 authData: jwtToken
             };
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
+        }
+        return null;
+    }
+
+
+    login(jwtToken: string): boolean {
+        const helper = new JwtHelperService();
+        if (!helper.isTokenExpired(jwtToken)) {
+            this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, AuthenticationService.decodeToken(jwtToken)));
+            localStorage.setItem('auth', jwtToken);
             return true;
         }
         return false;
@@ -40,7 +72,7 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
 
         window.location.href = "https://" + environment.authHost + "/Auth/Logout";
