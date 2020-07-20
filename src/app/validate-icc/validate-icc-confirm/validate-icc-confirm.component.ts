@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-validate-icc-confirm',
@@ -14,8 +14,8 @@ export class ValidateIccConfirmComponent implements OnInit {
   }
 
     backToStart() {
-        if(confirm("Weet je zeker dat je deze index wilt annuleren?")){
-          this.router.navigate(["/validate/start"]);
+        if (confirm('Weet je zeker dat je deze index wilt annuleren?')) {
+          this.router.navigate(['/validate/start']);
         }
     }
 }

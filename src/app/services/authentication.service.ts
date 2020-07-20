@@ -47,7 +47,7 @@ export class AuthenticationService {
         };
         return this.http.get<any>(serviceUrl, headers).pipe(
             map(response => {
-                if(response.user.id === this.currentUserValue.id){
+                if (response.user.id === this.currentUserValue.id) {
                     return true;
                 }
                 return this.router.parseUrl('');
