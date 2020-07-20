@@ -11,6 +11,10 @@ This repository contains the frontend code for the Proof of Concept for the Dutc
 * The designs that are used as a basis to develop the apps can be found here: https://github.com/minvws/nl-covid19-notification-app-design
 * The architecture that underpins the development can be found here: https://github.com/minvws/nl-covid19-notification-app-coordination
 
+## Changelog
+
+The changelog for the UI perspective of this project can be found in [this document](https://docs.google.com/document/d/18z9gvCDJIGgSyJ-nnvD-97Rj8Z6fjQ0G2nalgY0_aBg/edit?usp=sharing).
+
 ## Development & Contribution process
 
 The core team works on the repository in a private fork (for reasons of compliance with existing processes) and will share its work as often as possible.
@@ -36,7 +40,7 @@ npm install
 Run `npm run start` for a dev server. Navigate to [http://localhost:4200/](http://localhost:4200/). The app will automatically reload if you change any of the source files.
 
 ## Production build
-To make a production build with diffrent environment variables, copy `src/environments/environment.ts` to `src/environments/environment.prod.ts` and adjust the `apiUrl` and `authHost` properties.
+To make a production build with different environment variables, copy `src/assets/data/appConfig.json` to `src/assets/data/appConfig.prod.json` and adjust the `apiUrl` and `authHost` properties.
 
 ```bash
 npm run build --prod
