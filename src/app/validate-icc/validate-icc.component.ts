@@ -11,10 +11,9 @@ import {AuthenticationService} from '../services';
 export class ValidateIccComponent implements OnInit {
 
     public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
-    public InfectionConfirmationIdIsValid: boolean = false
-    public IndexIsSubmitted: boolean = false
-    public scrollDown: boolean = false
-
+    public InfectionConfirmationIdIsValid = false;
+    public IndexIsSubmitted = false;
+    public scrollDown = false;
 
     constructor(public titleService: TitleService, public authenticationService: AuthenticationService) {
     }
@@ -22,7 +21,7 @@ export class ValidateIccComponent implements OnInit {
     @HostListener('window:scroll', ['$event'])
     scrollHandler(event) {
         if (window.scrollY > 40) {
-            this.scrollDown = true
+            this.scrollDown = true;
         } else {
             this.scrollDown = false;
         }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-expansion-panel',
@@ -8,12 +8,13 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ExpansionPanelComponent implements OnInit {
   @Input() panelTitle: string;
   @Input() expanded: Boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
   }
-  toggleExpand(){
-    this.expanded = !this.expanded
-  }
 
+  toggleExpand() {
+    this.expanded = !this.expanded;
+  }
 }

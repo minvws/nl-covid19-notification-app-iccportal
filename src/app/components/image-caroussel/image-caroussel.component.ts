@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-image-caroussel',
@@ -8,10 +8,10 @@ import {Component, HostListener, Input, OnInit} from '@angular/core';
 export class ImageCarousselComponent implements OnInit {
     @Input() images: Array<Object>;
     @Input() additionalStyle: string;
-    canLeftScroll: boolean = false;
-    canRightScroll: boolean = true;
 
-    popupActive: boolean = false
+    canLeftScroll = false;
+    canRightScroll = true;
+    popupActive = false;
 
     @HostListener('document:keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
@@ -25,5 +25,4 @@ export class ImageCarousselComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
 }

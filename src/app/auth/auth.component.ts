@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {AuthenticationService} from "../services";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '../services';
 
 @Component({
     selector: 'app-auth',
@@ -10,7 +9,7 @@ import {AuthenticationService} from "../services";
 })
 export class AuthComponent implements OnInit {
 
-    public error_code: number = -1;
+    public error_code = -1;
 
     constructor(private route: ActivatedRoute, private authentication: AuthenticationService, private router: Router) {
     }
@@ -20,10 +19,10 @@ export class AuthComponent implements OnInit {
         this.route.queryParams.subscribe(params => {
             if (params['token']) {
                 if (this.authentication.login(params['token'])) {
-                    this.router.navigate(["validate/start"]);
+                    this.router.navigate(['validate/start']);
                 } else {
                     this.error_code = 1;
-                    this.router.navigate([""], {queryParams: {e: "access_token_invalid"}});
+                    this.router.navigate([''], {queryParams: {e: 'access_token_invalid'}});
                 }
             }
         });
