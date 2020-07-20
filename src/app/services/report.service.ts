@@ -9,12 +9,9 @@ import { AppConfigService, IAppConfig } from './app-config.service';
   providedIn: 'root'
 })
 export class ReportService {
-  private config: IAppConfig;
-
   constructor(private readonly http: HttpClient,
     private readonly authenticationService: AuthenticationService,
-    appConfigService: AppConfigService) {
-      this.config = appConfigService.getConfig();
+    private readonly appConfigService: AppConfigService) {
     }
 
   private data: { LabConfirmationID: string; DateOfSymptomsOnset: string; };
@@ -29,7 +26,7 @@ export class ReportService {
   }
 
   confirmLabId(labConfirmationIds: Array<string>, dateOfSymptomsOnset: string): Observable<any> {
-    const serviceUrl = this.config.apiUrl + '/CaregiversPortalApi/v1/labconfirm';
+    const serviceUrl = this.appConfigService.getConfig().apiUrl + '/CaregiversPortalApi/v1/labconfirm';
     this.data = {
       'LabConfirmationID': labConfirmationIds.join(''),
       'DateOfSymptomsOnset': dateOfSymptomsOnset

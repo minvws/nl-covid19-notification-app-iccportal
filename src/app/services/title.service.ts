@@ -6,22 +6,20 @@ import { IAppConfig, AppConfigService } from './app-config.service';
     providedIn: 'root'
 })
 export class TitleService {
-    private config: IAppConfig;
     private titleService: Title;
     private subTitle: string;
 
-    constructor(private service: Title, appConfigService: AppConfigService) {
+    constructor(private readonly service: Title, private readonly appConfigService: AppConfigService) {
         this.titleService = service;
-        this.titleService.setTitle(this.config.appName + ' Digitaal Contactonderzoek.');
-        this.config = appConfigService.getConfig();
+        this.titleService.setTitle(this.appConfigService.getConfig().appName + ' Digitaal Contactonderzoek.');
     }
 
     public setTitle(title: string) {
         this.subTitle = title;
-        this.titleService.setTitle(title + ' – ' + this.config.appName + ' Digitaal Contactonderzoek.');
+        this.titleService.setTitle(title + ' – ' + this.appConfigService.getConfig().appName + ' Digitaal Contactonderzoek.');
     }
 
     public getAppTitle() {
-        return this.config.appName;
+        return this.appConfigService.getConfig().appName;
     }
 }

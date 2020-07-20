@@ -8,26 +8,24 @@ import { IAppConfig, AppConfigService } from './app-config.service';
   providedIn: 'root'
 })
 export class GenerateService {
-  private config: IAppConfig;
   private readonly authHeader: string = '';
   private readonly testUserId: string = '3fa85f64-5717-4562-b3fc-2c963f66afa6'; // TODO: Create global state for user management
 
-  constructor(private readonly http: HttpClient, appConfigService: AppConfigService) {
-    this.config = appConfigService.getConfig();
+  constructor(private readonly http: HttpClient, private readonly appConfigService: AppConfigService) {
   }
 
   generateIccSingle(): Observable<any> {
-    const serviceUrl = this.config.apiUrl + '/GenerateIcc/single';
+    const serviceUrl = this.appConfigService.getConfig().apiUrl + '/GenerateIcc/single';
     return this.http.post(serviceUrl, { UserId: this.testUserId }).pipe(catchError(this.errorHandler));
   }
 
   generateIccBatch(): Observable<any> {
-    const serviceUrl = this.config.apiUrl + '/GenerateIcc/batch';
+    const serviceUrl = this.appConfigService.getConfig().apiUrl + '/GenerateIcc/batch';
     return this.http.post(serviceUrl, { UserId: this.testUserId }).pipe(catchError(this.errorHandler));
   }
 
   generateDownloadCsv(): Observable<any> {
-    const serviceUrl = this.config.apiUrl + '/GenerateIcc/batch-csv';
+    const serviceUrl = this.appConfigService.getConfig().apiUrl + '/GenerateIcc/batch-csv';
     return this.http.post(serviceUrl,
       { 'UserId': '3fa85f64-5717-4562-b3fc-2c963f66afa6' },
       {
@@ -37,7 +35,7 @@ export class GenerateService {
   }
 
   downloadCsv(iccBatchId) {
-    const serviceUrl = `${this.config.apiUrl}/GenerateIcc/batch-csv?batchId=${iccBatchId}`;
+    const serviceUrl = `${this.appConfigService.getConfig().apiUrl}/GenerateIcc/batch-csv?batchId=${iccBatchId}`;
     return this.http.get(serviceUrl, { responseType: 'blob' });
   }
 

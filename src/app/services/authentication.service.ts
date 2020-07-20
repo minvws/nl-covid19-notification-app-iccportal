@@ -9,7 +9,6 @@ import { AppConfigService, IAppConfig } from './app-config.service';
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
-    private config: IAppConfig;
     public currentUser: Observable<User>;
 
     private static decodeToken({ jwtToken, helper = null }: { jwtToken: string; helper?: JwtHelperService; }): object {
@@ -32,16 +31,15 @@ export class AuthenticationService {
         return null;
     }
 
-    constructor(private http: HttpClient, private router: Router, appConfigService: AppConfigService) {
+    constructor(private readonly http: HttpClient, private readonly router: Router, private readonly appConfigService: AppConfigService) {
         const jwtToken = localStorage.getItem('auth');
         const decodedToken = AuthenticationService.decodeToken({ jwtToken: localStorage.getItem('auth') });
         this.currentUserSubject = new BehaviorSubject<User>(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
         this.currentUser = this.currentUserSubject.asObservable();
-        this.config = appConfigService.getConfig();
     }
 
     public fetchCurrentUser(): Observable<any> {
-        const serviceUrl = 'https://' + this.config.authHost + '/user/@me';
+        const serviceUrl = 'https://' + this.appConfigService.getConfig().authHost + '/user/@me';
         const headers = {
             headers: {
                 'Authorization': 'Bearer ' + ((this.currentUserValue !== null) ? this.currentUserValue.authData : '')
@@ -81,10 +79,10 @@ export class AuthenticationService {
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
 
-        window.location.href = 'https://' + this.config.authHost + '/Auth/Logout';
+        window.location.href = 'https://' + this.appConfigService.getConfig().authHost + '/Auth/Logout';
     }
 
     public redirectToAuthorization() {
-        window.location.href = 'https://' + this.config.authHost + '/Auth/Redirect';
-}
+        window.location.href = 'https://' + this.appConfigService.getConfig().authHost + '/Auth/Redirect';
+    }
 }

@@ -9,12 +9,9 @@ import { IAppConfig, AppConfigService } from './app-config.service';
     providedIn: 'root'
 })
 export class UploadCheckService {
-    private config: IAppConfig;
-
     constructor(private readonly http: HttpClient,
         private readonly authenticationService: AuthenticationService,
-        appConfigService: AppConfigService) {
-        this.config = appConfigService.getConfig();
+        private readonly appConfigService: AppConfigService) {
     }
 
     private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
@@ -23,7 +20,7 @@ export class UploadCheckService {
     }
 
     checkUpload(polltoken: string): Observable<any> {
-        const serviceUrl = this.config.apiUrl + '/CaregiversPortalApi/v1/labverify';
+        const serviceUrl = this.appConfigService.getConfig().apiUrl + '/CaregiversPortalApi/v1/labverify';
         const data = {
             PollToken: polltoken
         };

@@ -15,7 +15,6 @@ export class AuthComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this.route.queryParams.subscribe(params => {
             if (params['token']) {
                 if (this.authentication.login(params['token'])) {
@@ -27,5 +26,4 @@ export class AuthComponent implements OnInit {
             }
         });
     }
-
 }
