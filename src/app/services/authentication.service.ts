@@ -5,13 +5,14 @@ import {catchError, map} from 'rxjs/operators';
 import {User} from "../models";
 import {environment} from "../../environments/environment";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router) {
         const jwtToken = localStorage.getItem('auth');
         this.currentUserSubject = new BehaviorSubject<User>(AuthenticationService.parsePayloadToUser(jwtToken, AuthenticationService.decodeToken(localStorage.getItem('auth'))));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -26,7 +27,10 @@ export class AuthenticationService {
         };
         return this.http.get<any>(serviceUrl, headers).pipe(
             map(response => {
-                return response.user.id === this.currentUserValue.id
+                if(response.user.id === this.currentUserValue.id){
+                    return true;
+                }
+                return this.router.parseUrl('')
             }),
             catchError(error => {
                 this.logout()
