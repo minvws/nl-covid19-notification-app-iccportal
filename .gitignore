@@ -2,6 +2,7 @@
 
 .env
 src/environments/environment.prod.ts
+src/assets/data/appConfig.prod.json
 
 /dist/
 /bazel-out

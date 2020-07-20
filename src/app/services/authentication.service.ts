@@ -1,18 +1,29 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { User} from '../models';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { AppConfigService, IAppConfig } from './app-config.service';
-import { Router } from '@angular/router';
+﻿import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {User} from '../models';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {AppConfigService, IAppConfig} from './app-config.service';
+import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
 
-    private static decodeToken({ jwtToken, helper = null }: { jwtToken: string; helper?: JwtHelperService; }): object {
+    constructor(private readonly http: HttpClient, private readonly router: Router, private readonly appConfigService: AppConfigService) {
+        const jwtToken = localStorage.getItem('auth');
+        const decodedToken = AuthenticationService.decodeToken({jwtToken: localStorage.getItem('auth')});
+        this.currentUserSubject = new BehaviorSubject<User>(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
+        this.currentUser = this.currentUserSubject.asObservable();
+    }
+
+    private buildUrl(endpoint) {
+        return 'https://' + this.appConfigService.getConfig().authHost + endpoint;
+    }
+
+    private static decodeToken({jwtToken, helper = null}: { jwtToken: string; helper?: JwtHelperService; }): object {
         helper = (helper) ? helper : new JwtHelperService();
         if (!helper.isTokenExpired(jwtToken)) {
             return helper.decodeToken(jwtToken);
@@ -32,15 +43,9 @@ export class AuthenticationService {
         return null;
     }
 
-    constructor(private readonly http: HttpClient, private readonly router: Router, private readonly appConfigService: AppConfigService) {
-        const jwtToken = localStorage.getItem('auth');
-        const decodedToken = AuthenticationService.decodeToken({ jwtToken: localStorage.getItem('auth') });
-        this.currentUserSubject = new BehaviorSubject<User>(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
 
     public fetchCurrentUser(): Observable<any> {
-        const serviceUrl = 'https://' + this.appConfigService.getConfig().authHost + '/user/@me';
+        const serviceUrl = this.buildUrl('AuthenticatedUser');
         const headers = {
             headers: {
                 'Authorization': 'Bearer ' + ((this.currentUserValue !== null) ? this.currentUserValue.authData : '')
@@ -67,7 +72,7 @@ export class AuthenticationService {
     public login(jwtToken: string): boolean {
         const helper = new JwtHelperService();
         if (!helper.isTokenExpired(jwtToken)) {
-            const decodedToken = AuthenticationService.decodeToken({ jwtToken });
+            const decodedToken = AuthenticationService.decodeToken({jwtToken});
             this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
             localStorage.setItem('auth', jwtToken);
             return true;
@@ -79,11 +84,10 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
-
-        window.location.href = 'https://' + this.appConfigService.getConfig().authHost + '/Auth/Logout';
+        window.location.href = this.buildUrl('/Auth/Logout');
     }
 
     public redirectToAuthorization() {
-        window.location.href = 'https://' + this.appConfigService.getConfig().authHost + '/Auth/Redirect';
+        window.location.href = this.buildUrl('/Auth/Redirect');
     }
 }
