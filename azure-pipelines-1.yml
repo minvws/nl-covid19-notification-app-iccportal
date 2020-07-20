@@ -24,7 +24,6 @@ steps:
   displayName: 'install yarn'
 
 - script: |
-    npm install -g yarn
     yarn
   displayName: 'run yarn'
 
@@ -33,5 +32,19 @@ steps:
   displayName: 'ng lint'
 
 - script: |
-    ng lint
+    ng build --prod
   displayName: 'ng build --prod'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)/dist'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/GGD-Portal.$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
