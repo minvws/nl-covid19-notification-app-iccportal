@@ -16,9 +16,17 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
+    npm install -g @angular/cli
+  displayName: 'install angular cli'
+
+- script: |
+    npm install -g yarn
+  displayName: 'install yarn'
+
+- script: |
     npm install -g yarn
     yarn
-  displayName: 'install and run yarn'
+  displayName: 'run yarn'
 
 - script: |
     ng lint
