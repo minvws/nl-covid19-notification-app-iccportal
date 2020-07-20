@@ -1,8 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {TitleService} from "../services/title.service";
-import {environment} from "../../environments/environment";
-import {ActivatedRoute} from "@angular/router";
-import {AuthenticationService} from "../services";
+import {TitleService} from '../services/title.service';
+import {ActivatedRoute} from '@angular/router';
+import {AuthenticationService} from '../services';
 
 @Component({
     selector: 'app-validate-icc',

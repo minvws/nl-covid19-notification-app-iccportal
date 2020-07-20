@@ -40,8 +40,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "src/assets/data/appConfig.json",
+                  "with": "src/assets/data/appConfig.prod.json"
                 }
               ],
               "optimization": true,
@@ -85,6 +85,9 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.css"
+            ],
+			"iisConfig": [
+              "web.config"
             ],
             "scripts": [],
             "assets": [
