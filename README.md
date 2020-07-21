@@ -13,7 +13,7 @@ This repository contains the frontend code for the Proof of Concept for the Dutc
 
 ## Changelog
 
-The changelog for the UI perspective of this project can be found in [this document](https://docs.google.com/document/d/18z9gvCDJIGgSyJ-nnvD-97Rj8Z6fjQ0G2nalgY0_aBg/edit?usp=sharing).
+The changelog for the UI perspective of this project can be found in [this document](https://docs.google.com/document/d/1j33k73TJ7UwTMYK3knbYEyChuPwPFHyDrPXVmyMLRCQ/edit?usp=sharing).
 
 ## Development & Contribution process
 
