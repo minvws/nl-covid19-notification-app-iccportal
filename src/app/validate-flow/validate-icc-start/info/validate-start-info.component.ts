@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-validate-step1',
-    templateUrl: './validate-step1.component.html',
-    styleUrls: ['./validate-step1.component.scss']
+    templateUrl: './validate-start-info.component.html',
+    styleUrls: ['./validate-start-info.component.scss']
 })
-export class ValidateStep1Component implements OnInit {
+export class ValidateStartInfoComponent implements OnInit {
 
     images: Array<Object> = [
         {

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {UploadCheckService} from '../../services/uploadCheck.service';
+import {UploadCheckService} from '../../../services/uploadCheck.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-    selector: 'app-validate-step5',
-    templateUrl: './validate-step5.component.html',
-    styleUrls: ['./validate-step5.component.scss']
+    selector: 'app-validate-confirm-check',
+    templateUrl: './validate-confirm-check.component.html',
+    styleUrls: ['./validate-confirm-check.component.scss']
 })
-export class ValidateStep5Component implements OnInit {
+export class ValidateConfirmCheckComponent implements OnInit {
     public uploadState = 0;
     private pollToken: string;
     private poller: object;
@@ -39,6 +39,7 @@ export class ValidateStep5Component implements OnInit {
         this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
+                this.router.navigate(["/validate_final"], {queryParams: {success: true}})
                 clearInterval(this.interval);
             }
             this.pollToken = result.pollToken;

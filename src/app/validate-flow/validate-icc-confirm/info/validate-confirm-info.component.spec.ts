@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ValidateStep5Component } from './validate-step5.component';
+import { ValidateConfirmInfoComponent } from './validate-confirm-info.component';
 
-describe('ValidateStep5Component', () => {
-  let component: ValidateStep5Component;
-  let fixture: ComponentFixture<ValidateStep5Component>;
+describe('ValidateStep4Component', () => {
+  let component: ValidateConfirmInfoComponent;
+  let fixture: ComponentFixture<ValidateConfirmInfoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ValidateStep5Component ]
+      declarations: [ ValidateConfirmInfoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ValidateStep5Component);
+    fixture = TestBed.createComponent(ValidateConfirmInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

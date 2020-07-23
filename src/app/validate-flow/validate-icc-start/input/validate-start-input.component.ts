@@ -1,17 +1,17 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {DatePipe} from '@angular/common';
-import {ReportService} from '../../services/report.service';
+import {ReportService} from '../../../services/report.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 @Component({
     selector: 'app-validate-step2',
-    templateUrl: './validate-step2.component.html',
-    styleUrls: ['./validate-step2.component.scss']
+    templateUrl: './validate-start-input.component.html',
+    styleUrls: ['./validate-start-input.component.scss']
 })
-export class ValidateStep2Component implements OnInit, AfterViewInit {
+export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
     InvalidState: Array<number> = [];
@@ -22,6 +22,7 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
     error_code = -1;
     deniedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54'];
     allowedChars = 'BCFGJLQRSTUVXYZ23456789';
+    loading: number = 0;
 
     // datepart
     symptonsDate: Date = null;
@@ -117,7 +118,9 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
         if (this.InfectionConfirmationId.join('').length > 0 && !this.validateCharacters()) {
             this.error_code = 1;
         }
-        if (this.InvalidState.length > 0) { this.InvalidState = []; }
+        if (this.InvalidState.length > 0) {
+            this.InvalidState = [];
+        }
     }
 
     focusOnNext(target: Element) {
@@ -200,11 +203,14 @@ export class ValidateStep2Component implements OnInit, AfterViewInit {
 
     confirmLabConfirmationId() {
         if (this.InfectionConfirmationIdValid()) {
+            this.loading++
             this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
                 .pipe(catchError((e) => {
+                    this.loading--
                     this.error_code = 2;
                     throw e;
                 })).subscribe((result) => {
+                this.loading--
                 if (result.valid === true) {
                     this.router.navigate(['/validate/confirm'], {
                         queryParams: {

@@ -6,26 +6,26 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {ValidateIccComponent} from './validate-icc/validate-icc.component';
-import {ValidateStep1Component} from './validate-icc/validate-step1/validate-step1.component';
+import {ValidateIccComponent} from './validate-flow/validate-icc.component';
+import {ValidateStartInfoComponent} from './validate-flow/validate-icc-start/info/validate-start-info.component';
 import {StepComponent} from './components/step/step.component';
-import {ValidateStep2Component} from './validate-icc/validate-step2/validate-step2.component';
+import {ValidateStartInputComponent} from './validate-flow/validate-icc-start/input/validate-start-input.component';
 import {ExpansionPanelComponent} from './components/expansion-panel/expansion-panel.component';
-import {ValidateStep4Component} from './validate-icc/validate-step4/validate-step4.component';
+import {ValidateConfirmInfoComponent} from './validate-flow/validate-icc-confirm/info/validate-confirm-info.component';
 
 import {registerLocaleData} from '@angular/common';
 import localeNL from '@angular/common/locales/nl';
-import {ValidateStep5Component} from './validate-icc/validate-step5/validate-step5.component';
-import {ValidateIccConfirmComponent} from './validate-icc/validate-icc-confirm/validate-icc-confirm.component';
-import {ValidateIccStartComponent} from './validate-icc/validate-icc-start/validate-icc-start.component';
+import {ValidateIccConfirmComponent} from './validate-flow/validate-icc-confirm/validate-icc-confirm.component';
+import {ValidateIccStartComponent} from './validate-flow/validate-icc-start/validate-icc-start.component';
 
-import {ValidateIccFinalComponent} from './validate-icc/validate-icc-final/validate-icc-final.component';
+import {ValidateIccFinalComponent} from './validate-flow/validate-icc-final/validate-icc-final.component';
 import {AuthGuard, ErrorInterceptor} from './helpers';
 import {ImageCarousselComponent} from './components/image-caroussel/image-caroussel.component';
 import {AuthComponent} from './auth/auth.component';
 
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfigService, IAppConfig } from './services/app-config.service';
+import {ValidateConfirmCheckComponent} from "./validate-flow/validate-icc-confirm/check/validate-confirm-check.component";
 
 registerLocaleData(localeNL);
 
@@ -40,14 +40,15 @@ const appInitializer = (appConfig: AppConfigService) => {
         AppComponent,
         HomeComponent,
         ValidateIccComponent,
-        ValidateStep1Component,
+        ValidateStartInfoComponent,
         StepComponent,
         ExpansionPanelComponent,
-        ValidateStep2Component,
-        ValidateStep4Component,
-        ValidateStep5Component,
+        ValidateStartInputComponent,
+        ValidateConfirmInfoComponent,
+        ValidateIccFinalComponent,
         ValidateIccConfirmComponent,
         ValidateIccStartComponent,
+        ValidateConfirmCheckComponent,
         ValidateIccFinalComponent,
         ImageCarousselComponent
     ],
