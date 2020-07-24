@@ -19,8 +19,8 @@ export class AuthenticationService {
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    private buildUrl(endpoint) {
-        return 'https://' + this.appConfigService.getConfig().authHost + endpoint;
+    private buildUrl(endpoint: string) {
+        return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith("/") ? "" : "/") + endpoint;
     }
 
     private static decodeToken({jwtToken, helper = null}: { jwtToken: string; helper?: JwtHelperService; }): object {

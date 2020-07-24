@@ -1,5 +1,5 @@
 <app-step stepNumber="3" stepTitle="Vul de GGD-sleutel van de index in" stepTitleClass="mb-10">
-    <div #step_element  class="input-box grid grid-cols-8 mb-10" >
+    <div #step_element class="input-box grid grid-cols-8 mb-10">
         <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)"
                (focus)="removeInvalidState($event,0)"
                (keyup)="icIdKeyPress($event)"
@@ -28,7 +28,7 @@
     </div>
 
     <div class="error-message text-red-600 mt-4 mb-10 flex flex-row flex-nowrap items-start" *ngIf="error_code > -1"
-         >
+    >
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
             <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je
@@ -56,5 +56,5 @@
 </app-step>
 <button class="btn btn-primary mb-40" (click)="confirmLabConfirmationId()"
         [disabled]="InfectionConfirmationId.join('').length !== 6 || symptonsDate === null"
-        disabled>Volgende
+        disabled>Volgende{{(loading > 0) ? "..." : ""}}
 </button>
