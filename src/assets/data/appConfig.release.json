@@ -1,0 +1,6 @@
+{
+    "production": false,
+    "appName": "CoronaMelder",
+    "apiUrl": "#{Deploy.ICCBackend.Hostname.External}#",
+    "authHost": "localhost:5001"
+}
