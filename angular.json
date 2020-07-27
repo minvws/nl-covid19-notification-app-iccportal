@@ -41,7 +41,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/assets/data/appConfig.json",
-                  "with": "src/assets/data/appConfig.prod.json"
+                  "with": "src/assets/data/appConfig.release.json"
                 }
               ],
               "optimization": true,
