@@ -39,12 +39,11 @@ steps:
       script: 'echo F|xcopy /Y "appConfig.release.json" "appConfig.json"'
       workingDirectory: '$(Build.SourcesDirectory)/dist/assets/data'
 
-  - task: Copy@1
+  - task: CopyFiles@2
     inputs:
-      CopyMethod: 'xcopy'
-      CopyFrom: '$(Build.SourcesDirectory)/web.config'
-      CopyTo: '$(Build.SourcesDirectory)/dist/web.config'
-      CopyArguments: '/Y'
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: 'web.config'
+      TargetFolder: '$(Build.SourcesDirectory)/dist'
 
   - task: CopyFiles@2
     inputs:
