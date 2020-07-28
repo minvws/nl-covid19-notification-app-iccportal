@@ -41,10 +41,10 @@ steps:
 
   - task: Copy@1
     inputs:
-      CopyMethod: 'osCopy'
+      CopyMethod: 'xcopy'
       CopyFrom: '$(Build.SourcesDirectory)/web.config'
       CopyTo: '$(Build.SourcesDirectory)/dist/web.config'
-      CopyArguments: 
+      CopyArguments: '/Y'
 
   - task: CopyFiles@2
     inputs:
