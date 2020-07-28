@@ -36,7 +36,7 @@ steps:
 
   - task: CmdLine@2
     inputs:
-      script: 'echo F|xcopy /S /Q /Y /F "appConfig.release.json" "appConfig.json"'
+      script: 'echo F|xcopy /F "appConfig.release.json" "appConfig.json"'
       workingDirectory: '$(Build.SourcesDirectory)/dist/assets/data'
 
   - task: CopyFiles@2
