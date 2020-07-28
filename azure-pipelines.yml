@@ -5,9 +5,8 @@
 
 trigger:
   - master
-
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'CIBG-BuildRelease-O'
 
 steps:
   - task: NodeTool@0
