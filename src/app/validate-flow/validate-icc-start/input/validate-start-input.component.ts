@@ -22,7 +22,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     error_code = -1;
     deniedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54'];
     allowedChars = 'BCFGJLQRSTUVXYZ23456789';
-    loading: number = 0;
+    loading = 0;
 
     // datepart
     symptonsDate: Date = null;
@@ -203,14 +203,14 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     confirmLabConfirmationId() {
         if (this.InfectionConfirmationIdValid()) {
-            this.loading++
+            this.loading++;
             this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
                 .pipe(catchError((e) => {
-                    this.loading--
+                    this.loading--;
                     this.error_code = 2;
                     throw e;
                 })).subscribe((result) => {
-                this.loading--
+                this.loading--;
                 if (result.valid === true) {
                     this.router.navigate(['/validate/confirm'], {
                         queryParams: {
