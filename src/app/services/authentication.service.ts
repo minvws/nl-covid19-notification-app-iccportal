@@ -19,10 +19,6 @@ export class AuthenticationService {
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
-    private buildUrl(endpoint: string) {
-        return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith("/") ? "" : "/") + endpoint;
-    }
-
     private static decodeToken({jwtToken, helper = null}: { jwtToken: string; helper?: JwtHelperService; }): object {
         helper = (helper) ? helper : new JwtHelperService();
         if (!helper.isTokenExpired(jwtToken)) {
@@ -30,7 +26,6 @@ export class AuthenticationService {
         }
         return null;
     }
-
     private static parsePayloadToUser(jwtToken: string, payload: any): User {
         if (payload && payload.id) {
             return {
@@ -43,6 +38,10 @@ export class AuthenticationService {
         return null;
     }
 
+
+    private buildUrl(endpoint: string) {
+        return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
+    }
 
     public fetchCurrentUser(): Observable<any> {
         const serviceUrl = this.buildUrl('AuthenticatedUser');
@@ -90,4 +89,6 @@ export class AuthenticationService {
     public redirectToAuthorization() {
         window.location.href = this.buildUrl('/Auth/Redirect');
     }
+
+
 }

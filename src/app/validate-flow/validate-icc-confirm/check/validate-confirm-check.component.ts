@@ -39,7 +39,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
         this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
-                this.router.navigate(["/validate_final"], {queryParams: {success: true}})
+                this.router.navigate(['/validate_final'], {queryParams: {success: true}});
                 clearInterval(this.interval);
             }
             this.pollToken = result.pollToken;

@@ -23,16 +23,16 @@ import {AuthGuard, ErrorInterceptor} from './helpers';
 import {ImageCarousselComponent} from './components/image-caroussel/image-caroussel.component';
 import {AuthComponent} from './auth/auth.component';
 
-import { APP_INITIALIZER } from '@angular/core';
-import { AppConfigService, IAppConfig } from './services/app-config.service';
-import {ValidateConfirmCheckComponent} from "./validate-flow/validate-icc-confirm/check/validate-confirm-check.component";
+import {APP_INITIALIZER} from '@angular/core';
+import {AppConfigService, IAppConfig} from './services/app-config.service';
+import {ValidateConfirmCheckComponent} from './validate-flow/validate-icc-confirm/check/validate-confirm-check.component';
 
 registerLocaleData(localeNL);
 
 const appInitializer = (appConfig: AppConfigService) => {
-  return () => {
-    return appConfig.loadAppConfig();
-  };
+    return () => {
+        return appConfig.loadAppConfig();
+    };
 };
 
 @NgModule({
@@ -90,10 +90,11 @@ const appInitializer = (appConfig: AppConfigService) => {
             useFactory: appInitializer,
             multi: true,
             deps: [AppConfigService]
-          }
+        }
     ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
 }
+
 // {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full', canActivate: [AuthGuard]}
