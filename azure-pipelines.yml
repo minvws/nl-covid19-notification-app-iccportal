@@ -34,13 +34,16 @@ steps:
       ng build --prod
     displayName: 'ng build --prod'
 
-  - task: ArchiveFiles@2
+  - task: CmdLine@2
     inputs:
-      rootFolderOrFile: '$(Build.SourcesDirectory)/dist'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/GGD-Portal.$(Build.BuildId).zip'
-      replaceExistingArchive: true
+      script: 'echo F|xcopy /Y "appConfig.release.json" "appConfig.json"'
+      workingDirectory: '$(Build.SourcesDirectory)/dist/assets/data'
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/dist'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
   - task: PublishBuildArtifacts@1
     inputs:
