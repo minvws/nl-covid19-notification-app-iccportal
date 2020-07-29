@@ -41,6 +41,12 @@ steps:
 
   - task: CopyFiles@2
     inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: 'web.config'
+      TargetFolder: '$(Build.SourcesDirectory)/dist'
+
+  - task: CopyFiles@2
+    inputs:
       SourceFolder: '$(Build.SourcesDirectory)/dist'
       Contents: '**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
