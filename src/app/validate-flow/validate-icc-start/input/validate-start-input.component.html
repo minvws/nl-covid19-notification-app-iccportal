@@ -3,28 +3,28 @@
         <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)"
                (focus)="removeInvalidState($event,0)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[0]" [autofocus]="true">
+               type="text" [(ngModel)]="LabConfirmationId[0]" [autofocus]="true">
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)"
                (focus)="removeInvalidState($event,1)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[1]">
+               type="text" [(ngModel)]="LabConfirmationId[1]">
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)"
                (focus)="removeInvalidState($event,2)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[2]">
+               type="text" [(ngModel)]="LabConfirmationId[2]">
         <div class="text-center text-3xl py-4">-</div>
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)"
                (focus)="removeInvalidState($event,3)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[3]">
+               type="text" [(ngModel)]="LabConfirmationId[3]">
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)"
                (focus)="removeInvalidState($event,4)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[4]">
+               type="text" [(ngModel)]="LabConfirmationId[4]">
         <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)"
                (focus)="removeInvalidState($event,5)"
                (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="InfectionConfirmationId[5]">
+               type="text" [(ngModel)]="LabConfirmationId[5]">
     </div>
 
     <div class="error-message text-red-600 mt-4 mb-10 flex flex-row flex-nowrap items-start" *ngIf="error_code > -1"
@@ -55,6 +55,6 @@
     </div>
 </app-step>
 <button class="btn btn-primary mb-40" (click)="confirmLabConfirmationId()"
-        [disabled]="InfectionConfirmationId.join('').length !== 6 || symptonsDate === null"
+        [disabled]="LabConfirmationId.join('').length !== 6 || symptonsDate === null"
         disabled>Volgende{{(loading > 0) ? "..." : ""}}
 </button>

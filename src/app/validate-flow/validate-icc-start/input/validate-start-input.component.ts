@@ -13,7 +13,7 @@ import {catchError} from 'rxjs/operators';
 })
 export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
-    public InfectionConfirmationId: Array<string> = ['', '', '', '', '', ''];
+    public LabConfirmationId: Array<string> = ['', '', '', '', '', ''];
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
@@ -73,7 +73,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     @HostListener('window:scroll', ['$event'])
     scrollHandler(event) {
         const y = (this.step_element.nativeElement.offsetTop - window.outerHeight + 220);
-        if (this.InfectionConfirmationId.join('').length < 1 && window.scrollY > y) {
+        if (this.LabConfirmationId.join('').length < 1 && window.scrollY > y) {
             const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement;
             firstCharInputElement.focus();
         }
@@ -83,12 +83,12 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     public InfectionConfirmationIdValid() {
-        return (this.InfectionConfirmationId.join('').length === 6 && this.validateCharacters());
+        return (this.LabConfirmationId.join('').length === 6 && this.validateCharacters());
     }
 
     public InfectionConfirmationIdToTaalString() {
         let output = '';
-        this.InfectionConfirmationId.forEach((c, index) => {
+        this.LabConfirmationId.forEach((c, index) => {
             if (index === 3) {
                 output += ' – ';
             }
@@ -108,14 +108,18 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.InvalidState = this.InvalidState.filter((i) => i !== number);
     }
 
+    labConfirmationIdJoined() {
+        return this.LabConfirmationId.join('').trim().toUpperCase()
+    }
+
     validateCharacters(): boolean {
-        const matchArray: RegExpMatchArray = this.InfectionConfirmationId.join('').trim().toUpperCase().match('^[' + this.allowedChars + ']+$');
+        const matchArray: RegExpMatchArray = this.labConfirmationIdJoined().match('^[' + this.allowedChars + ']+$');
         return matchArray && matchArray.length > 0;
     }
 
     resetInvalidState() {
         this.error_code = -1;
-        if (this.InfectionConfirmationId.join('').length > 0 && !this.validateCharacters()) {
+        if (this.LabConfirmationId.join('').length > 0 && !this.validateCharacters()) {
             this.error_code = 1;
         }
         if (this.InvalidState.length > 0) {
@@ -166,7 +170,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
             }
         }
         // sync with model
-        this.InfectionConfirmationId[index] = target.value;
+        this.LabConfirmationId[index] = target.value;
     }
 
     getFriendlySymptonsDate() {
@@ -200,11 +204,18 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.error_code = 2;
         throw error;
     }
-
+// TODO:
     confirmLabConfirmationId() {
+        if (this.labConfirmationIdJoined() == "000000") {
+            this.router.navigate(['/validate/confirm'], {
+                queryParams: {
+                    p: "000000"
+                }
+            });
+        }
         if (this.InfectionConfirmationIdValid()) {
             this.loading++;
-            this.reportService.confirmLabId(this.InfectionConfirmationId, this.symptonsDate.toISOString())
+            this.reportService.confirmLabId(this.LabConfirmationId, this.symptonsDate.toISOString())
                 .pipe(catchError((e) => {
                     this.loading--;
                     this.error_code = 2;

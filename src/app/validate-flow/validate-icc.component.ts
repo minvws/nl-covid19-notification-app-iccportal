@@ -16,6 +16,11 @@ export class ValidateIccComponent implements OnInit {
     public scrollDown = false;
 
     constructor(public titleService: TitleService, public authenticationService: AuthenticationService) {
+        window.addEventListener("beforeunload", (event) => {
+            event.preventDefault();
+            event.returnValue =  "Weet je zeker dat je wilt herladen? De ingevoerde sleutel gaat verloren.";
+            return event;
+        });
     }
 
     @HostListener('window:scroll', ['$event'])
@@ -26,8 +31,6 @@ export class ValidateIccComponent implements OnInit {
             this.scrollDown = false;
         }
     }
-
     ngOnInit(): void {
-
     }
 }

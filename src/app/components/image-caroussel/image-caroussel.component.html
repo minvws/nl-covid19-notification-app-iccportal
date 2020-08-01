@@ -21,19 +21,19 @@
             <span class="icon icon-close leading-none"></span>
         </div>
     </div>
-    <div class="caroussel z-20 flex overflow-hidden flex-row items-center relative pl-20 h-full text-white">
+    <div class="caroussel z-20 flex overflow-hidden flex-row items-center justify-center relative pl-20 h-full text-white">
         <div class="image mr-10" id="popupImage" (click)="popupActive=false"
              *ngFor="let image of bigImages(); let imageIndex = index">
             <p class="description w-full text-center mb-4 px-4" [innerHTML]="image.text.replace('\n','')">
             </p>
             <img [src]="image.image" [alt]="image.text">
         </div>
-        <div class="controls absolute w-full pl-4">
-            <div *ngIf="canLeftScroll" class="w-10 h-10 flex items-center justify-center text-sm rounded-full d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span
-                    class="icon icon-arrow-left-sm icon-white"></span></div>
-            <div *ngIf="canRightScroll" class="w-10 h-10 flex items-center mr-6 justify-center text-sm rounded-full top-0 right-0 absolute d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span
-                    class="icon icon-arrow-right icon-white"></span></div>
-        </div>
+<!--        <div class="controls absolute w-full pl-4">-->
+<!--            <div *ngIf="canLeftScroll" class="w-10 h-10 flex items-center justify-center text-sm rounded-full d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span-->
+<!--                    class="icon icon-arrow-left-sm icon-white"></span></div>-->
+<!--            <div *ngIf="canRightScroll" class="w-10 h-10 flex items-center mr-6 justify-center text-sm rounded-full top-0 right-0 absolute d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span-->
+<!--                    class="icon icon-arrow-right icon-white"></span></div>-->
+<!--        </div>-->
     </div>
 
 </div>
