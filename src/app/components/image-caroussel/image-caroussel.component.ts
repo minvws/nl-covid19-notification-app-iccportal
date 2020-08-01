@@ -1,4 +1,5 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {CarousselImage} from '../../models/caroussel-image';
 
 @Component({
     selector: 'app-image-caroussel',
@@ -6,7 +7,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
     styleUrls: ['./image-caroussel.component.scss']
 })
 export class ImageCarousselComponent implements OnInit {
-    @Input() images: Array<Object>;
+    @Input() images: Array<CarousselImage>;
     @Input() additionalStyle: string;
 
     canLeftScroll = false;
@@ -24,5 +25,9 @@ export class ImageCarousselComponent implements OnInit {
     }
 
     ngOnInit(): void {
+    }
+
+    bigImages() {
+        return this.images.filter(i => !i.small);
     }
 }

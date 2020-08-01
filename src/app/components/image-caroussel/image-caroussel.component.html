@@ -1,7 +1,7 @@
 <div class="flex overflow-hidden flex-row items-start" [style]="additionalStyle">
     <div (click)="popupActive = true" class="cursor-zoom opacity-0 transition-ease-in duration-200 hover:opacity-50 bg-black w-full h-full absolute top-0 left-0"></div>
     <div (click)="popupActive = true" class="image mr-4" id="inlineImage"
-         *ngFor="let image of images; let imageIndex = index">
+         *ngFor="let image of images; let imageIndex = index" [class.small]="((image.small) ? image.small : false)">
         <img draggable="false" title="Vergroot screenshot"
              [src]="image.image" [alt]="image.text"/>
     </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="caroussel z-20 flex overflow-hidden flex-row items-center relative pl-20 h-full text-white">
         <div class="image mr-10" id="popupImage" (click)="popupActive=false"
-             *ngFor="let image of images; let imageIndex = index">
+             *ngFor="let image of bigImages(); let imageIndex = index">
             <p class="description w-full text-center mb-4 px-4" [innerHTML]="image.text.replace('\n','')">
             </p>
             <img [src]="image.image" [alt]="image.text">

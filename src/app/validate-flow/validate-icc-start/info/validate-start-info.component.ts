@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CarousselImage} from '../../../models/caroussel-image';
 
 @Component({
     selector: 'app-validate-step1',
@@ -7,27 +8,24 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ValidateStartInfoComponent implements OnInit {
 
-    images: Array<Object> = [
+    images: Array<CarousselImage> = [
         {
-            'text': 'Zoek de CoronaMelder app',
-            'image': 'assets/images/Screen 1.png',
+            text: 'Zet telefoon op luidspreker en open CoronaMelder app.',
+            image: 'assets/images/Screen 0.png',
+            small: true
         },
         {
-            'text': 'Open de app en scroll naar beneden',
-            'image': 'assets/images/Screen 2.png',
+            text: 'Open de app en scroll naar beneden',
+            image: 'assets/images/Screen 1.png',
         },
         {
-            'text': 'Druk op ‘GGD-sleutel doorgeven’',
-            'image': 'assets/images/Screen 3.png',
+            text: 'Druk op ‘GGD-sleutel doorgeven’',
+            image: 'assets/images/Screen 2.png',
         },
         {
-            'text': 'Ga naar de GGD-sleutel',
-            'image': 'assets/images/Screen 4.png',
+            text: 'Geef de tijdelijke GGD-sleutel door',
+            image: 'assets/images/Screen 3.png',
         },
-        {
-            'text': 'Geef de tijdelijkse GGD-sleutel door',
-            'image': 'assets/images/Screen 5.png',
-        }
     ];
 
     constructor() {

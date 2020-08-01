@@ -18,3 +18,4 @@ export class ExpansionPanelComponent implements OnInit {
     this.expanded = !this.expanded;
   }
 }
+

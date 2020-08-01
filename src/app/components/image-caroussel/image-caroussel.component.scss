@@ -1,9 +1,14 @@
 #inlineImage {
-  min-width: 250px;
+  min-width: 200px;
+  &.small {
+    min-width: 144px;
+  }
 }
-.cursor-zoom{
+
+.cursor-zoom {
   cursor: zoom-in;
 }
+
 #closeBtn {
   top: 2.5rem;
   right: 1.75rem;
@@ -18,6 +23,7 @@
   min-width: 310px;
   cursor: zoom-out;
 }
+
 
 .backdrop {
   z-index: -1;
