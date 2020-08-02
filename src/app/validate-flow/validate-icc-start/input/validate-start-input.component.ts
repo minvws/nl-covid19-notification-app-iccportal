@@ -24,11 +24,15 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     allowedChars = 'BCFGJLQRSTUVXYZ23456789';
     loading = 0;
 
+    showSymptons: boolean = true
+
     // datepart
     symptonsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;
     dateArray: Array<number> = [...Array(22)];
+
+    demoMode = false;
 
     spelAlphabet: Object = {
         'A': 'Anna',
@@ -83,7 +87,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     public InfectionConfirmationIdValid() {
-        return (this.LabConfirmationId.join('').length === 6 && this.validateCharacters());
+        return (this.labConfirmationIdJoined().length === 6 && this.validateCharacters());
     }
 
     public InfectionConfirmationIdToTaalString() {
@@ -119,8 +123,11 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     resetInvalidState() {
         this.error_code = -1;
-        if (this.LabConfirmationId.join('').length > 0 && !this.validateCharacters()) {
+        if (this.labConfirmationIdJoined().length > 0 && !this.validateCharacters()) {
             this.error_code = 1;
+        }
+        if (this.labConfirmationIdJoined() == "000000") {
+            this.demoMode = true
         }
         if (this.InvalidState.length > 0) {
             this.InvalidState = [];
@@ -173,8 +180,8 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.LabConfirmationId[index] = target.value;
     }
 
-    getFriendlySymptonsDate() {
-        return this.datePipe.transform(this.symptonsDate, 'EE. d MMM - ');
+    getFriendlySymptonsDate(format: string = 'EE. d MMM - ') {
+        return this.datePipe.transform(this.symptonsDate, format);
     }
 
     getDaysAgo(inputDate: Date = null): string {
@@ -204,6 +211,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.error_code = 2;
         throw error;
     }
+
 // TODO:
     confirmLabConfirmationId() {
         if (this.labConfirmationIdJoined() == "000000") {

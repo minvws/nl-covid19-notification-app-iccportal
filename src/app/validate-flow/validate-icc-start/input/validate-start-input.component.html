@@ -31,19 +31,38 @@
     >
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
-            <p *ngIf="error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke wachtwoord dat je
+            <p *ngIf="demoMode">Democode, formaat onjuist en enkel bestemd voor trainingsdoeleinden.</p>
+            <p *ngIf="!demoMode && error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke
+                wachtwoord dat je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
-            <p *ngIf="error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke wachtwoord <b>enkel</b>
+            <p *ngIf="!demoMode && error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke
+                wachtwoord <b>enkel</b>
                 de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
         </div>
     </div>
 </app-step>
 <!--TODO: Bring datepicker code into new component-->
-<app-step stepNumber="4" stepTitle="Eerste ziektedag van de index?" stepTitleClass="mb-10">
+<app-step stepNumber="4" stepTitle="Vertoont de index COVID-19 symptonen?" stepTitleClass="mb-10">
+    <div class="select-box flex align-center flex-row flex-wrap">
+        <div [class.border-2]="showSymptons" (click)="showSymptons = true"
+             class="px-5 cursor-pointer border-primary border-solid text-center bg-gray-300 rounded-l rounded-bl py-3 d-inline-block"
+             style="min-width: 120px;">Ja
+        </div>
+        <div [class.border-2]="!showSymptons" (click)="showSymptons = false"
+             class="px-5 cursor-pointer border-primary border-solid text-center bg-gray-300 rounded-r rounded-br py-3 d-inline-block"
+             style="min-width: 120px;">Nee
+        </div>
+    </div>
+    <br>
+<div>
+
+    <p class="mb-2 font-bold" *ngIf="showSymptons">Datum eerste ziektedag:</p>
+    <p class="mb-2 font-bold" *ngIf="!showSymptons">Datum test aanvraag:</p>
     <div class="cursor-pointer friendly-date-block px-4 py-3 bg-gray-300 rounded inline-block hover:bg-gray-100"
          [class.shadow-sm]="!openDayPicker" (click)="openDayPicker=!openDayPicker">
         {{getFriendlySymptonsDate()}} <span class="text-gray-700">{{getDaysAgo()}}</span>
     </div>
+    <p class="mt-2" *ngIf="symptonsDate">Eerste besmettingsdag: <b>{{getFriendlySymptonsDate('EEEE d LLLL yyyy')}}</b></p>
     <div *ngIf="openDayPicker"
          class="friendly-dates bg-white shadow-md flex flex-col justify-start rounded inline-block mt-1">
         <div (click)="selectDate(dateDay)" *ngFor="let ii of dateArray; let dateDay = index"
@@ -53,6 +72,9 @@
           getDayAgo(dateDay))}}</span>
         </div>
     </div>
+</div>
+
+
 </app-step>
 <button class="btn btn-primary mb-40" (click)="confirmLabConfirmationId()"
         [disabled]="LabConfirmationId.join('').length !== 6 || symptonsDate === null"
