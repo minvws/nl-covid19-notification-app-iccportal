@@ -22,7 +22,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
             this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
             this.checkUpload();
             const uploadInterval = setInterval(() => {
-                if (this.pollToken === "000000") { // testcase
+                if (this.pollToken === '000000') { // testcase
                     this.uploadState = 1;
                     this.router.navigate(['/validate_final'], {queryParams: {success: true}});
                     clearInterval(this.interval);

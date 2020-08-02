@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CarousselImage} from "../../../models/caroussel-image";
+import {CarousselImage} from '../../../models/caroussel-image';
 
 @Component({
   selector: 'app-validate-step4',
