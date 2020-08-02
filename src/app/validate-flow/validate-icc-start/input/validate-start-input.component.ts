@@ -24,9 +24,10 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     allowedChars = 'BCFGJLQRSTUVXYZ23456789';
     loading = 0;
 
-    showSymptons: boolean = true
 
     // datepart
+    showSymptons: boolean;
+
     symptonsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;
@@ -113,7 +114,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     labConfirmationIdJoined() {
-        return this.LabConfirmationId.join('').trim().toUpperCase()
+        return this.LabConfirmationId.join('').trim().toUpperCase();
     }
 
     validateCharacters(): boolean {
@@ -126,8 +127,8 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         if (this.labConfirmationIdJoined().length > 0 && !this.validateCharacters()) {
             this.error_code = 1;
         }
-        if (this.labConfirmationIdJoined() == "000000") {
-            this.demoMode = true
+        if (this.labConfirmationIdJoined() === '000000') {
+            this.demoMode = true;
         }
         if (this.InvalidState.length > 0) {
             this.InvalidState = [];
@@ -214,10 +215,10 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
 // TODO:
     confirmLabConfirmationId() {
-        if (this.labConfirmationIdJoined() == "000000") {
+        if (this.labConfirmationIdJoined() === '000000') {
             this.router.navigate(['/validate/confirm'], {
                 queryParams: {
-                    p: "000000"
+                    p: `000000`
                 }
             });
         }
