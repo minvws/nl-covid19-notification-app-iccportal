@@ -17,6 +17,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
+
     @ViewChild('step_element')
     step_element: ElementRef;
     error_code = -1;
@@ -77,6 +78,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     @HostListener('window:scroll', ['$event'])
     scrollHandler(event) {
+        console.log(this.first_char);
         const y = (this.step_element.nativeElement.offsetTop - window.outerHeight + 220);
         if (this.LabConfirmationId.join('').length < 1 && window.scrollY > y) {
             const firstCharInputElement: HTMLInputElement = this.first_char.nativeElement;

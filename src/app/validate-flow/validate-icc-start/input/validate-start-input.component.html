@@ -1,30 +1,13 @@
 <app-step stepNumber="3" stepTitle="Vul de GGD-sleutel van de index in" stepTitleClass="mb-10">
     <div #step_element class="input-box grid grid-cols-8 mb-10">
-        <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)"
-               (focus)="removeInvalidState($event,0)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[0]" [autofocus]="true">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)"
-               (focus)="removeInvalidState($event,1)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[1]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)"
-               (focus)="removeInvalidState($event,2)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[2]">
-        <div class="text-center text-3xl py-4">-</div>
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)"
-               (focus)="removeInvalidState($event,3)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[3]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)"
-               (focus)="removeInvalidState($event,4)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[4]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)"
-               (focus)="removeInvalidState($event,5)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[5]">
+        <ng-container *ngFor="let key of [].constructor(6); let i = index">
+            <input #first_char (input)="resetInvalidState()"
+                   [class.invalid]="InvalidState.includes(i)"
+                   (focus)="removeInvalidState($event,i)"
+                   (keyup)="icIdKeyPress($event)" [value]="i"
+                   type="text" [(ngModel)]="LabConfirmationId[i]"/>
+            <div class="text-center text-3xl py-4" *ngIf="i == 2">-</div>
+        </ng-container>
     </div>
 
     <div class="error-message text-red-600 mt-4 mb-10 flex flex-row flex-nowrap items-start" *ngIf="error_code > -1"
