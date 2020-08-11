@@ -5,10 +5,6 @@
         <img draggable="false" title="Vergroot screenshot"
              [src]="image.image" [alt]="image.text"/>
     </div>
-<!--    <div class="absolute w-10 h-10 flex items-center justify-center text-sm bg-black cursor-pointer hover:gray-800 rounded-full d-inline"-->
-<!--         style="top: 50%; right: 1rem" (click)="popupActive = true">-->
-<!--        <span class="icon icon-arrow-right icon-white"></span>-->
-<!--    </div>-->
 </div>
 
 <div class="popup fixed top-0 left-0 h-screen w-screen" *ngIf="popupActive">
@@ -28,12 +24,6 @@
             </p>
             <img [src]="image.image" [alt]="image.text">
         </div>
-<!--        <div class="controls absolute w-full pl-4">-->
-<!--            <div *ngIf="canLeftScroll" class="w-10 h-10 flex items-center justify-center text-sm rounded-full d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span-->
-<!--                    class="icon icon-arrow-left-sm icon-white"></span></div>-->
-<!--            <div *ngIf="canRightScroll" class="w-10 h-10 flex items-center mr-6 justify-center text-sm rounded-full top-0 right-0 absolute d-inline bg-primary cursor-pointer hover:bg-blue-600 rounded-full d-inline"><span-->
-<!--                    class="icon icon-arrow-right icon-white"></span></div>-->
-<!--        </div>-->
     </div>
 
 </div>
