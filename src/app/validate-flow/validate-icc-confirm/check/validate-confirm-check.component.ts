@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ValidateConfirmCheckComponent implements OnInit {
     public uploadState = 0;
     private pollToken: string;
+    private symptomsDate: Date;
     private poller: object;
     private interval: number;
 
@@ -19,12 +20,18 @@ export class ValidateConfirmCheckComponent implements OnInit {
     ngOnInit(): void {
         if (this.route.snapshot.queryParams['p']) {
             this.pollToken = this.route.snapshot.queryParams['p'];
-            this.router.navigate([], {queryParams: {p: null}, queryParamsHandling: 'merge'});
+            this.symptomsDate = this.route.snapshot.queryParams['symptomsDate'];
+            this.router.navigate([], {queryParams: {p: null, symptomsDate: null}, queryParamsHandling: 'merge'});
             this.checkUpload();
             const uploadInterval = setInterval(() => {
-                if (this.pollToken === '000000') { // testcase
+                if (this.pollToken === 'demo_polltoken_test_000000') { // testcase
                     this.uploadState = 1;
-                    this.router.navigate(['/validate_final'], {queryParams: {success: true}});
+                    this.router.navigate(['/validate_final'], {
+                        queryParams: {
+                            success: true,
+                            symptomsDate: this.symptomsDate
+                        }
+                    });
                     clearInterval(this.interval);
                 }
                 if (this.uploadState > -1 && this.pollToken && this.pollToken !== '') {
@@ -44,7 +51,12 @@ export class ValidateConfirmCheckComponent implements OnInit {
         this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
-                this.router.navigate(['/validate_final'], {queryParams: {success: true}});
+                this.router.navigate(['/validate_final'], {
+                    queryParams: {
+                        success: true,
+                        symptomsDate: this.symptomsDate
+                    }
+                });
                 clearInterval(this.interval);
             }
             this.pollToken = result.pollToken;

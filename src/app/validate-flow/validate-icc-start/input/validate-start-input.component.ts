@@ -26,9 +26,9 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
 
     // datepart
-    showSymptons: boolean;
+    showSymptoms = true;
 
-    symptonsDate: Date = null;
+    symptomsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;
     dateArray: Array<number> = [...Array(22)];
@@ -181,12 +181,16 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.LabConfirmationId[index] = target.value;
     }
 
-    getFriendlySymptonsDate(format: string = 'EE. d MMM - ') {
-        return this.datePipe.transform(this.symptonsDate, format);
+    getFriendlySymptomsDate(format: string = 'EE. d MMM - ', offset: number = 0) {
+        const date: Date = this.symptomsDate;
+        if (date) {
+            date.setDate(date.getDate() - offset);
+        }
+        return this.datePipe.transform(date, format);
     }
 
     getDaysAgo(inputDate: Date = null): string {
-        inputDate = ((inputDate != null) ? inputDate : this.symptonsDate);
+        inputDate = ((inputDate != null) ? inputDate : this.symptomsDate);
         const daysAgo = (inputDate) ? Math.floor(((Date.now() - (inputDate).valueOf()) / 1000 / 60 / 60 / 24)) : 0;
         return (daysAgo < 1) ? 'vandaag' : (daysAgo + ' ' + ((daysAgo > 1) ? 'dagen' : 'dag') + ' gel.');
     }
@@ -204,7 +208,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     selectDate(dateDay: number) {
-        this.symptonsDate = this.getDayAgo(dateDay);
+        this.symptomsDate = this.getDayAgo(dateDay);
         this.openDayPicker = false;
     }
 
@@ -218,13 +222,14 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         if (this.labConfirmationIdJoined() === '000000') {
             this.router.navigate(['/validate/confirm'], {
                 queryParams: {
-                    p: `000000`
+                    p: `demo_polltoken_test_000000`,
+                    symptomsDate: this.symptomsDate.valueOf()
                 }
             });
         }
         if (this.InfectionConfirmationIdValid()) {
             this.loading++;
-            this.reportService.confirmLabId(this.LabConfirmationId, this.symptonsDate.toISOString())
+            this.reportService.confirmLabId(this.LabConfirmationId, this.symptomsDate.toISOString())
                 .pipe(catchError((e) => {
                     this.loading--;
                     this.error_code = 2;
@@ -234,7 +239,8 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
                 if (result.valid === true) {
                     this.router.navigate(['/validate/confirm'], {
                         queryParams: {
-                            p: result.pollToken
+                            p: result.pollToken,
+                            symptomsDate: this.symptomsDate.valueOf()
                         }
                     });
                 } else {
