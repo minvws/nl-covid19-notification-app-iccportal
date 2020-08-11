@@ -1,37 +1,20 @@
 <app-step stepNumber="3" stepTitle="Vul de GGD-sleutel van de index in" stepTitleClass="mb-10">
     <div #step_element class="input-box grid grid-cols-8 mb-10">
-        <input #first_char (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(0)"
-               (focus)="removeInvalidState($event,0)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[0]" [autofocus]="true">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(1)"
-               (focus)="removeInvalidState($event,1)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[1]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(2)"
-               (focus)="removeInvalidState($event,2)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[2]">
-        <div class="text-center text-3xl py-4">-</div>
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(3)"
-               (focus)="removeInvalidState($event,3)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[3]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(4)"
-               (focus)="removeInvalidState($event,4)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[4]">
-        <input (input)="resetInvalidState()" [class.invalid]="InvalidState.includes(5)"
-               (focus)="removeInvalidState($event,5)"
-               (keyup)="icIdKeyPress($event)"
-               type="text" [(ngModel)]="LabConfirmationId[5]">
+        <ng-container *ngFor="let key of [].constructor(6); let i = index">
+            <input #first_char (input)="resetInvalidState()"
+                   [class.invalid]="InvalidState.includes(i)"
+                   (focus)="removeInvalidState($event,i)"
+                   (keyup)="icIdKeyPress($event)" [value]="i"
+                   type="text" [(ngModel)]="LabConfirmationId[i]"/>
+            <div class="text-center text-3xl py-4" *ngIf="i == 2">-</div>
+        </ng-container>
     </div>
 
     <div class="error-message text-red-600 mt-4 mb-10 flex flex-row flex-nowrap items-start" *ngIf="error_code > -1"
     >
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
-            <p *ngIf="demoMode">Democode, formaat onjuist en enkel bestemd voor trainingsdoeleinden.</p>
+            <p *ngIf="demoMode">Democode, enkel bestemd voor trainingsdoeleinden.</p>
             <p *ngIf="!demoMode && error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke
                 wachtwoord dat je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
@@ -41,8 +24,7 @@
         </div>
     </div>
 </app-step>
-<!--TODO: Bring datepicker code into new component-->
-<app-step stepNumber="4" stepTitle="Vertoont de index COVID-19 symptonen?" stepTitleClass="mb-10">
+<app-step stepNumber="4" stepTitle="Heeft de index klachten die bij COVID-19 passen?" stepTitleClass="mb-10">
     <div class="select-box flex align-center flex-row flex-wrap">
         <div [class.border-2]="showSymptoms" (click)="showSymptoms = true"
              class="px-5 cursor-pointer border-primary border-solid text-center bg-gray-300 rounded-l rounded-bl py-3 d-inline-block"
@@ -56,7 +38,7 @@
     <br>
     <div>
         <p class="mb-2 font-bold" *ngIf="showSymptoms">Datum eerste ziektedag:</p>
-        <p class="mb-2 font-bold" *ngIf="!showSymptoms">Datum test aanvraag:</p>
+        <p class="mb-2 font-bold" *ngIf="!showSymptoms">Datum test:</p>
         <div class="cursor-pointer friendly-date-block px-4 py-3 bg-gray-300 rounded inline-block hover:bg-gray-100"
              [class.shadow-sm]="!openDayPicker" (click)="openDayPicker=!openDayPicker">
             {{getFriendlySymptomsDate()}} <span class="text-gray-700">{{getDaysAgo()}}</span>

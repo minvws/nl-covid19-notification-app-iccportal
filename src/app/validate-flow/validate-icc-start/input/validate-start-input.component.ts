@@ -17,6 +17,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
+
     @ViewChild('step_element')
     step_element: ElementRef;
     error_code = -1;

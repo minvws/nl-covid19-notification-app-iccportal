@@ -12,7 +12,6 @@ body {
 // reset
 
 
-
 h1, h2 {
   @apply font-bold;
   letter-spacing: 0.5px;
@@ -85,7 +84,7 @@ h6 {
 
 // Move to components.scss
 
-button.btn-primary{
+button.btn-primary {
   min-width: 320px;
 }
 
@@ -145,6 +144,7 @@ span.icon {
   &.icon-arrow-left:after {
     background-image: url("src/assets/icon-arrow-left.svg");
   }
+
   &.icon-arrow-left-sm:after {
     transform: rotate(-90deg);
     margin-left: -0.1em;
@@ -183,6 +183,7 @@ span.icon {
 // TODO: Move to component' file
 .input-box {
   width: 480px;
+
   input {
     @apply text-2xl bg-gray-300 mr-2 rounded text-center;
     width: 56px;
@@ -196,6 +197,7 @@ span.icon {
     &.invalid {
       @apply border-2 border-solid border-red-400;
     }
+
   }
 }
 
@@ -214,9 +216,10 @@ span.icon {
   }
 }
 
-.friendly-date-block{
+.friendly-date-block {
   min-width: 240px;
 }
+
 .friendly-date-block, .friendly-dates {
   &:first-letter {
     text-transform: uppercase;
