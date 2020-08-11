@@ -38,7 +38,7 @@
     <br>
     <div>
         <p class="mb-2 font-bold" *ngIf="showSymptons">Datum eerste ziektedag:</p>
-        <p class="mb-2 font-bold" *ngIf="!showSymptons">Datum test aanvraag:</p>
+        <p class="mb-2 font-bold" *ngIf="!showSymptons">Datum test:</p>
         <div class="cursor-pointer friendly-date-block px-4 py-3 bg-gray-300 rounded inline-block hover:bg-gray-100"
              [class.shadow-sm]="!openDayPicker" (click)="openDayPicker=!openDayPicker">
             {{getFriendlySymptonsDate()}} <span class="text-gray-700">{{getDaysAgo()}}</span>
