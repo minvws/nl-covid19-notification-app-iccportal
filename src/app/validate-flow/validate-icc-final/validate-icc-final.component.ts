@@ -1,6 +1,6 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-validate-icc-final',
@@ -24,7 +24,6 @@ export class ValidateIccFinalComponent implements OnInit {
     }
 
     public friendlySymptomsDate(): string {
-        console.log(this.symptomsDate);
         return this.datePipe.transform(this.symptomsDate, 'EEEE M MMMM');
     }
 

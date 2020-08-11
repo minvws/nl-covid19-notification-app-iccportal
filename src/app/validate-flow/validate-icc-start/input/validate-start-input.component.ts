@@ -26,7 +26,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
 
     // datepart
-    showSymptoms: boolean = true;
+    showSymptoms = true;
 
     symptomsDate: Date = null;
     datePipe: DatePipe;
@@ -182,9 +182,9 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     getFriendlySymptomsDate(format: string = 'EE. d MMM - ', offset: number = 0) {
-        let date: Date = this.symptomsDate;
+        const date: Date = this.symptomsDate;
         if (date) {
-            date.setDate(date.getDate() - offset)
+            date.setDate(date.getDate() - offset);
         }
         return this.datePipe.transform(date, format);
     }
