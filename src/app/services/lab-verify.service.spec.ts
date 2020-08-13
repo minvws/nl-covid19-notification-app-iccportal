@@ -1,15 +1,15 @@
 import {TestBed} from '@angular/core/testing';
 
-import {ReportService} from './report.service';
+import {LabVerifyService} from './lab-verify.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 
-describe('ReportServiceService', () => {
-  let service: ReportService;
+describe('LabVerifyServiceService', () => {
+  let service: LabVerifyService;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ReportService, HttpClient, HttpHandler]
+      providers: [LabVerifyService, HttpClient, HttpHandler]
     });
-    service = TestBed.inject(ReportService);
+    service = TestBed.inject(LabVerifyService);
   });
 
   it('should be created', () => {

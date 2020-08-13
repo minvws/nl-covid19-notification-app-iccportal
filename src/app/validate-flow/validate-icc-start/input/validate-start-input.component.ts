@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {DatePipe} from '@angular/common';
-import {ReportService} from '../../../services/report.service';
+import {LabConfirmService} from '../../../services/lab-confirm.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -69,7 +69,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         @Inject(LOCALE_ID) private locale: string,
         private route: ActivatedRoute,
         private router: Router,
-        private reportService: ReportService) {
+        private reportService: LabConfirmService) {
         this.datePipe = new DatePipe(locale);
     }
 

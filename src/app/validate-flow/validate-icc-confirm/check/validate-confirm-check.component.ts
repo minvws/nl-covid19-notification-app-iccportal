@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UploadCheckService} from '../../../services/uploadCheck.service';
+import {LabVerifyService} from '../../../services/lab-verify.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
     private poller: object;
     private interval: number;
 
-    constructor(private route: ActivatedRoute, private router: Router, private uploadCheckService: UploadCheckService) {
+    constructor(private route: ActivatedRoute, private router: Router, private labVerifyService: LabVerifyService) {
     }
 
     ngOnInit(): void {
@@ -48,7 +48,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
     }
 
     checkUpload() {
-        this.uploadCheckService.checkUpload(this.pollToken).subscribe((result) => {
+        this.labVerifyService.labVerify(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
                 this.router.navigate(['/validate_final'], {
