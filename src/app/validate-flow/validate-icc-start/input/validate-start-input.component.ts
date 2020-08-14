@@ -29,6 +29,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     // datepart
     showSymptoms = true;
 
+    private todayDate = new Date();
     symptomsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;
@@ -198,8 +199,17 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     getDayAgo(dayCount: number): Date {
-        const todayDate = new Date();
-        const startOfDay = new Date(Date.UTC(todayDate.getUTCFullYear(), todayDate.getUTCMonth(), todayDate.getUTCDate(), 0, 0, 0, 0));
+        const startOfDay = new Date(
+            Date.UTC(
+                this.todayDate.getUTCFullYear(),
+                this.todayDate.getUTCMonth(),
+                this.todayDate.getUTCDate(),
+                0,
+                0,
+                0,
+                0
+            )
+        );
 
         if (dayCount > 0) {
             return new Date(startOfDay.setDate(startOfDay.getDate() - dayCount));
