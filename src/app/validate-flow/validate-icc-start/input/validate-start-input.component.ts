@@ -198,7 +198,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     }
 
     getDayAgo(dayCount: number): Date {
-        let todayDate = new Date();
+        const todayDate = new Date();
         const startOfDay = new Date(Date.UTC(todayDate.getUTCFullYear(), todayDate.getUTCMonth(), todayDate.getUTCDate(), 0, 0, 0, 0));
 
         if (dayCount > 0) {
