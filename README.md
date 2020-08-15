@@ -1,9 +1,9 @@
-# Covid19 NotificationApp GGD Portal
+# COVID-19 Notification App GGD Portal
 This repository contains the front-end portal for GGD workers to validate InfectionConfirmationId's ('GGD-Keys') from CoronaMelder users within the Workflow API backend.
 
 ## Introduction
 
-This repository contains the frontend code for the Proof of Concept for the Dutch exposure notification app GGD portal, technically called `ICC Portal`. We provide this code in an early stage so that everyone can follow along as we develop the app, and to solicit feedback. Note that due to the early stage in which we are sharing this code, significant portions of the code might still change. We might add or remove features and code as needed, based on validation and user tests that are conducted partially in parallel to the development.
+This repository contains the frontend code of the Dutch COVID-19 Notification App GGD portal, technically called `ICC Portal`. 
 
 * The backend repository with Workflow API can be found here https://github.com/minvws/nl-covid19-notification-app-backend.
 * The iOS app can be found here: https://github.com/minvws/nl-covid19-notification-app-ios
