@@ -13,7 +13,7 @@ This repository contains the frontend code of the Dutch COVID-19 Notification Ap
 
 ## Changelog
 
-The changelog for the UI perspective of this project can be found in [this document](https://docs.google.com/document/d/1j33k73TJ7UwTMYK3knbYEyChuPwPFHyDrPXVmyMLRCQ/edit?usp=sharing).
+The changelog for the UI perspective of this project can be found in [CHANGELOG.md](CHANGELOG.md)
 
 ## Development & Contribution process
 
