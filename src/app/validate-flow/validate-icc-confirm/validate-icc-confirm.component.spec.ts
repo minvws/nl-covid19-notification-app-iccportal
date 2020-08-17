@@ -1,8 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValidateIccConfirmComponent} from './validate-icc-confirm.component';
-import {RouterTestingModule} from "@angular/router/testing";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ValidateIccConfirmComponent', () => {
     let component: ValidateIccConfirmComponent;

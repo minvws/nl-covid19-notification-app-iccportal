@@ -200,7 +200,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     getDayAgo(dayCount: number, inputDate: Date = null): Date {
 
-        if(inputDate == null){
+        if (inputDate == null) {
             inputDate = this.todayDate;
         }
 

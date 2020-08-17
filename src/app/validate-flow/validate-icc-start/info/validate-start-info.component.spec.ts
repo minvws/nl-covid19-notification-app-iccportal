@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidateStartInfoComponent } from './validate-start-info.component';
-import {RouterTestingModule} from "@angular/router/testing";
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ValidateStep1Component', () => {
   let component: ValidateStartInfoComponent;
