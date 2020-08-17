@@ -18,11 +18,16 @@ describe('ValidateConfirmCheckComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        paramMap: of({
-                            get: v => {
-                                return {id: 123};
-                            }
-                        })
+                        snapshot: {
+                            queryParams: of({
+                                get: v => {
+                                    return {
+                                        p: '',
+                                        symptomsDate: null
+                                    };
+                                }
+                            })
+                        }
                     }
                 }
             ],

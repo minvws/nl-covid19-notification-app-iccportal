@@ -14,11 +14,12 @@ describe('ValidateIccFinalComponent', () => {
                 {
                     provide: ActivatedRoute,
                     useValue: {
-                        paramMap: of({
-                            get: v => {
-                                return {id: 123};
-                            }
-                        })
+                        snapshot: {
+                            queryParams: of({
+                                success: false,
+                                symptomsDate: null
+                            })
+                        }
                     }
                 }
             ],
