@@ -1,8 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValidateIccFinalComponent} from './validate-icc-final.component';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ValidateIccFinalComponent', () => {
     let component: ValidateIccFinalComponent;
@@ -10,22 +9,9 @@ describe('ValidateIccFinalComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            providers: [
-                {
-                    provide: ActivatedRoute,
-                    useValue: {
-                        snapshot: {
-                            queryParams: of({
-                                success: false,
-                                symptomsDate: null
-                            })
-                        }
-                    }
-                }
-            ],
+            imports: [RouterTestingModule.withRoutes([])],
             declarations: [ValidateIccFinalComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

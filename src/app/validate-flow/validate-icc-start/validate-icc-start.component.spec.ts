@@ -1,8 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ValidateIccStartComponent } from './validate-icc-start.component';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
 
 describe('ValidateIccStartComponent', () => {
   let component: ValidateIccStartComponent;
@@ -10,18 +8,6 @@ describe('ValidateIccStartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            paramMap: of({
-              get: v => {
-                return {id: 123};
-              }
-            })
-          }
-        }
-      ],
       declarations: [ ValidateIccStartComponent ]
     })
     .compileComponents();

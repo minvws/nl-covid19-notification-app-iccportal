@@ -1,8 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValidateStartInputComponent} from './validate-start-input.component';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {AppConfigService} from '../../../services/app-config.service';
@@ -14,19 +12,9 @@ describe('ValidateStartInputComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             providers: [
-                AppConfigService,
-                {
-                    provide: ActivatedRoute,
-                    useValue: {
-                        paramMap: of({
-                            get: v => {
-                                return {id: 123};
-                            }
-                        })
-                    }
-                }
+                AppConfigService
             ],
-            imports: [RouterTestingModule, HttpClientTestingModule],
+            imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule],
             declarations: [ValidateStartInputComponent]
         })
             .compileComponents();
