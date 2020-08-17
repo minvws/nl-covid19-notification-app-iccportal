@@ -24,7 +24,7 @@ export class ValidateIccFinalComponent implements OnInit {
     }
 
     public friendlySymptomsDate(): string {
-        return this.datePipe.transform(this.symptomsDate, 'EEEE M MMMM');
+        return this.datePipe.transform(this.symptomsDate, 'EEEE d MMMM');
     }
 
     ngOnInit(): void {
