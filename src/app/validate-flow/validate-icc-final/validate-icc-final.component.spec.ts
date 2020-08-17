@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValidateIccFinalComponent} from './validate-icc-final.component';
-import {RouterTestingModule} from '@angular/router/testing';
+import {ActivatedRoute} from '@angular/router';
 
 describe('ValidateIccFinalComponent', () => {
     let component: ValidateIccFinalComponent;
@@ -9,7 +9,19 @@ describe('ValidateIccFinalComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule.withRoutes([])],
+            providers: [
+                {
+                    provide: ActivatedRoute,
+                    useValue: {
+                        snapshot: {
+                            queryParams: {
+                                success: true,
+                                symptomsDate: new Date(1597666227190)
+                            }
+                        },
+                    }
+                }
+            ],
             declarations: [ValidateIccFinalComponent]
         }).compileComponents();
     }));
@@ -22,5 +34,9 @@ describe('ValidateIccFinalComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+    it('friendlySymptomsDate() should be in the expected format', () => {
+        const result = component.friendlySymptomsDate();
+        expect(result).toBe('maandag 17 augustus');
     });
 });
