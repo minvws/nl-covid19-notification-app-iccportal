@@ -15,11 +15,9 @@
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
             <p *ngIf="demoMode">Democode, enkel bestemd voor trainingsdoeleinden.</p>
-            <p *ngIf="!demoMode && error_code == 2">Dit tijdelijke wachtwoord is onjuist. Controleer het tijdelijke
-                wachtwoord dat je
+            <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel wachtwoord is onjuist. Controleer de GGD-sleutel dat je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
-            <p *ngIf="!demoMode && error_code == 1">Dit tijdelijke wachtwoord is onjuist. Controleer of het tijdelijke
-                wachtwoord <b>enkel</b>
+            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel wachtwoord is onjuist. Controleer of de GGD-sleutel <b>enkel</b>
                 de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
         </div>
     </div>
@@ -43,7 +41,7 @@
              [class.shadow-sm]="!openDayPicker" (click)="openDayPicker=!openDayPicker">
             {{getFriendlySymptomsDate()}} <span class="text-gray-700">{{getDaysAgo()}}</span>
         </div>
-        <p class="mt-2" *ngIf="symptomsDate">Eerste besmettingsdag: <b>{{getFriendlySymptomsDate(
+        <p class="mt-2" *ngIf="symptomsDate">Eerste dag dat index besmettelijk was: <b>{{getFriendlySymptomsDate(
           'EEEE d LLLL yyyy', 2)}}</b></p>
         <div *ngIf="openDayPicker"
              class="friendly-dates bg-white shadow-md flex flex-col justify-start rounded inline-block mt-1">
