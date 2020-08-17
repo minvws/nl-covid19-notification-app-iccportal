@@ -29,7 +29,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     // datepart
     showSymptoms = true;
 
-    private todayDate = new Date();
+    private todayDate: Date = new Date();
     symptomsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;

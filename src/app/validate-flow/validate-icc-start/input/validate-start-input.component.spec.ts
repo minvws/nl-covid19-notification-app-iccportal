@@ -42,19 +42,44 @@ describe('ValidateStartInputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-
-    it('getDayAgo returns date on x days ago', () => {
+    it('getDayAgo returns date on x days -2 ago', () => {
         const daysInPast = 2;
         // testdate = 31 dec 2020
-        const inputDate = new Date();
-        inputDate.setUTCFullYear(2020)
-        inputDate.setUTCMonth(11)
-        inputDate.setUTCDate(31)
-        inputDate.setUTCHours(4)
-        inputDate.setUTCMinutes(2)
-        inputDate.setUTCSeconds(2)
+        const inputDate = new Date(Date.UTC(2020, 0, 3, 4, 2, 2));
 
-        const expectedDate = new Date(2020, 11, 29, 0, 0, 0);
+        const expectedDate = new Date(Date.UTC(2020, 0, 1, 0, 0, 0, 0));
+        const result = component.getDayAgo(daysInPast, inputDate);
+
+        expect(result).toEqual(expectedDate);
+    });
+    it('getDayAgo returns date on x days -2 ago ny eve', () => {
+        const daysInPast = 2;
+        // testdate = 31 dec 2020
+        const inputDate = new Date(Date.UTC(2020, 0, 2, 4, 2, 2));
+
+        const expectedDate = new Date(Date.UTC(2019, 11, 31, 0, 0, 0, 0));
+        const result = component.getDayAgo(daysInPast, inputDate);
+
+        expect(result).toEqual(expectedDate);
+    });
+
+    it('getDayAgo returns date on x days -2 ago gmt +1', () => {
+        const daysInPast = 2;
+        // testdate = 31 dec 2020
+        const inputDate = new Date(Date.UTC(2020, 11, 31, 4, 2, 2));
+
+        const expectedDate = new Date(Date.UTC(2020, 11, 29, 0, 0, 0, 0));
+        const result = component.getDayAgo(daysInPast, inputDate);
+
+        expect(result).toEqual(expectedDate);
+    });
+
+    it('getDayAgo returns date on x days -2 ago gmt +2', () => {
+        const daysInPast = 2;
+        // testdate = 6 sep 2020
+        const inputDate = new Date(Date.UTC(2020, 6, 3, 4, 2, 2));
+
+        const expectedDate = new Date(Date.UTC(2020, 6, 1, 0, 0, 0, 0));
         const result = component.getDayAgo(daysInPast, inputDate);
 
         expect(result).toEqual(expectedDate);
