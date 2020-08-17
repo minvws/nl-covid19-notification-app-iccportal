@@ -34,7 +34,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
                             symptomsDate: this.symptomsDate
                         }
                     });
-                    return
+                    return;
                 } else {
                     if (this.uploadState > -1 && this.pollToken && this.pollToken !== '') {
                         this.checkUpload();
