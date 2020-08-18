@@ -64,7 +64,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
         this.labVerifyService.labVerify(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
-                this.goToFinal(true)
+                this.goToFinal(true);
             }
             this.pollToken = result.pollToken;
         });
