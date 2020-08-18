@@ -33,6 +33,7 @@ export class ValidateConfirmCheckComponent implements OnInit {
                             symptomsDate: this.symptomsDate
                         }
                     });
+                    clearInterval(this.interval);
                     return;
                 } else {
                     if (this.uploadState > -1 && this.pollToken && this.pollToken !== '') {
@@ -49,17 +50,21 @@ export class ValidateConfirmCheckComponent implements OnInit {
         }
     }
 
+    goToFinal(b: boolean) {
+        this.router.navigate(['/validate_final'], {
+            queryParams: {
+                success: b,
+                symptomsDate: this.symptomsDate
+            }
+        });
+        clearInterval(this.interval);
+    }
+
     checkUpload() {
         this.labVerifyService.labVerify(this.pollToken).subscribe((result) => {
             if (result.valid) {
                 this.uploadState = 1;
-                this.router.navigate(['/validate_final'], {
-                    queryParams: {
-                        success: true,
-                        symptomsDate: this.symptomsDate
-                    }
-                });
-                clearInterval(this.interval);
+                this.goToFinal(true)
             }
             this.pollToken = result.pollToken;
         });
