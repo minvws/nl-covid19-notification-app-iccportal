@@ -84,16 +84,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
-            "styles": [
-              "src/styles.css"
-            ],
-			"iisConfig": [
-              "web.config"
-            ],
-            "scripts": [],
             "assets": [
               "src/assets"
-            ]
+            ],
+            "styles": [
+              "src/css/app.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/css"
+              ]
+            },
+            "scripts": []
           }
         },
         "lint": {

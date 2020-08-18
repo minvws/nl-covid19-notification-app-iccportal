@@ -8,7 +8,7 @@ import { IAppConfig, AppConfigService } from './app-config.service';
 @Injectable({
     providedIn: 'root'
 })
-export class UploadCheckService {
+export class LabVerifyService {
     constructor(private readonly http: HttpClient,
         private readonly authenticationService: AuthenticationService,
         private readonly appConfigService: AppConfigService) {
@@ -19,7 +19,7 @@ export class UploadCheckService {
         throw error;
     }
 
-    checkUpload(polltoken: string): Observable<any> {
+    labVerify(polltoken: string): Observable<any> {
         const serviceUrl = this.appConfigService.getConfig().apiUrl + '/CaregiversPortalApi/v1/labverify';
         const data = {
             PollToken: polltoken
@@ -30,6 +30,6 @@ export class UploadCheckService {
             }
         };
 
-        return this.http.post(serviceUrl, data, headers).pipe(catchError(UploadCheckService.errorHandler));
+        return this.http.post(serviceUrl, data, headers).pipe(catchError(LabVerifyService.errorHandler));
     }
 }

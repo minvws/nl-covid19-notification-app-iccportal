@@ -5,10 +5,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
 import { AppConfigService, IAppConfig } from './app-config.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class ReportService {
+export class LabConfirmService {
   constructor(private readonly http: HttpClient,
     private readonly authenticationService: AuthenticationService,
     private readonly appConfigService: AppConfigService) {
@@ -19,10 +20,6 @@ export class ReportService {
   private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
     // TODO error handling
     throw error;
-  }
-
-  getPayload() {
-    return btoa(JSON.stringify(this.data));
   }
 
   confirmLabId(labConfirmationIds: Array<string>, dateOfSymptomsOnset: string): Observable<any> {
@@ -37,6 +34,6 @@ export class ReportService {
       }
     };
 
-    return this.http.post(serviceUrl, this.data, headers).pipe(catchError(ReportService.errorHandler));
+    return this.http.post(serviceUrl, this.data, headers).pipe(catchError(LabConfirmService.errorHandler));
   }
 }
