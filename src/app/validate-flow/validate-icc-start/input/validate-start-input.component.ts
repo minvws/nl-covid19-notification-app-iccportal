@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Inject, LOCALE_ID, OnInit, ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {DatePipe} from '@angular/common';
-import {ReportService} from '../../../services/report.service';
+import {LabConfirmService} from '../../../services/lab-confirm.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -29,7 +29,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     // datepart
     showSymptoms = true;
 
-    private todayDate = new Date();
+    private todayDate: Date = new Date();
     symptomsDate: Date = null;
     datePipe: DatePipe;
     openDayPicker = false;
@@ -70,7 +70,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         @Inject(LOCALE_ID) private locale: string,
         private route: ActivatedRoute,
         private router: Router,
-        private reportService: ReportService) {
+        private reportService: LabConfirmService) {
         this.datePipe = new DatePipe(locale);
     }
 
@@ -198,12 +198,17 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         return (daysAgo < 1) ? 'vandaag' : (daysAgo + ' ' + ((daysAgo > 1) ? 'dagen' : 'dag') + ' gel.');
     }
 
-    getDayAgo(dayCount: number): Date {
+    getDayAgo(dayCount: number, inputDate: Date = null): Date {
+
+        if (inputDate == null) {
+            inputDate = this.todayDate;
+        }
+
         const startOfDay = new Date(
             Date.UTC(
-                this.todayDate.getUTCFullYear(),
-                this.todayDate.getUTCMonth(),
-                this.todayDate.getUTCDate(),
+                inputDate.getUTCFullYear(),
+                inputDate.getUTCMonth(),
+                inputDate.getUTCDate(),
                 0,
                 0,
                 0,

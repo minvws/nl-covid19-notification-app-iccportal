@@ -15,7 +15,7 @@ export class ValidateIccComponent implements OnInit {
     public IndexIsSubmitted = false;
     public scrollDown = false;
 
-    constructor(public titleService: TitleService, public authenticationService: AuthenticationService) {
+    constructor(public authenticationService: AuthenticationService) {
         window.addEventListener('beforeunload', (event) => {
             event.preventDefault();
             event.returnValue =  'Weet je zeker dat je wilt herladen? De ingevoerde sleutel gaat verloren.';
