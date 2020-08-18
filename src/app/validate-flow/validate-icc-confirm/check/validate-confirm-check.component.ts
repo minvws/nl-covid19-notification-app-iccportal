@@ -22,7 +22,9 @@ export class ValidateConfirmCheckComponent implements OnInit {
             this.pollToken = this.route.snapshot.queryParams['p'];
             this.symptomsDate = this.route.snapshot.queryParams['symptomsDate'];
             this.router.navigate([], {queryParams: {p: null, symptomsDate: null}, queryParamsHandling: 'merge'});
-            this.checkUpload();
+            if (this.pollToken !== 'demo_polltoken_test_000000') {
+                this.checkUpload();
+            }
             const uploadInterval = setInterval(() => {
                 if (this.pollToken === 'demo_polltoken_test_000000') { // testcase
                     this.uploadState = 1;
@@ -32,12 +34,13 @@ export class ValidateConfirmCheckComponent implements OnInit {
                             symptomsDate: this.symptomsDate
                         }
                     });
-                    clearInterval(this.interval);
-                }
-                if (this.uploadState > -1 && this.pollToken && this.pollToken !== '') {
-                    this.checkUpload();
+                    return;
                 } else {
-                    clearInterval(this.interval);
+                    if (this.uploadState > -1 && this.pollToken && this.pollToken !== '') {
+                        this.checkUpload();
+                    } else {
+                        clearInterval(this.interval);
+                    }
                 }
             }, 15000);
             // TODO this is dirty and needs looking at - typescript interval typing issue
