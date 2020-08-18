@@ -11,7 +11,6 @@ export class ValidateConfirmCheckComponent implements OnInit {
     public uploadState = 0;
     private pollToken: string;
     private symptomsDate: Date;
-    private poller: object;
     private interval: number;
 
     constructor(private route: ActivatedRoute, private router: Router, private labVerifyService: LabVerifyService) {
