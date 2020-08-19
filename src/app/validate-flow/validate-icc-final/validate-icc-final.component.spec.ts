@@ -3,7 +3,7 @@ import localeNL from '@angular/common/locales/nl';
 import {ValidateIccFinalComponent} from './validate-icc-final.component';
 import {ActivatedRoute} from '@angular/router';
 import {LOCALE_ID} from '@angular/core';
-import {registerLocaleData} from "@angular/common";
+import {registerLocaleData} from '@angular/common';
 
 registerLocaleData(localeNL);
 
