@@ -31,6 +31,10 @@ steps:
     displayName: 'ng lint'
 
   - script: |
+      ng test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
+    displayName: 'ng test'
+
+  - script: |
       ng build --prod
     displayName: 'ng build --prod'
 
