@@ -31,6 +31,10 @@ steps:
     displayName: 'ng lint'
 
   - script: |
+      npm run test:ci
+    displayName: 'npm run test:ci'
+
+  - script: |
       ng build --prod
     displayName: 'ng build --prod'
 
@@ -56,3 +60,7 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TESTS-*.xml'

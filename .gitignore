@@ -48,3 +48,5 @@ yarn-error.log
 baseline.json
 
 *.zip
+
+src/TESTS-*.xml
