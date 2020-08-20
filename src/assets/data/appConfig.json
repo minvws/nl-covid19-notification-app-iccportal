@@ -1,5 +1,4 @@
 {
-    "production": false,
     "appName": "CoronaMelder",
     "apiUrl": "https://localhost:5001",
     "authHost": "localhost:5001"
