@@ -19,12 +19,20 @@ export class ValidateIccFinalComponent implements OnInit {
             window.history.pushState(null, null, 'validate_final');
         }
         if (route.snapshot.queryParams.symptomsDate) {
-            this.symptomsDate = route.snapshot.queryParams.symptomsDate;
+            const queryParamSymptomsDate = parseInt(route.snapshot.queryParams.symptomsDate, 0);
+            if (Number.isInteger(queryParamSymptomsDate)) {
+                this.symptomsDate = new Date(queryParamSymptomsDate);
+            }
         }
     }
 
-    public friendlySymptomsDate(): string {
-        return this.datePipe.transform(this.symptomsDate, 'EEEE d MMMM');
+    public friendlySymptomsDate(offset: number = 2): string {
+        if (!this.symptomsDate) {
+            return '';
+        }
+        const date = new Date(this.symptomsDate);
+        date.setDate(date.getDate() - offset);
+        return this.datePipe.transform(date, 'EEEE d MMMM');
     }
 
     ngOnInit(): void {
