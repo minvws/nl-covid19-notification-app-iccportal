@@ -1,6 +1,7 @@
 import {Component, Inject, LOCALE_ID, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DatePipe} from '@angular/common';
+import {isNumber} from "util";
 
 @Component({
     selector: 'app-validate-icc-final',
@@ -19,11 +20,14 @@ export class ValidateIccFinalComponent implements OnInit {
             window.history.pushState(null, null, 'validate_final');
         }
         if (route.snapshot.queryParams.symptomsDate) {
-            this.symptomsDate = new Date(route.snapshot.queryParams.symptomsDate * 1);
+            this.symptomsDate = new Date(parseInt(route.snapshot.queryParams.symptomsDate.toString()));
         }
     }
 
     public friendlySymptomsDate(offset: number = 2): string {
+        if (!this.symptomsDate) {
+            return ""
+        }
         let date = new Date(this.symptomsDate);
         date.setDate(date.getDate() - offset);
         return this.datePipe.transform(date, 'EEEE d MMMM');

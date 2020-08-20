@@ -20,7 +20,7 @@ describe('ValidateIccFinalComponent', () => {
                         snapshot: {
                             queryParams: {
                                 success: true,
-                                symptomsDate: new Date(1597666227190)
+                                symptomsDate: "1597666227190"
                             }
                         },
                     }
@@ -40,8 +40,10 @@ describe('ValidateIccFinalComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+
     it('friendlySymptomsDate() should be in the expected format', () => {
         const result = component.friendlySymptomsDate();
-        expect(result).toBe('maandag 17 augustus');
+        expect(result).toBe('zaterdag 15 augustus');
     });
 });
