@@ -20,7 +20,7 @@ describe('ValidateIccFinalComponent', () => {
                         snapshot: {
                             queryParams: {
                                 success: true,
-                                symptomsDate: "1597666227190"
+                                symptomsDate: '1597666227190'
                             }
                         },
                     }
