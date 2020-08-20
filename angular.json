@@ -43,6 +43,10 @@
                 {
                   "replace": "src/assets/data/appConfig.json",
                   "with": "src/assets/data/appConfig.release.json"
+                },
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
