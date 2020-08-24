@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AuthenticationService } from './authentication.service';
-import { IAppConfig, AppConfigService } from './app-config.service';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {catchError} from 'rxjs/operators';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {AppConfigService} from './app-config.service';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LabVerifyService {
     constructor(private readonly http: HttpClient,
-        private readonly authenticationService: AuthenticationService,
-        private readonly appConfigService: AppConfigService) {
+                private readonly authenticationService: AuthenticationService,
+                private readonly appConfigService: AppConfigService) {
     }
 
     private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {

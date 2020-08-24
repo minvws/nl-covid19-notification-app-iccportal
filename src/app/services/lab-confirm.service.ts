@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { AppConfigService, IAppConfig } from './app-config.service';
+import { AppConfigService} from './app-config.service';
 
 
 @Injectable({

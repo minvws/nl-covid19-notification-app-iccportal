@@ -4,7 +4,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {User} from '../models';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {AppConfigService, IAppConfig} from './app-config.service';
+import {AppConfigService} from './app-config.service';
 import {Router} from '@angular/router';
 
 @Injectable({providedIn: 'root'})
@@ -89,6 +89,5 @@ export class AuthenticationService {
     public redirectToAuthorization() {
         window.location.href = this.buildUrl('/Auth/Redirect');
     }
-
-
 }
+
