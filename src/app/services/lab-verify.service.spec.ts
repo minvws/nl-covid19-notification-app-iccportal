@@ -1,14 +1,11 @@
 import {TestBed} from '@angular/core/testing';
-
 import {LabVerifyService} from './lab-verify.service';
-import {HttpClient, HttpHandler} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {AppConfigTestService} from "./app-config.test.service";
-import {AppConfigService} from "./app-config.service";
-import {APP_INITIALIZER} from "@angular/core";
-import {AuthenticationTestService} from "./authenticationTestService";
-import {AuthenticationService} from "./authentication.service";
+import {AppConfigTestService} from './app-config.test.service';
+import {AppConfigService} from './app-config.service';
+import {AuthenticationTestService} from './authenticationTestService';
+import {AuthenticationService} from './authentication.service';
 
 describe('LabVerifyServiceService', () => {
     let service: LabVerifyService;
@@ -22,7 +19,7 @@ describe('LabVerifyServiceService', () => {
             }, {provide: AuthenticationService, useClass: AuthenticationTestService}
             ],
         });
-        let appConfigService = TestBed.inject(AppConfigService);
+        const appConfigService = TestBed.inject(AppConfigService);
         appConfigService.loadAppConfig();
 
         httpTestingController = TestBed.inject(HttpTestingController);
@@ -35,15 +32,15 @@ describe('LabVerifyServiceService', () => {
 
     it('labVerify returned Observable should match the right data', () => {
 
-        const pollToken = "test_polltoken_123";
+        const pollToken = 'test_polltoken_123';
         const mockResponse = {
             active: false,
-            pollToken: "refreshed_polltoken_456"
+            pollToken: 'refreshed_polltoken_456'
         };
 
         service.labVerify(pollToken).subscribe(result => {
             expect(result.active).toEqual(false);
-            expect(result.pollToken).toEqual("refreshed_polltoken_456");
+            expect(result.pollToken).toEqual('refreshed_polltoken_456');
         });
 
         const req = httpTestingController.expectOne('http://coronamelder.test/CaregiversPortalApi/v1/labverify');

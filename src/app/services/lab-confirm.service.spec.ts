@@ -1,13 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 import {LabConfirmService} from './lab-confirm.service';
-import {HttpClient, HttpHandler} from '@angular/common/http';
 import {AppConfigService} from './app-config.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {LabVerifyService} from "./lab-verify.service";
-import {AppConfigTestService} from "./app-config.test.service";
-import {AuthenticationService} from "./authentication.service";
-import {AuthenticationTestService} from "./authenticationTestService";
+import {AppConfigTestService} from './app-config.test.service';
+import {AuthenticationService} from './authentication.service';
+import {AuthenticationTestService} from './authenticationTestService';
 
 describe('LabConfirmServiceService', () => {
     let service: LabConfirmService;
@@ -21,7 +19,7 @@ describe('LabConfirmServiceService', () => {
                 useClass: AppConfigTestService,
             }, {provide: AuthenticationService, useClass: AuthenticationTestService}]
         });
-        let appConfigService = TestBed.inject(AppConfigService);
+        const appConfigService = TestBed.inject(AppConfigService);
         appConfigService.loadAppConfig();
 
         httpTestingController = TestBed.inject(HttpTestingController);
@@ -34,16 +32,16 @@ describe('LabConfirmServiceService', () => {
 
 
     it('labConfirm returned Observable should match the right data', () => {
-        const mockLabConfirmationId = ["0","0","0","0","0","0"];
+        const mockLabConfirmationId = ['0', '0', '0', '0', '0', '0'];
         const mockDateOfSymptomsOnset = new Date().toISOString();
         const mockResponse = {
             active: true,
-            pollToken: "first_polltoken_123"
+            pollToken: 'first_polltoken_123'
         };
 
         service.confirmLabId(mockLabConfirmationId, mockDateOfSymptomsOnset).subscribe(result => {
             expect(result.active).toEqual(true);
-            expect(result.pollToken).toEqual("first_polltoken_123");
+            expect(result.pollToken).toEqual('first_polltoken_123');
         });
 
         const req = httpTestingController.expectOne('http://coronamelder.test/CaregiversPortalApi/v1/labconfirm');
