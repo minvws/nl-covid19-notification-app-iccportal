@@ -1,23 +1,17 @@
 import {enableProdMode, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {IAppConfig} from "./app-config.service";
+import {AppConfigService, IAppConfig} from "./app-config.service";
+import {IAppConfigService} from "./i-app-config.service";
 
 @Injectable()
-export class AppConfigTestService {
-    private appConfig: IAppConfig;
-
-    constructor(private http: HttpClient) {
-    }
+export class AppConfigTestService extends AppConfigService{
 
     async loadAppConfig() {
         this.appConfig = <IAppConfig>{
             appName: "CoronaMelder TestSuite",
-            apiUrl: "string",
-            authHost: "string"
+            apiUrl: "http://coronamelder.test",
+            authHost: "coronamelder.test"
         };
     }
-
-    getConfig(): IAppConfig {
-        return this.appConfig;
-    }
 }
+
