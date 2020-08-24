@@ -45,7 +45,7 @@ export class AuthenticationService {
     }
 
     public fetchCurrentUser(): Observable<any> {
-        const serviceUrl = this.buildUrl('AuthenticatedUser');
+        const serviceUrl = this.buildUrl('Auth/User');
         const headers = {
             headers: {
                 'Authorization': 'Bearer ' + ((this.currentUserValue !== null) ? this.currentUserValue.authData : '')
