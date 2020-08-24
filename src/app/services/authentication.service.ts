@@ -1,5 +1,5 @@
 ﻿import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {User} from '../models';
@@ -69,28 +69,30 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public async callback(authorizationCode: string) {
-        const serviceUrl = this.buildUrl('Auth/Token');
-
-        return this.http.post<any>(serviceUrl, {"code": authorizationCode}).pipe(
-            map(response => {
-
-                const jwtToken = response.token;
-                const helper = new JwtHelperService();
-                if (!helper.isTokenExpired(jwtToken)) {
-                    const decodedToken = AuthenticationService.decodeToken({jwtToken});
-                    this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
-                    localStorage.setItem('auth', jwtToken);
-                    return true;
-                }
-                return false;
-            }),
-            catchError(error => {
-                this.logout();
-                return of(false);
-            })
-        );
+    private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+        // TODO error handling
+        throw error;
     }
+
+    public callback(authorizationCode: string): Observable<boolean> {
+        const serviceUrl = this.buildUrl('Auth/Token');
+        return this.http.post<any>(serviceUrl, {"code": authorizationCode})
+            .pipe(
+                map(response => {
+                    const jwtToken = response.token;
+                    const helper = new JwtHelperService();
+                    if (!helper.isTokenExpired(jwtToken)) {
+                        const decodedToken = AuthenticationService.decodeToken({jwtToken});
+                        this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
+                        localStorage.setItem('auth', jwtToken);
+                        return true;
+                    }
+                    return false;
+                }),
+                catchError(AuthenticationService.errorHandler)
+            );
+    }
+
     public logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');

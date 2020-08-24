@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../services';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthenticationService} from '../services';
 
 @Component({
     selector: 'app-auth',
@@ -16,13 +16,16 @@ export class AuthCallbackComponent implements OnInit {
 
     ngOnInit(): void {
         this.route.queryParams.subscribe(async params => {
+
             if (params['code']) {
-                if (await this.authentication.callback(params['token'])) {
-                    await this.router.navigate(['validate/start']);
-                } else {
-                    this.error_code = 1;
-                    await this.router.navigate([''], {queryParams: {e: 'access_token_invalid'}});
-                }
+                this.authentication.callback(params['code']).subscribe((valid) => {
+                    if (valid) {
+                        this.router.navigate(['validate/start']);
+                    } else {
+                        this.error_code = 1;
+                        this.router.navigate([''], {queryParams: {e: 'access_token_invalid'}});
+                    }
+                });
             }
         });
     }
