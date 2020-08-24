@@ -26,6 +26,7 @@ export class AuthenticationService {
         }
         return null;
     }
+
     private static parsePayloadToUser(jwtToken: string, payload: any): User {
         if (payload && payload.id) {
             return {
@@ -68,17 +69,28 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public login(jwtToken: string): boolean {
-        const helper = new JwtHelperService();
-        if (!helper.isTokenExpired(jwtToken)) {
-            const decodedToken = AuthenticationService.decodeToken({jwtToken});
-            this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
-            localStorage.setItem('auth', jwtToken);
-            return true;
-        }
-        return false;
-    }
+    public async callback(authorizationCode: string) {
+        const serviceUrl = this.buildUrl('Auth/Token');
 
+        return this.http.post<any>(serviceUrl, {"code": authorizationCode}).pipe(
+            map(response => {
+
+                const jwtToken = response.token;
+                const helper = new JwtHelperService();
+                if (!helper.isTokenExpired(jwtToken)) {
+                    const decodedToken = AuthenticationService.decodeToken({jwtToken});
+                    this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
+                    localStorage.setItem('auth', jwtToken);
+                    return true;
+                }
+                return false;
+            }),
+            catchError(error => {
+                this.logout();
+                return of(false);
+            })
+        );
+    }
     public logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');
