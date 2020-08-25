@@ -1,5 +1,5 @@
 ﻿import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {User} from '../models';
@@ -26,6 +26,7 @@ export class AuthenticationService {
         }
         return null;
     }
+
     private static parsePayloadToUser(jwtToken: string, payload: any): User {
         if (payload && payload.id) {
             return {
@@ -38,13 +39,17 @@ export class AuthenticationService {
         return null;
     }
 
+    private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+        // TODO error handling
+        throw error;
+    }
 
     private buildUrl(endpoint: string) {
         return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
     }
 
     public fetchCurrentUser(): Observable<any> {
-        const serviceUrl = this.buildUrl('AuthenticatedUser');
+        const serviceUrl = this.buildUrl('Auth/User');
         const headers = {
             headers: {
                 'Authorization': 'Bearer ' + ((this.currentUserValue !== null) ? this.currentUserValue.authData : '')
@@ -68,15 +73,24 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    public login(jwtToken: string): boolean {
-        const helper = new JwtHelperService();
-        if (!helper.isTokenExpired(jwtToken)) {
-            const decodedToken = AuthenticationService.decodeToken({jwtToken});
-            this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
-            localStorage.setItem('auth', jwtToken);
-            return true;
-        }
-        return false;
+    public callback(authorizationCode: string): Observable<boolean> {
+        const serviceUrl = this.buildUrl('Auth/Token');
+
+        return this.http.post<any>(serviceUrl, {code: authorizationCode})
+            .pipe(
+                map(response => {
+                    const jwtToken = response.token;
+                    const helper = new JwtHelperService();
+                    if (!helper.isTokenExpired(jwtToken)) {
+                        const decodedToken = AuthenticationService.decodeToken({jwtToken});
+                        this.currentUserSubject.next(AuthenticationService.parsePayloadToUser(jwtToken, decodedToken));
+                        localStorage.setItem('auth', jwtToken);
+                        return true;
+                    }
+                    return false;
+                }),
+                catchError(AuthenticationService.errorHandler)
+            );
     }
 
     public logout() {
