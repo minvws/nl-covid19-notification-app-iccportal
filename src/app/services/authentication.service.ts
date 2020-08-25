@@ -76,7 +76,8 @@ export class AuthenticationService {
 
     public callback(authorizationCode: string): Observable<boolean> {
         const serviceUrl = this.buildUrl('Auth/Token');
-        return this.http.post<any>(serviceUrl, {"code": authorizationCode})
+
+        return this.http.post<any>(serviceUrl, {code: authorizationCode})
             .pipe(
                 map(response => {
                     const jwtToken = response.token;
