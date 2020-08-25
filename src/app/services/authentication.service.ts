@@ -39,6 +39,10 @@ export class AuthenticationService {
         return null;
     }
 
+    private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
+        // TODO error handling
+        throw error;
+    }
 
     private buildUrl(endpoint: string) {
         return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
@@ -67,11 +71,6 @@ export class AuthenticationService {
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
-    }
-
-    private static errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
-        // TODO error handling
-        throw error;
     }
 
     public callback(authorizationCode: string): Observable<boolean> {
