@@ -98,7 +98,9 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
-        if(redirect) window.location.href = this.buildUrl('/Auth/Logout');
+        if (redirect) {
+            window.location.href = this.buildUrl('/Auth/Logout');
+        }
     }
 
     public redirectToAuthorization() {
