@@ -94,11 +94,11 @@ export class AuthenticationService {
             );
     }
 
-    public logout() {
+    public logout(redirect = true) {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
-        window.location.href = this.buildUrl('/Auth/Logout');
+        if(redirect) window.location.href = this.buildUrl('/Auth/Logout');
     }
 
     public redirectToAuthorization() {

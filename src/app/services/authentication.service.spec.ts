@@ -75,6 +75,7 @@ describe('AuthenticationServiceService', () => {
 
 
     it('logout should reset the localStorage', () => {
+
 //      // Arrange
         const mockResponse = {
             token: testJwtToken
@@ -92,7 +93,7 @@ describe('AuthenticationServiceService', () => {
         req.flush(mockResponse);
 
         // Act
-        service.logout();
+        service.logout(false);
 
         const result = localStorage.getItem('auth');
 
