@@ -29,6 +29,7 @@ export class AuthenticationService {
 
     private static parsePayloadToUser(jwtToken: string, payload: any): User {
         if (payload && payload.id) {
+
             return {
                 displayName: payload.name,
                 email: payload.email,
@@ -44,7 +45,7 @@ export class AuthenticationService {
         throw error;
     }
 
-    private buildUrl(endpoint: string) {
+    public buildUrl(endpoint: string) {
         return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
     }
 
@@ -93,11 +94,13 @@ export class AuthenticationService {
             );
     }
 
-    public logout() {
+    public logout(redirect = true) {
         // remove user from local storage to log user out
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
-        window.location.href = this.buildUrl('/Auth/Logout');
+        if (redirect) {
+            window.location.href = this.buildUrl('/Auth/Logout');
+        }
     }
 
     public redirectToAuthorization() {

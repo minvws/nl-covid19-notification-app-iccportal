@@ -1,5 +1,4 @@
-import {TestBed} from '@angular/core/testing';
-import {LabVerifyService} from './lab-verify.service';
+﻿import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppConfigTestService} from './app-config.test.service';
@@ -7,13 +6,13 @@ import {AppConfigService} from './app-config.service';
 import {AuthenticationTestService} from './authentication_test.service';
 import {AuthenticationService} from './authentication.service';
 
-describe('LabVerifyServiceService', () => {
-    let service: LabVerifyService;
+describe('AuthenticationServiceService', () => {
+    let service: AuthenticationService;
     let httpTestingController: HttpTestingController;
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule, RouterTestingModule],
-            providers: [LabVerifyService, {
+            providers: [AuthenticationService, {
                 provide: AppConfigService,
                 useClass: AppConfigTestService,
             }, {provide: AuthenticationService, useClass: AuthenticationTestService}
@@ -23,29 +22,28 @@ describe('LabVerifyServiceService', () => {
         appConfigService.loadAppConfig();
 
         httpTestingController = TestBed.inject(HttpTestingController);
-        service = TestBed.inject(LabVerifyService);
+        service = TestBed.inject(AuthenticationService);
     });
 
     it('should be created', () => {
         expect(service).toBeTruthy();
     });
 
-    it('labVerify returned Observable should match the right data', () => {
 
-        const pollToken = 'test_polltoken_123';
-        const mockResponse = {
-            active: false,
-            pollToken: 'refreshed_polltoken_456'
-        };
+    it('currentUserValue.authData should return correct test user', () => {
+        const expectedAuthData = 'authData';
 
-        service.labVerify(pollToken).subscribe(result => {
-            expect(result.active).toEqual(false);
-            expect(result.pollToken).toEqual('refreshed_polltoken_456');
-        });
+        const result = service.currentUserValue.authData;
 
-        const req = httpTestingController.expectOne('http://coronamelder.test/CaregiversPortalApi/v1/labverify');
-        req.flush(mockResponse);
+        expect(result).toEqual(expectedAuthData);
     });
 
+    it('buildUrl should build correct url', () => {
+        const expected = 'https://coronamelder.test/Auth/User';
+
+        const result = service.buildUrl('Auth/User');
+
+        expect(result).toEqual(expected);
+    });
 });
 

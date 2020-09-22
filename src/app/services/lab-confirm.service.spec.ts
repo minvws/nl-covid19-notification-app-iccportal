@@ -5,7 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppConfigTestService} from './app-config.test.service';
 import {AuthenticationService} from './authentication.service';
-import {AuthenticationTestService} from './authenticationTestService';
+import {AuthenticationTestService} from './authentication_test.service';
 
 describe('LabConfirmServiceService', () => {
     let service: LabConfirmService;
