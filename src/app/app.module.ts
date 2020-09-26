@@ -25,7 +25,6 @@ import {AuthCallbackComponent} from './auth/auth-callback.component';
 
 import {APP_INITIALIZER} from '@angular/core';
 import {AppConfigService, IAppConfig} from './services/app-config.service';
-import {ValidateConfirmCheckComponent} from './validate-flow/validate-icc-confirm/check/validate-confirm-check.component';
 
 registerLocaleData(localeNL);
 
@@ -48,7 +47,6 @@ const appInitializer = (appConfig: AppConfigService) => {
         ValidateIccFinalComponent,
         ValidateIccConfirmComponent,
         ValidateIccStartComponent,
-        ValidateConfirmCheckComponent,
         ValidateIccFinalComponent,
         ImageCarousselComponent
     ],
