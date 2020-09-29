@@ -1,10 +1,8 @@
 ﻿import {TestBed} from '@angular/core/testing';
-import {LabVerifyService} from './lab-verify.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppConfigTestService} from './app-config.test.service';
 import {AppConfigService} from './app-config.service';
-import {AuthenticationTestService} from './authentication_test.service';
 import {AuthenticationService} from './authentication.service';
 
 describe('AuthenticationServiceService', () => {
