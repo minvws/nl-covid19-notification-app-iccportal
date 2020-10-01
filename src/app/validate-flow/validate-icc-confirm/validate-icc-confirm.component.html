@@ -5,24 +5,15 @@
     </div>
 </div>
 <app-validate-step4></app-validate-step4>
-<div class="my-40 text-center flex items-center w-50 h-full justify-center" id="final_block">
-    <div class="text-center">
-        <img src="assets/finished.png" class="mb-10 mx-auto" alt="">
-
-        <h6 class="mb-6">
-            Als de codes zijn gedeeld door de index
-        </h6>
-        <p class="mb-10">
-            Als de codes zijn gedeeld door de index krjgen alle personen die contact hebben gehad met de index vanaf
-            <b>{{this.friendlySymptomsDate()}}</b> een melding.
-        </p>
-        <h6 class="mb-6">
-            Als de index zijn codes nog niet heeft gedeeld
-        </h6>
-        <p class="mb-10">
-            Als de index de codes nog niet heeft gedeeld heeft de index tot 04:00 om de codes te delen en zo anderen te
-            waarschuwen.
-        </p>
-        <button routerLink="/validate/start" class="btn btn-primary">Nieuwe index verwerken</button>
+<app-step stepTitle="Vraag de index de codes te delen" stepNumber="6">
+    <p class="mt-4 mb-6">
+        <b>Vraag:</b> Vraag of de index <b>een scherm ziet waarin hij/zij wordt bedankt.</b>
+    </p>
+    <div class="image-holder bg-gray-200 p-10 text-center w-full">
+        <img src="assets/images/Screen%207.png" class="ml-auto mr-auto" alt="Screenshot van eindscherm na delen codes">
     </div>
-</div>
+</app-step>
+
+<button (click)="goToValidateFinal()" class="mt-2 mb-4 btn btn-primary">Verwerken</button>
+<br>
+<br>

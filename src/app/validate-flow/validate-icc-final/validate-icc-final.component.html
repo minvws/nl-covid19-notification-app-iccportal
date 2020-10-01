@@ -1,25 +1,12 @@
-<div *ngIf="success" class="my-40 text-center flex items-center w-full h-full justify-center">
+<div class="my-40 text-center flex items-center w-full h-full justify-center">
     <div class="text-center">
         <img src="assets/finished.png" class="mb-10 mx-auto" alt="">
 
         <h6 class="mb-6">
-            De codes zijn gedeeld door de index
+            Risico contacten krijgen een melding
         </h6>
         <p class="mb-10">
-            Alle personen die contact hebben gehad met de index vanaf <b>{{this.friendlySymptomsDate()}}</b> krijgen een melding.
-        </p>
-        <button routerLink="/validate/start" class="btn btn-primary">Nieuwe index verwerken</button>
-    </div>
-</div>
-<div *ngIf="!success" class="my-40 text-center flex items-center w-full h-full justify-center">
-    <div class="text-center">
-        <img src="assets/finished.png" class="mb-10 mx-auto" alt="">
-
-        <h6 class="mb-6">
-            De index heeft tot 04:00 om de codes te delen en zo anderen te waarschuwen
-        </h6>
-        <p class="mb-10">
-            Alle personen die contact hebben gehad met de index vanaf <b>{{this.friendlySymptomsDate()}}</b> krijgen een melding als de codes zijn gedeeld.
+            Alle personen die contact hebben gehad de index vanaf <b>{{this.friendlySymptomsDate()}}</b>  en daarbij besmettingsrisico hebben gelopen krijgen een melding.
         </p>
         <button routerLink="/validate/start" class="btn btn-primary">Nieuwe index verwerken</button>
     </div>
