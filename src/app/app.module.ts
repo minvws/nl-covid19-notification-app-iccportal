@@ -94,5 +94,3 @@ const appInitializer = (appConfig: AppConfigService) => {
 })
 export class AppModule {
 }
-
-// {path: 'icc/generate', component: IccGenerateComponent, pathMatch: 'full', canActivate: [AuthGuard]}
