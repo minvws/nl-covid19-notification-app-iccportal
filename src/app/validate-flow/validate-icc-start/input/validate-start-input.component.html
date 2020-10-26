@@ -57,6 +57,5 @@
 
 </app-step>
 <button class="btn btn-primary mb-40" (click)="confirmLabConfirmationId()"
-        [disabled]="LabConfirmationId.join('').length !== 6 || symptomsDate === null"
-        disabled>Volgende{{(loading > 0) ? "..." : ""}}
+        [disabled]="(LabConfirmationId.join('').length !== 6 || symptomsDate === null) || loading > 0">Volgende{{(loading > 0) ? "..." : ""}}
 </button>
