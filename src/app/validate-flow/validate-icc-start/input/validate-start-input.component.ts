@@ -14,6 +14,7 @@ import {catchError} from 'rxjs/operators';
 export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
     public LabConfirmationId: Array<string> = ['', '', '', '', '', ''];
+    private LastConfirmedLCId: Array<string> = ['', '', '', '', '', ''];
     InvalidState: Array<number> = [];
     @ViewChild('first_char')
     first_char: ElementRef;
@@ -21,10 +22,8 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     @ViewChild('step_element')
     step_element: ElementRef;
     error_code = -1;
-    deniedMockIds: Array<string> = ['QURS3F', 'G4SYTG', 'LJ4VSG', '2L2587', 'F28TT7', 'JCXY54'];
     allowedChars = 'BCFGJLQRSTUVXYZ23456789';
     loading = 0;
-
 
     // datepart
     showSymptoms = true;
@@ -226,13 +225,6 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.symptomsDate = this.getDayAgo(dateDay);
         this.openDayPicker = false;
     }
-
-    errorHandler(error: HttpErrorResponse, caught: Observable<any>): Observable<any> {
-        this.error_code = 2;
-        throw error;
-    }
-
-// TODO:
     confirmLabConfirmationId() {
         if (this.labConfirmationIdJoined() === '000000') {
             this.router.navigate(['/validate/confirm'], {
