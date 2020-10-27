@@ -244,8 +244,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         }
       })
     }
-    console.log(this.LabConfirmationId.join("") === this.LastConfirmedLCId.join(""))
-    console.log(this.LabConfirmationId.join("") + " " + this.LastConfirmedLCId.join(""))
+
     if (this.LabConfirmationId.join("") === this.LastConfirmedLCId.join("")) {
       alert('Het is niet mogelijk om meerdere keren dezelfde GGD-sleutel te verwerken. Probeer het opnieuw met een unieke GGD-sleutel.')
       return
