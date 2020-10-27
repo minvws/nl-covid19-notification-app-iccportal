@@ -259,10 +259,6 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         this.loading--;
         this.LastConfirmedLCId = [...this.LabConfirmationId]; // 200 response
 
-        setTimeout(() => {
-          this.LastConfirmedLCId = null;
-        }, 1000 * 30);
-
         if (result.valid === true) {
           this.router.navigate(['/validate/confirm'], {
             queryParams: {
