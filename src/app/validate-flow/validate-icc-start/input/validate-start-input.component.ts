@@ -24,7 +24,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
   public LabConfirmationId: Array<string> = ['', '', '', '', '', ''];
   private LastConfirmedLCId: Array<string> = ['', '', '', '', '', ''];
-  InvalidState: Array<number> = [];
+  public InvalidState: Array<number> = [];
   @ViewChild('first_char')
   first_char: ElementRef;
 
@@ -132,16 +132,26 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     return matchArray && matchArray.length > 0;
   }
 
-  resetInvalidState() {
+  evaluateInvalidState() {
     this.error_code = -1;
     if (this.labConfirmationIdJoined().length > 0 && !this.validateCharacters()) {
       this.error_code = 1;
+
+      for (let i = 0; i < 6; i++) {
+        const labCICharacter = this.LabConfirmationId[i];
+        if (labCICharacter.length > 0) {
+          const labCICharacterValidMatch = labCICharacter.match('^[' + this.allowedChars + ']+$');
+          if (labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1) {
+            console.log(labCICharacter);
+            this.InvalidState.push(i);
+          }
+        } else {
+          this.InvalidState[i] = null;
+        }
+      }
     }
     if (this.labConfirmationIdJoined() === '000000') {
       this.demoMode = true;
-    }
-    if (this.InvalidState.length > 0) {
-      this.InvalidState = [];
     }
   }
 
