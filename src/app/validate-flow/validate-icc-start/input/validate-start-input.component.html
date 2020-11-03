@@ -17,7 +17,7 @@
             <p *ngIf="demoMode">Democode, enkel bestemd voor trainingsdoeleinden.</p>
             <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel wachtwoord is onjuist. Controleer de GGD-sleutel dat je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
-            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel wachtwoord is onjuist. Controleer of de GGD-sleutel <b>enkel</b>
+            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel wachtwoord is onjuist. Controleer of de GGD-sleutel <b>alleen</b>
                 de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
         </div>
     </div>
