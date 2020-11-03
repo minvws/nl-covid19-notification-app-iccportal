@@ -142,7 +142,6 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         if (labCICharacter.length > 0) {
           const labCICharacterValidMatch = labCICharacter.match('^[' + this.allowedChars + ']+$');
           if (labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1) {
-            console.log(labCICharacter);
             this.InvalidState.push(i);
           }
         } else {
