@@ -199,7 +199,9 @@ span.icon {
     &.invalid {
       @apply border-2 border-solid border-red-400;
     }
-
+    &.valid {
+      @apply border-2 border-solid border-green-400;
+    }
   }
 }
 
