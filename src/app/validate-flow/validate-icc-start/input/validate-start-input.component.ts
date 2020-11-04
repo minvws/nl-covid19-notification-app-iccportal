@@ -140,7 +140,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
       this.LabConfirmationIdValidState[index] = !(labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1);
     } else {
-      this.LabConfirmationIdValidState[index] = true
+      this.LabConfirmationIdValidState[index] = true;
     }
 
     this.error_code = (Object.values(this.LabConfirmationIdValidState).filter(s => s === false).length > 0) ? 1 : -1;
