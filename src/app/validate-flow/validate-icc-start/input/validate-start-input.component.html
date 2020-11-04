@@ -15,10 +15,10 @@
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
             <p *ngIf="demoMode">Democode, enkel bestemd voor trainingsdoeleinden.</p>
-            <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel wachtwoord is onjuist. Controleer de GGD-sleutel
-                dat je
+            <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel is onjuist. Controleer de GGD-sleutel
+                die je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
-            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel wachtwoord is onjuist. Controleer of de GGD-sleutel
+            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel is onjuist. Controleer of de GGD-sleutel
                 <b>alleen</b>
                 de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
         </div>
