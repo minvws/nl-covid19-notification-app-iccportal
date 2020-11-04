@@ -24,7 +24,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
   public LabConfirmationId: Array<string> = ['', '', '', '', '', ''];
   private LastConfirmedLCId: Array<string> = ['', '', '', '', '', ''];
-  public InvalidState: Array<number> = [];
+  public LabConfirmationIdValidState: { [key: number]: boolean} = [];
   @ViewChild('first_char')
   first_char: ElementRef;
 
@@ -80,6 +80,9 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     private router: Router,
     private reportService: LabConfirmService) {
     this.datePipe = new DatePipe(locale);
+    for (let i = 0; i < 6; i++) {
+      this.LabConfirmationIdValidState[i] = null;
+    }
   }
 
   ngAfterViewInit() {
@@ -117,12 +120,6 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     return output;
   }
 
-  removeInvalidState($event: FocusEvent, number: number) {
-    const target = $event.target as HTMLInputElement;
-    target.select();
-    this.InvalidState = this.InvalidState.filter((i) => i !== number);
-  }
-
   labConfirmationIdJoined() {
     return this.LabConfirmationId.join('').trim().toUpperCase();
   }
@@ -131,27 +128,23 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     const matchArray: RegExpMatchArray = this.labConfirmationIdJoined().match('^[' + this.allowedChars + ']+$');
     return matchArray && matchArray.length > 0;
   }
+  focusInput($event: FocusEvent) {
+    const target = $event.target as HTMLInputElement;
+    target.select();
+  }
 
-  evaluateInvalidState() {
-    this.error_code = -1;
-    if (this.labConfirmationIdJoined().length > 0 && !this.validateCharacters()) {
-      this.error_code = 1;
+  evaluateInvalidState($event: KeyboardEvent, index: number) {
+    const labCICharacter = this.LabConfirmationId[index];
+    if (labCICharacter.length > 0) {
+      const labCICharacterValidMatch = labCICharacter.toUpperCase().match('^[' + this.allowedChars + ']+$');
 
-      for (let i = 0; i < 6; i++) {
-        const labCICharacter = this.LabConfirmationId[i];
-        if (labCICharacter.length > 0) {
-          const labCICharacterValidMatch = labCICharacter.match('^[' + this.allowedChars + ']+$');
-          if (labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1) {
-            this.InvalidState.push(i);
-          }
-        } else {
-          this.InvalidState[i] = null;
-        }
-      }
+      this.LabConfirmationIdValidState[index] = !(labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1);
+    } else {
+      this.LabConfirmationIdValidState[index] = true
     }
-    if (this.labConfirmationIdJoined() === '000000') {
-      this.demoMode = true;
-    }
+
+    this.error_code = (Object.values(this.LabConfirmationIdValidState).filter(s => s === false).length > 0) ? 1 : -1;
+    this.demoMode = (this.labConfirmationIdJoined() === '000000');
   }
 
   focusOnNext(target: Element) {
@@ -283,8 +276,8 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
       this.error_code = 1;
     }
     if (this.error_code > -1) {
-      for (let i = 0; i < 7; i++) {
-        this.InvalidState.push(i);
+      for (let i = 0; i < 6; i++) {
+        this.LabConfirmationIdValidState[i] = false;
       }
     }
   }

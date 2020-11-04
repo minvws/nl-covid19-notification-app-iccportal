@@ -1,9 +1,9 @@
 <app-step stepNumber="3" stepTitle="Vul de GGD-sleutel van de index in" stepTitleClass="mb-10">
     <div #step_element class="input-box grid grid-cols-8 mb-10">
         <ng-container *ngFor="let key of [].constructor(6); let i = index">
-            <input #first_char (input)="evaluateInvalidState()"
-                   [class]="InvalidState.includes(i) ? 'invalid' : (LabConfirmationId[i] !== null && LabConfirmationId[i] !== '') ? 'valid' : ''"
-                   (focus)="removeInvalidState($event,i)"
+            <input #first_char (input)="evaluateInvalidState($event, i)"
+                   [class]="LabConfirmationIdValidState[i] === false ? 'invalid' : (LabConfirmationIdValidState[i] === true) ? 'valid' : ''"
+                   (focus)="focusInput($event)"
                    (keyup)="icIdKeyPress($event)" [value]="i"
                    type="text" [(ngModel)]="LabConfirmationId[i]"/>
             <div class="text-center text-3xl py-4" *ngIf="i == 2">-</div>
