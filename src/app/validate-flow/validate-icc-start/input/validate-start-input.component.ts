@@ -8,11 +8,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { LabConfirmService } from '../../../services/lab-confirm.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Component({
@@ -135,9 +133,11 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
   }
 
   evaluateInvalidState($event: KeyboardEvent, index: number) {
-    if(this.error_code === 2){
+    if (this.error_code === 2) {
       for (let i = 0; i < 6; i++) {
-        if(i !== index) this.LabConfirmationIdValidState[i] = null;
+        if (i !== index) {
+          this.LabConfirmationIdValidState[i] = null;
+        }
       }
     }
     const labCICharacter = this.LabConfirmationId[index];
