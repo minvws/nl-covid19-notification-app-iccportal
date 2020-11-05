@@ -1,9 +1,9 @@
 <app-step stepNumber="3" stepTitle="Vul de GGD-sleutel van de index in" stepTitleClass="mb-10">
     <div #step_element class="input-box grid grid-cols-8 mb-10">
         <ng-container *ngFor="let key of [].constructor(6); let i = index">
-            <input #first_char (input)="evaluateInvalidState()"
-                   [class]="InvalidState.includes(i) ? 'invalid' : (LabConfirmationId[i] !== null && LabConfirmationId[i] !== '') ? 'valid' : ''"
-                   (focus)="removeInvalidState($event,i)"
+            <input #first_char (input)="evaluateInvalidState($event, i)"
+                   [class]="LabConfirmationIdValidState[i] === false ? 'invalid' : (LabConfirmationIdValidState[i] === true) ? 'valid' : ''"
+                   (focus)="focusInput($event)"
                    (keyup)="icIdKeyPress($event)" [value]="i"
                    type="text" [(ngModel)]="LabConfirmationId[i]"/>
             <div class="text-center text-3xl py-4" *ngIf="i == 2">-</div>
@@ -15,10 +15,10 @@
         <div class="mr-2"><span class="icon icon-exclamation-mark"></span></div>
         <div>
             <p *ngIf="demoMode">Democode, enkel bestemd voor trainingsdoeleinden.</p>
-            <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel wachtwoord is onjuist. Controleer de GGD-sleutel
-                dat je
+            <p *ngIf="!demoMode && error_code == 2">Deze GGD-sleutel is onjuist. Controleer de GGD-sleutel
+                die je
                 hebt ingevoerd: <span [innerHTML]="InfectionConfirmationIdToTaalString()"></span></p>
-            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel wachtwoord is onjuist. Controleer of de GGD-sleutel
+            <p *ngIf="!demoMode && error_code == 1">Deze GGD-sleutel is onjuist. Controleer of de GGD-sleutel
                 <b>alleen</b>
                 de volgende letters en nummers bevat:<br><b>{{this.allowedChars}}</b></p>
         </div>
