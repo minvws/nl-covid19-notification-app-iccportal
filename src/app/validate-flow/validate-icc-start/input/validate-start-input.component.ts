@@ -8,11 +8,9 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { LabConfirmService } from '../../../services/lab-confirm.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Component({
@@ -24,7 +22,7 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
 
   public LabConfirmationId: Array<string> = ['', '', '', '', '', ''];
   private LastConfirmedLCId: Array<string> = ['', '', '', '', '', ''];
-  public LabConfirmationIdValidState: { [key: number]: boolean} = [];
+  public LabConfirmationIdValidState: { [key: number]: boolean } = [];
   @ViewChild('first_char')
   first_char: ElementRef;
 
@@ -128,16 +126,23 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
     const matchArray: RegExpMatchArray = this.labConfirmationIdJoined().match('^[' + this.allowedChars + ']+$');
     return matchArray && matchArray.length > 0;
   }
+
   focusInput($event: FocusEvent) {
     const target = $event.target as HTMLInputElement;
     target.select();
   }
 
   evaluateInvalidState($event: KeyboardEvent, index: number) {
+    if (this.error_code === 2) {
+      for (let i = 0; i < 6; i++) {
+        if (i !== index) {
+          this.LabConfirmationIdValidState[i] = null;
+        }
+      }
+    }
     const labCICharacter = this.LabConfirmationId[index];
     if (labCICharacter.length > 0) {
       const labCICharacterValidMatch = labCICharacter.toUpperCase().match('^[' + this.allowedChars + ']+$');
-
       this.LabConfirmationIdValidState[index] = !(labCICharacterValidMatch == null || labCICharacterValidMatch.length < 1);
     } else {
       this.LabConfirmationIdValidState[index] = true;
@@ -177,7 +182,6 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
       target.value = '';
       this.focusOnPrev(target);
     } else if ($event.code === 'Enter') {
-      // this.submitIccId()la
       this.openDayPicker = true;
     } else {
       if ([...target.value].length > 1) {
@@ -271,14 +275,14 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
         } else {
           this.error_code = 2;
         }
+        if (this.error_code > 1) {
+          for (let i = 0; i < 6; i++) {
+            this.LabConfirmationIdValidState[i] = false;
+          }
+        }
       });
     } else {
       this.error_code = 1;
-    }
-    if (this.error_code > -1) {
-      for (let i = 0; i < 6; i++) {
-        this.LabConfirmationIdValidState[i] = false;
-      }
     }
   }
 }
