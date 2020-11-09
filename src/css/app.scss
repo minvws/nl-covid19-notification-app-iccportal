@@ -92,9 +92,11 @@ button.btn-primary {
 .btn {
   @apply px-10 py-2 bg-white text-black font-medium text-center rounded cursor-pointer inline-block;
   &.btn-primary {
-    @apply bg-primary text-white;
+    @apply bg-primary text-white duration-200 transition-opacity;
+    &:hover{
+      opacity: .8;
+    }
   }
-
   &.btn-disabled, &:disabled {
     @apply text-gray-700 bg-gray-500;
     cursor: not-allowed;
@@ -193,7 +195,7 @@ span.icon {
     vertical-align: middle;
 
     &:focus {
-      @apply border-2 border-solid border-primary;
+      @apply border-2 border-solid border-primary shadow-md;
     }
 
     &.invalid {

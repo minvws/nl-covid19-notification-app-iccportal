@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { LabConfirmService } from '../../../services/lab-confirm.service';
 import { catchError } from 'rxjs/operators';
@@ -130,6 +130,9 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
   focusInput($event: FocusEvent) {
     const target = $event.target as HTMLInputElement;
     target.select();
+    setTimeout(() => {
+      target.select();
+    }, 1); // safari webkit select issue
   }
 
   evaluateInvalidState($event: KeyboardEvent, index: number) {
