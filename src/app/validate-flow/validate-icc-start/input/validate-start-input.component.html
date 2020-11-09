@@ -5,7 +5,7 @@
                    [class]="LabConfirmationIdValidState[i] === false ? 'invalid' : (LabConfirmationIdValidState[i] === true) ? 'valid' : ''"
                    (focus)="focusInput($event)"
                    (keyup)="icIdKeyPress($event)" [value]="i"
-                   type="text" [(ngModel)]="LabConfirmationId[i]"/>
+                   type="text" [(ngModel)]="LabConfirmationId[i]" maxlength="1" min="0" max="9"/>
             <div class="text-center text-3xl py-4" *ngIf="i == 2">-</div>
         </ng-container>
     </div>
