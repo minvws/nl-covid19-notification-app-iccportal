@@ -10,7 +10,7 @@ export class ValidateStartInfoComponent implements OnInit {
 
     images: Array<CarousselImage> = [
         {
-            text: 'Zet telefoon op luidspreker en open CoronaMelder app.',
+            text: 'Zet telefoon op luidspreker en open CoronaMelder-app.',
             image: 'assets/images/Screen 0.png',
             small: true
         },

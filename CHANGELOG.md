@@ -25,7 +25,7 @@ Versie 0.2 en 0.3 van het GGD-app portaal is getest met medewerkers van de GGD o
 Tussen de testen door zijn de changes 0.3 gemaakt. 
 [De inzichten van deze testdagen](http://corona.sticktailapp.com/study-share/pJjR4djzQYWt/app-portaal-testen-bij-de-ggd-714/) zijn gebundeld in de documentatie en  hebben geleid tot de volgende aanpassingen in het design:
 
-- Screenshots in stap 2 zijn geupdate zodat die gelijk zijn aan het laatste design van de CoronaMelder app. 
+- Screenshots in stap 2 zijn geupdate zodat die gelijk zijn aan het laatste design van de CoronaMelder-app. 
 - Link om uit te loggen uit het portal is toegevoegd. 
 - Om meer de aandacht te leggen op de instructie en minder op de eventuele vragen zijn de kleuren van de background en tekstvelden aangepast. 
 - Label toegevoegd boven de vragen omdat we in onderzoek zagen dat sommige GGD-medewerkers ook de vragen gingen voorlezen.
