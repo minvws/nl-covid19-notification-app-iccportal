@@ -16,15 +16,18 @@ export class ValidateStartInfoComponent implements OnInit {
         },
         {
             text: 'Open de app en scroll naar beneden',
-            image: 'assets/images/Screen 1.png',
+            image: 'assets/images/new/1.svg',
+            device: true
         },
         {
             text: 'Druk op ‘GGD-sleutel doorgeven’',
-            image: 'assets/images/Screen 2.png',
+            image: 'assets/images/new/2.svg',
+            device: true
         },
         {
             text: 'Geef de tijdelijke GGD-sleutel door',
-            image: 'assets/images/Screen 3.png',
+            image: 'assets/images/new/3.svg',
+            device: true
         },
     ];
 

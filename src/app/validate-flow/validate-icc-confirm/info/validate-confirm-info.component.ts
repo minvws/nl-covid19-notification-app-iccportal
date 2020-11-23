@@ -10,15 +10,18 @@ export class ValidateConfirmInfoComponent implements OnInit {
   images: Array<CarousselImage> = [
     {
       text: 'Scroll naar beneden',
-      image: 'assets/images/Screen 4.png'
+      image: 'assets/images/new/4.svg',
+      device: true
     },
     {
       text: 'Druk op ‘Ga door’ om de codes te delen',
-      image: 'assets/images/Screen 5.png',
+      image: 'assets/images/new/5.svg',
+      device: true
     },
     {
       text: 'Geef toestemming',
-      image: 'assets/images/Screen 6.png',
+      image: 'assets/images/new/6.svg',
+      device: true
     }
   ];
   constructor() { }
