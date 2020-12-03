@@ -151,8 +151,12 @@ export class ValidateStartInputComponent implements OnInit, AfterViewInit {
       this.LabConfirmationIdValidState[index] = true;
     }
 
-    this.error_code = (Object.values(this.LabConfirmationIdValidState).filter(s => s === false).length > 0) ? 1 : -1;
     this.demoMode = (this.labConfirmationIdJoined() === '000000');
+    if (!this.demoMode) {
+      this.error_code = (Object.values(this.LabConfirmationIdValidState).filter(s => s === false).length > 0) ? 1 : -1;
+    } else {
+      this.error_code = -1;
+    }
   }
 
   focusOnNext(target: Element) {
