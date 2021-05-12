@@ -1,4 +1,8 @@
-﻿import {TestBed} from '@angular/core/testing';
+// Copyright 2020 De Staat der Nederlanden, Ministerie van Volksgezondheid, Welzijn en Sport.
+// Licensed under the EUROPEAN UNION PUBLIC LICENCE v. 1.2
+// SPDX-License-Identifier: EUPL-1.2
+
+import { TestBed } from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppConfigTestService} from './app-config.test.service';
@@ -49,7 +53,7 @@ describe('AuthenticationServiceService', () => {
 
         });
 
-        const req = httpTestingController.expectOne('https://coronamelder.test/Auth/Token');
+        const req = httpTestingController.expectOne('http://localhost:9876/Auth/Token');
         req.flush(mockResponse);
 
         expect(localStorage.getItem('auth')).toEqual(testJwtToken);
@@ -63,7 +67,7 @@ describe('AuthenticationServiceService', () => {
 
         service.callback('test_auth_code').subscribe();
 
-        const req = httpTestingController.expectOne('https://coronamelder.test/Auth/Token');
+        const req = httpTestingController.expectOne('http://localhost:9876/Auth/Token');
         req.flush(mockResponse);
 
         expect(service.currentUserValue.displayName).toEqual('Test User');
@@ -79,7 +83,7 @@ describe('AuthenticationServiceService', () => {
             token: testJwtToken
         };
         const expected = null;
-        const targetUrl = 'https://coronamelder.test/Auth/Logout';
+        const targetUrl = 'http://localhost:9876/Auth/Logout';
 
         // run callback to fill localStorage
 
@@ -87,7 +91,7 @@ describe('AuthenticationServiceService', () => {
 
         });
 
-        const req = httpTestingController.expectOne('https://coronamelder.test/Auth/Token');
+        const req = httpTestingController.expectOne('http://localhost:9876/Auth/Token');
         req.flush(mockResponse);
 
         // Act

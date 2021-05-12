@@ -1,4 +1,8 @@
-﻿import {Injectable} from '@angular/core';
+// Copyright 2020 De Staat der Nederlanden, Ministerie van Volksgezondheid, Welzijn en Sport.
+// Licensed under the EUROPEAN UNION PUBLIC LICENCE v. 1.2
+// SPDX-License-Identifier: EUPL-1.2
+
+import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -45,8 +49,8 @@ export class AuthenticationService {
         throw error;
     }
 
-    public buildUrl(endpoint: string) {
-        return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
+  public buildUrl(endpoint: string) {
+    return 'https://' + this.appConfigService.getConfig().authHost + (endpoint.startsWith('/') ? '' : '/') + endpoint;
     }
 
     public fetchCurrentUser(): Observable<any> {
@@ -99,12 +103,12 @@ export class AuthenticationService {
         localStorage.removeItem('auth');
         this.currentUserSubject.next(null);
         if (redirect) {
-            window.location.href = this.buildUrl('/Auth/Logout');
+            window.location.href = this.buildUrl('Auth/Logout');
         }
     }
 
     public redirectToAuthorization() {
-        window.location.href = this.buildUrl('/Auth/Redirect');
+        window.location.href = this.buildUrl('Auth/Redirect');
     }
 }
 
