@@ -5,63 +5,63 @@
 
 trigger:
   - master
-  pool:
-    vmImage: 'ubuntu-latest'
-    steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '14.x'
-        displayName: 'Install Node.js'
-      - script: |
-          npm install
-          npm install -g @angular/cli
-          npm install -g mocha
-          npm install -g mocha-junit-reporter
-        displayName: 'Install npm Packages'
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+  - script: |
+      npm install
+      npm install -g @angular/cli
+      npm install -g mocha
+      npm install -g mocha-junit-reporter
+    displayName: 'Install npm Packages'
 
-      - script: |
-          npm install -g yarn
-        displayName: 'install yarn'
+  - script: |
+      npm install -g yarn
+    displayName: 'install yarn'
 
-      - script: |
-          yarn
-        displayName: 'run yarn'
+  - script: |
+      yarn
+    displayName: 'run yarn'
 
-      - script: |
-          ng lint
-        displayName: 'ng lint'
+  - script: |
+      ng lint
+    displayName: 'ng lint'
 
-      - script: |
-          npm run test:ci
-        displayName: 'npm run test:ci'
+  - script: |
+      npm run test:ci
+    displayName: 'npm run test:ci'
 
-      - script: |
-          ng build --prod
-        displayName: 'ng build --prod'
+  - script: |
+      ng build --prod
+    displayName: 'ng build --prod'
 
-      - task: CmdLine@2
-        inputs:
-          script: 'echo F|xcopy /Y "appConfig.release.json" "appConfig.json"'
-          workingDirectory: '$(Build.SourcesDirectory)/dist/assets/data'
+  - task: CmdLine@2
+    inputs:
+      script: 'echo F|xcopy /Y "appConfig.release.json" "appConfig.json"'
+      workingDirectory: '$(Build.SourcesDirectory)/dist/assets/data'
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)'
-          Contents: 'web.config'
-          TargetFolder: '$(Build.SourcesDirectory)/dist'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: 'web.config'
+      TargetFolder: '$(Build.SourcesDirectory)/dist'
 
-      - task: CopyFiles@2
-        inputs:
-          SourceFolder: '$(Build.SourcesDirectory)/dist'
-          Contents: '**'
-          TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)/dist'
+      Contents: '**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-      - task: PublishBuildArtifacts@1
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-          ArtifactName: 'drop'
-          publishLocation: 'Container'
-      - task: PublishTestResults@2
-        inputs:
-          testResultsFormat: 'JUnit'
-          testResultsFiles: '**/TESTS-*.xml'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TESTS-*.xml'
