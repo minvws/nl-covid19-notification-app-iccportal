@@ -7,7 +7,7 @@
     "build": "ng build",
     "build:ssr": "ng run GGDPortal:server:dev",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --browsers=ChromeHeadless --reporters=progress,junit",
+    "test:ci": "ng test --karma-config=karma.conf.js --watch=false --browsers=ChromeHeadless --reporters=progress,junit",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
