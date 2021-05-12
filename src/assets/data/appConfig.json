@@ -1,5 +1,7 @@
 {
-    "appName": "CoronaMelder",
-    "apiUrl": "https://localhost:5001",
-    "authHost": "localhost:5001"
+  "appName": "CoronaMelder",
+  "authHost": "localhost:5001",
+  "apiUrl": "https://localhost:5001",
+  "aSymptomaticIndexDayOffset": "0",
+  "symptomaticIndexDayOffset": "2"
 }

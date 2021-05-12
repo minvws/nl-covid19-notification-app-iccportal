@@ -1,5 +1,7 @@
 {
-    "appName": "CoronaMelder",
-    "apiUrl": "#{Deploy.ICCBackend.Hostname.External}#",
-    "authHost": "#{Deploy.ICCBackend.Hostname.External_Hostname}#"
+  "appName": "CoronaMelder",
+  "apiUrl": "#{Deploy.ICCBackend.Hostname.External}#",
+  "authHost": "#{Deploy.ICCBackend.Hostname.External_Hostname}#",
+  "aSymptomaticIndexDayOffset": "0",
+  "symptomaticIndexDayOffset": "2"
 }

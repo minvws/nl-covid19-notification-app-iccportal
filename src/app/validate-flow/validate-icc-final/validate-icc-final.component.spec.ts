@@ -1,4 +1,8 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+// Copyright 2020 De Staat der Nederlanden, Ministerie van Volksgezondheid, Welzijn en Sport.
+// Licensed under the EUROPEAN UNION PUBLIC LICENCE v. 1.2
+// SPDX-License-Identifier: EUPL-1.2
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import localeNL from '@angular/common/locales/nl';
 import {ValidateIccFinalComponent} from './validate-icc-final.component';
 import {ActivatedRoute} from '@angular/router';
@@ -44,6 +48,6 @@ describe('ValidateIccFinalComponent', () => {
 
     it('friendlySymptomsDate() should be in the expected format', () => {
         const result = component.friendlySymptomsDate();
-        expect(result).toBe('zaterdag 15 augustus');
+      expect(result).toBe('maandag 17 augustus');
     });
 });
