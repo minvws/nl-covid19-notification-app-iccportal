@@ -31,9 +31,9 @@ steps:
       ng lint
     displayName: 'ng lint'
 
-  - script: |
-      npm run test:ci
-    displayName: 'npm run test:ci'
+ # - script: |
+ #     npm run test:ci
+ #   displayName: 'npm run test:ci'
 
   - script: |
       ng build --prod
