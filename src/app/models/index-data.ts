@@ -97,7 +97,6 @@ export class IndexData {
   public InfectionConfirmationIdToTaalString() {
     let output = '';
     this.GGDKey.forEach((c, index) => {
-     
       if (this.spelAlphabet[c]) {
         output += '<b>' + c + '</b>' + ' (' + this.spelAlphabet[c] + ')';
       } else {
