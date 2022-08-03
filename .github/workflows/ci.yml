@@ -22,6 +22,6 @@ jobs:
           cache: 'npm'
       - run: npm ci
       # same version as used in package.json
-      - run: npm install -g @angular/cli@13.3.7
+      - run: npm install --location=global @angular/cli@13.3.7
       - run: npm run test:ci
       - run: ng build --configuration=production
